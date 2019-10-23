@@ -55,12 +55,12 @@ public class GraphicsPC implements Graphics {
 
     @Override
     public int getWidth() {
-        return 0;
+        return _frame.getWidth();
     }
 
     @Override
     public int getHeight() {
-        return 0;
+        return _frame.getHeight();
     }
 
 

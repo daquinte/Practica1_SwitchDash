@@ -9,6 +9,15 @@ public class ImageAndroid implements Image {
         _imageBitmap = img;
     }
 
+    /**
+     * Devuelve el Bitmap del objeto imageAndroid
+     *
+     * @return Bitmap del image
+     * */
+    public Bitmap getBitmap() {
+        return _imageBitmap;
+    }
+
     @Override
     public int getWidth() {
         return 0;
