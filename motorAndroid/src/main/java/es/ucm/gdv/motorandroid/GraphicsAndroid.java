@@ -19,7 +19,7 @@ import java.io.InputStream;
 public class GraphicsAndroid implements Graphics {
 
     //Atributos
-    private SurfaceView _surfaceView;       //Ventana para android
+    private SurfaceView _surfaceView;       //Ventana para android. Se usa para los guetters
     private AssetManager _assetManager;     //Carga de imagenes
     private Canvas _canvas;                 //Viewport. Aquí se pinta.
 

@@ -2,8 +2,6 @@ apply plugin: 'java-library'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(path: ':motorPC')
-    compile project(path: ':motorPC')
 }
 
 sourceCompatibility = "7"

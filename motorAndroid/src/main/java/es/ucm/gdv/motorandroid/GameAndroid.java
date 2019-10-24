@@ -14,7 +14,6 @@ import es.ucm.gdv.interfaces.Input;
 public class GameAndroid implements Game, Runnable {
 
     //Referencias para el patrón Singleton
-    @Getter
     private GraphicsAndroid _graphicsAndroid;
     private InputAndroid _inputAndroid;
 
@@ -30,28 +29,16 @@ public class GameAndroid implements Game, Runnable {
 
     public GameAndroid(Activity a, Context context){
          _surfaceView = new SurfaceView(context);
-        a.setContentView(_surfaceView);
+         a.setContentView(_surfaceView);
         _graphicsAndroid = new GraphicsAndroid(_surfaceView, context.getAssets());
         _inputAndroid = new InputAndroid();
 
         //surfaceView.setOnTouchListener(_inputAndroid);
     }
 
-    public void Init(){
-
-    }
-
-    @Override
-    public Graphics GetGraphics() {
-        return _graphicsAndroid;
-    }
-
-    @Override
-    public Input GetInput() {
-        return _inputAndroid;
-    }
-
-
+    /**
+     * Pausa el hilo de ejecución
+     * */
     public void Pause(){
         _running = false;
         while (true) {
@@ -73,9 +60,17 @@ public class GameAndroid implements Game, Runnable {
         }
     }
 
+    //-----------------------------------------------
+    //                  Ciclo de juego
+    //-----------------------------------------------
+
     //Runnable, para tener un hilo con el bucle ppal
     @Override
     public void run() {
+
+        if (_runningThread != Thread.currentThread()) {
+            throw new RuntimeException("run() should not be called directly!");
+        }
 
         //Espera a que se inicialice el surfaceView
         while (_graphicsAndroid.getWidth()<=0);
@@ -88,10 +83,11 @@ public class GameAndroid implements Game, Runnable {
     }
 
     private void CanvasManagePaint(SurfaceHolder sh) {
-        Canvas c = sh.lockCanvas();
+        Canvas c = sh.lockHardwareCanvas();
         _graphicsAndroid.startFrame(c);
+        //_logicaJuego.render();
         _graphicsAndroid.clear(0xFF000000);
-        Image test = _graphicsAndroid.newImage("Java-logo.png");
+        Image test = _graphicsAndroid.newImage("howToPlay.png");
         _graphicsAndroid.drawImage(test, 100, 100);
         sh.unlockCanvasAndPost(c);
     }
@@ -102,4 +98,23 @@ public class GameAndroid implements Game, Runnable {
         lastFrameTime = currentTime;
         return (double) nanoElapsedTime / 1.0e9;
     }
+
+
+
+
+    //-----------------------------------------------
+    //                   Getters
+    //-----------------------------------------------
+    //From Game Interface
+    @Override
+    public Graphics GetGraphics() {
+        return _graphicsAndroid;
+    }
+
+    @Override
+    public Input GetInput() {
+        return _inputAndroid;
+    }
+
+
 }

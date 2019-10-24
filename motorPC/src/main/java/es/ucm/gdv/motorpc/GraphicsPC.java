@@ -14,6 +14,10 @@ public class GraphicsPC implements Graphics {
         _graphics = g;
     }
 
+    public  GraphicsPC(JFrame jf){
+        _frame = jf;
+    }
+
     //-----Métodos de la interfaz-----
     @Override
     public Image newImage(String name) {
@@ -21,7 +25,6 @@ public class GraphicsPC implements Graphics {
         Image ret = null;
 
         try {
-            System.out.println(System.getProperty("user.dir"));
             _img = javax.imageio.ImageIO.read( new java.io.File("images/"+name));
 
             ret = new ImagePC(_img);
@@ -64,7 +67,7 @@ public class GraphicsPC implements Graphics {
     }
 
 
-    //Atributos
-    java.awt.Graphics _graphics;
-    JFrame _frame;
+    //Atributos privados
+    java.awt.Graphics _graphics;   //Graphics de java
+    JFrame _frame;                 //Ventana donde pintamos
 }

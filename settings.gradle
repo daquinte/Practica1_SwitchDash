@@ -1,1 +1,1 @@
-include ':app', ':Interfaces', ':motorPC', ':motorAndroid', ':SwitchDashPC'
+include ':app', ':Interfaces', ':motorPC', ':motorAndroid', ':SwitchDashPC', ':Logica'
