@@ -2,13 +2,13 @@ package es.ucm.gdv.motorandroid;
 
 import  es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
+import es.ucm.gdv.interfaces.Rect;
 
 //Imports de android
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Rect;
 import android.view.SurfaceView;
 
 
@@ -74,7 +74,7 @@ public class GraphicsAndroid implements Graphics {
     }
 
     @Override
-    public void drawImageFromSpritesheet(Image image, int x, int y, int tamTileX, int tamTileY, int imgX, int imgY) {
+    public void drawImageFromSpritesheet(Image image, es.ucm.gdv.interfaces.Rect destino, Rect spriteFromSpriteSheet) {
         //Igual ni lo usamos
     }
 

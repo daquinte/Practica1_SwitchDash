@@ -107,12 +107,12 @@ public class GameAndroid implements Game, Runnable {
     //-----------------------------------------------
     //From Game Interface
     @Override
-    public Graphics GetGraphics() {
+    public Graphics getGraphics() {
         return _graphicsAndroid;
     }
 
     @Override
-    public Input GetInput() {
+    public Input getInput() {
         return _inputAndroid;
     }
 

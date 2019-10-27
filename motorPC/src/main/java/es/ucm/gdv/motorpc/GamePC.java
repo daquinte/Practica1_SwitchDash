@@ -9,6 +9,7 @@ import  es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.Input;
+import es.ucm.gdv.logica.Logica;
 
 public class GamePC implements Game, Runnable {
 
@@ -31,6 +32,7 @@ public class GamePC implements Game, Runnable {
     //Para el hilo
     private volatile boolean _running; //Volatile hace que no revise en memoria
     private Thread _runningThread;     //Hilo de juego
+    private Logica _logica;
 
 
     public GamePC(String windowTitle){
@@ -68,6 +70,7 @@ public class GamePC implements Game, Runnable {
         //Inicializa los motores
         _graphicsPC = new GraphicsPC(_frame);
         _inputPC = new InputPC(/*_frame*/);
+        _logica = new Logica();
     }
 
 
@@ -76,6 +79,9 @@ public class GamePC implements Game, Runnable {
     //-----------------------------------------------
     @Override
     public void run() {
+
+        _logica.init(this);
+
 
         long lastFrameTime = System.nanoTime();
         // Bucle principal
@@ -86,23 +92,18 @@ public class GamePC implements Game, Runnable {
             double elapsedTime = (double) nanoElapsedTime / 1.0E9;
 
             //Tick de la lógica
-            //_logica.tick(elapsedTime);
+            _logica.tick(elapsedTime);
 
             // Pintamos el frame con el BufferStrategy
             do {
                 do {
                     //Actualizas el graphics que va a usar GraphicsPC
+                    //TODO: ARREGLAR ESTA LINEA PORQUE DA UNA EXCEPCION AL REDIMENSIONAR
                     java.awt.Graphics graphics = _bs.getDrawGraphics();
                     _graphicsPC.setGraphics(graphics);
                     try {
-                        //_logica.render();
                         _graphicsPC.clear(0xFF000000);
-                        Image testPC = _graphicsPC.newImage("howToPlay.png");
-                        if(testPC != null) {
-                            _graphicsPC.drawImage(testPC, 100, 100);
-                        }
-                        else System.out.println("HA FALLAO");
-
+                        _logica.render();
                     }
                     finally {
                         graphics.dispose();
@@ -125,12 +126,12 @@ public class GamePC implements Game, Runnable {
     //-----------------------------------------------
 
     @Override
-    public Graphics GetGraphics() {
+    public Graphics getGraphics() {
         return _graphicsPC;
     }
 
     @Override
-    public Input GetInput() {
+    public Input getInput() {
         return _inputPC;
     }
 

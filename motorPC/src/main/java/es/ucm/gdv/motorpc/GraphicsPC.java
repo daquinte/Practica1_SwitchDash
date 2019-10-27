@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
+import es.ucm.gdv.interfaces.Rect;
 
 public class GraphicsPC implements Graphics {
 
@@ -14,7 +15,7 @@ public class GraphicsPC implements Graphics {
         _graphics = g;
     }
 
-    public  GraphicsPC(JFrame jf){
+    public GraphicsPC(JFrame jf) {
         _frame = jf;
     }
 
@@ -25,7 +26,7 @@ public class GraphicsPC implements Graphics {
         Image ret = null;
 
         try {
-            _img = javax.imageio.ImageIO.read( new java.io.File("images/"+name));
+            _img = javax.imageio.ImageIO.read(new java.io.File("images/" + name));
 
             ret = new ImagePC(_img);
 
@@ -48,12 +49,17 @@ public class GraphicsPC implements Graphics {
         //Siempre recibimos una imagen de PC, hacemos un casting hacia abajo
         ImagePC img = (ImagePC) image;
         java.awt.Image awtImage = img.getImage();
-        _graphics.drawImage(awtImage,x,y,null);
+        _graphics.drawImage(awtImage, x, y, null);
     }
 
     @Override
-    public void drawImageFromSpritesheet(Image image, int x, int y, int tamTileX, int tamTileY, int imgX, int imgY) {
+    public void drawImageFromSpritesheet(Image image, Rect destino, Rect spriteFromSpriteSheet) {
+        ImagePC img = (ImagePC) image;
+        java.awt.Image awtImage = img.getImage();
 
+        _graphics.drawImage(awtImage, destino.x, destino.y, destino.width, destino.height,
+                spriteFromSpriteSheet.x, spriteFromSpriteSheet.y, spriteFromSpriteSheet.width,
+                spriteFromSpriteSheet.height,null);
     }
 
     @Override

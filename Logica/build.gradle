@@ -2,6 +2,8 @@ apply plugin: 'java-library'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(path: ':Interfaces')
+    implementation 'org.jetbrains:annotations-java5:15.0'
 }
 
 sourceCompatibility = "7"

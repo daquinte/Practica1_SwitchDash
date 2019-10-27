@@ -1,6 +1,4 @@
-package es.ucm.gdv.interfaces;
-
-//Estado del juego que define la lógica
+package es.ucm.gdv.logica;
 
 public interface GameState {
 
@@ -11,10 +9,4 @@ public interface GameState {
     public void tick(double elapsedTime);
 
     public void render();
-
-    public float getVelocity();
-
-    public boolean getStateOver();
-
 }
-
