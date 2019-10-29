@@ -6,6 +6,10 @@ public interface Graphics {
     Image newImage(String name);                //Carga una imagen
     void clear(int color);                      //Limpia la pantalla, con el color dado por parámetro
 
+    //TE ECHAS UNAS DIVISONES Y YA ESTÁ
+    //void SetCanvasSize(int x, int y);
+
+
     /**
      *
      * Dibuja completamente la imagen "image" en la posicion (x,y)
@@ -16,10 +20,24 @@ public interface Graphics {
      * */
     void drawImage(Image image, int x, int y);  //Imagen y coordenadas de pintado
 
-    //Prueba de pintar imagen a traves de un spritesheet
-    //The src parameters represent the area of the image to copy and draw.
-    //The dst parameters display the area of the destination to cover by the the source
+    /**
+     *  //The src parameters represent the area of the image to copy and draw.
+     *  //The dst parameters display the area of the destination to cover by the the source
+     * @param image
+     * @param destino
+     * @param spriteFromSpriteSheet
+     */
     void drawImageFromSpritesheet(Image image, Rect destino, Rect spriteFromSpriteSheet);
+
+    /**
+     * Pintar con alfa es más caro, por eso vamos a tener un método aparte
+     * @param image
+     * @param destino
+     * @param spriteFromSpriteSheet
+     * @param alpha
+     */
+    void drawFromSpriteSheetWithAlpha(Image image, Rect destino, Rect spriteFromSpriteSheet, int alpha);
+
 
     //Getters de la ventana
     int getWidth();                             //Ancho

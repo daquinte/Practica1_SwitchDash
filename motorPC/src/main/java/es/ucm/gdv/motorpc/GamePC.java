@@ -6,10 +6,10 @@ import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 
 import  es.ucm.gdv.interfaces.Game;
+import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.Input;
-import es.ucm.gdv.logica.Logica;
 
 public class GamePC implements Game, Runnable {
 
@@ -28,21 +28,21 @@ public class GamePC implements Game, Runnable {
     //Para el ciclo de juego
     long lastFrameTime = System.nanoTime();
     long currentTime, nanoElapsedTime;
+    private GameState _currentGameState;
 
     //Para el hilo
     private volatile boolean _running; //Volatile hace que no revise en memoria
     private Thread _runningThread;     //Hilo de juego
-    private Logica _logica;
 
 
-    public GamePC(String windowTitle){
+    public GamePC(String windowTitle) {
 
         _frame = new JFrame(windowTitle);
 
         // Vamos a usar renderizado activo. No queremos que Swing llame al
         // método repaint() porque el repintado es continuo en cualquier caso.
         _frame.setIgnoreRepaint(true);
-        init();
+
     }
 
     public void init() {
@@ -69,8 +69,8 @@ public class GamePC implements Game, Runnable {
 
         //Inicializa los motores
         _graphicsPC = new GraphicsPC(_frame);
-        _inputPC = new InputPC(/*_frame*/);
-        _logica = new Logica();
+        _inputPC = new InputPC(_frame);
+        _currentGameState.init(this); //TODO: Sincronizar esto, game tiene que estar creado y logica asignada.
     }
 
 
@@ -80,19 +80,16 @@ public class GamePC implements Game, Runnable {
     @Override
     public void run() {
 
-        _logica.init(this);
-
-
         long lastFrameTime = System.nanoTime();
         // Bucle principal
-        while(true) {
+        while (true) {
             currentTime = System.nanoTime();
             nanoElapsedTime = currentTime - lastFrameTime;
             lastFrameTime = currentTime;
             double elapsedTime = (double) nanoElapsedTime / 1.0E9;
 
             //Tick de la lógica
-            _logica.tick(elapsedTime);
+            _currentGameState.tick(elapsedTime);
 
             // Pintamos el frame con el BufferStrategy
             do {
@@ -103,14 +100,13 @@ public class GamePC implements Game, Runnable {
                     _graphicsPC.setGraphics(graphics);
                     try {
                         _graphicsPC.clear(0xFF000000);
-                        _logica.render();
-                    }
-                    finally {
+                        _currentGameState.render();
+                    } finally {
                         graphics.dispose();
                     }
-                } while(_bs.contentsRestored());
+                } while (_bs.contentsRestored());
                 _bs.show();
-            } while(_bs.contentsLost());
+            } while (_bs.contentsLost());
 			/*
 			// Posibilidad: cedemos algo de tiempo. es una medida conflictiva...
 			try {
@@ -121,19 +117,48 @@ public class GamePC implements Game, Runnable {
         } // while
     }
 
+
+    /**
+     * Cambia el gameState al que debe llamar el ciclo principal
+     * */
+    @Override
+    public void setGameState(GameState newGameState) {
+        _currentGameState = newGameState;
+    }
+
+
+
     //-----------------------------------------------
     //                   Getters
     //-----------------------------------------------
 
+    /**
+     * Devuelve la instancia de game, para tener siempre los graphics e input actualizados
+     * @return Instancia del motor de juego
+     * */
+    @Override
+    public Game getGame() {
+        return this;
+    }
+
+    /**
+     * Devuelve la instancia de graphics para poder cargar y pintar imagenes
+     * @return Instancia de Graphics contenida en el motor
+     * */
     @Override
     public Graphics getGraphics() {
         return _graphicsPC;
     }
 
+    /**
+     * Devuelve la instancia de input para poder registrar y recoger input
+     * @return Instancia de Input contenida en el motor
+     * */
     @Override
     public Input getInput() {
         return _inputPC;
     }
+
 
 
 }

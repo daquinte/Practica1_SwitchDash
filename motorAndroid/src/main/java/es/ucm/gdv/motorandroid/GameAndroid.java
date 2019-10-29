@@ -7,6 +7,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import es.ucm.gdv.interfaces.Game;
+import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.Input;
@@ -100,7 +101,10 @@ public class GameAndroid implements Game, Runnable {
     }
 
 
-
+    @Override
+    public Game getGame() {
+        return null;
+    }
 
     //-----------------------------------------------
     //                   Getters
@@ -114,6 +118,11 @@ public class GameAndroid implements Game, Runnable {
     @Override
     public Input getInput() {
         return _inputAndroid;
+    }
+
+    @Override
+    public void setGameState(GameState gameState) {
+
     }
 
 
