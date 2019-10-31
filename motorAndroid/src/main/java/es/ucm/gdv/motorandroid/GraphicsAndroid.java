@@ -79,6 +79,11 @@ public class GraphicsAndroid implements Graphics {
     }
 
     @Override
+    public void drawFromSpriteSheetWithAlpha(Image image, Rect destino, Rect spriteFromSpriteSheet, int alpha) {
+
+    }
+
+    @Override
     public int getWidth() {
         return _surfaceView.getWidth();
     }

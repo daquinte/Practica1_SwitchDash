@@ -79,7 +79,7 @@ public class GameAndroid implements Game, Runnable {
             SurfaceHolder sh = _surfaceView.getHolder();
             //_logicaJuego.tick(CalculaDeltaTime());
             while (!sh.getSurface().isValid());
-            CanvasManagePaint(sh);
+            CanvasManagePaint(sh); //TODO: pasar esto a que use Sprite y tal
         }
     }
 
