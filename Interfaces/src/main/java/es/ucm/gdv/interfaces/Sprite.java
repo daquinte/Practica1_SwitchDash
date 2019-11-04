@@ -27,15 +27,10 @@ public class Sprite {
      * @param x Posicion x destino en coodenadas de pantalla (0 - getWidth()-1 <- Escalado y reposicionamiento FUERA, es llamada desde el escalado.
      *
      * */
-    public void draw(Graphics graphics, int x, int y) {
-        int width = graphics.getWidth() * _source.width / 1080;
-        int height = _source.height * width / _source.width;
-        _rectDestiny = new Rect(x, y, width, height);
+    public void draw(AbstractGraphics graphics, int x, int y) {
+        _rectDestiny = graphics.Escalamelo(_spriteImage,x,y);
         graphics.drawImageFromSpritesheet(_spriteImage, _rectDestiny, _source);
     }
 
-    //Esto lo ha pensado Pepa para lo de las pelotas
-    public void drawCentered(){
-
-    }
+    public Image getImage(){ return _spriteImage; }
 }

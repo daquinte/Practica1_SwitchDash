@@ -1,4 +1,5 @@
 package es.ucm.gdv.logica;
+import es.ucm.gdv.interfaces.AbstractGraphics;
 import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;
@@ -26,10 +27,12 @@ public class SwitchDashState implements GameState {
     }
 
     public void render() {
-        Graphics graphics = _game.getGraphics();
+        AbstractGraphics graphics = _game.getGraphics();
         Image test = graphics.newImage("howToPlay.png");
         Sprite sprite = new Sprite(test, 0, 0, test.getWidth(), test.getHeight());
-        sprite.draw(graphics, 0, 0);
+        int x = graphics.getWidth()/2 - test.getWidth()/2;
+        int y = 290;
+        sprite.draw(graphics, x, y);
     }
 
 

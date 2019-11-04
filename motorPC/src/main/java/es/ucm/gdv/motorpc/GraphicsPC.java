@@ -5,11 +5,12 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 
+import es.ucm.gdv.interfaces.AbstractGraphics;
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.Rect;
 
-public class GraphicsPC implements Graphics {
+public class GraphicsPC extends AbstractGraphics {
 
     public void setGraphics(java.awt.Graphics g) {
         _graphics = g;
@@ -76,6 +77,7 @@ public class GraphicsPC implements Graphics {
     public int getHeight() {
         return _frame.getHeight();
     }
+
 
 
     //Atributos privados

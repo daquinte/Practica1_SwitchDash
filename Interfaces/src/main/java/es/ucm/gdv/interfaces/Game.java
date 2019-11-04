@@ -8,7 +8,7 @@ public interface Game {
     Game getGame();
 
     //Contiene la instancia de Graphics
-    Graphics getGraphics();
+    AbstractGraphics getGraphics();
 
     //Contiene la instancia de Input
     Input getInput();

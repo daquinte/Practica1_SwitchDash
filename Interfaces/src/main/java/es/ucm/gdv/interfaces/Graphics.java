@@ -6,8 +6,8 @@ public interface Graphics {
     Image newImage(String name);                //Carga una imagen
     void clear(int color);                      //Limpia la pantalla, con el color dado por parámetro
 
-    //TE ECHAS UNAS DIVISONES Y YA ESTA
-    //void SetCanvasSize(int x, int y);
+
+
 
 
     /**

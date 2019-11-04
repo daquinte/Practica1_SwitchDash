@@ -5,6 +5,7 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
+import es.ucm.gdv.interfaces.AbstractGraphics;
 import  es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;
@@ -22,8 +23,8 @@ public class GamePC implements Game, Runnable {
     private JFrame _frame;
 
     //Atributos de pantalla
-    private final int _anchoPantalla = 400;
-    private final int _altoPantalla = 711;
+    private final int _anchoPantalla = 600;
+    private final int _altoPantalla = 800;
 
     //Para el ciclo de juego
     long lastFrameTime = System.nanoTime();
@@ -146,7 +147,7 @@ public class GamePC implements Game, Runnable {
      * @return Instancia de Graphics contenida en el motor
      * */
     @Override
-    public Graphics getGraphics() {
+    public AbstractGraphics getGraphics() {
         return _graphicsPC;
     }
 

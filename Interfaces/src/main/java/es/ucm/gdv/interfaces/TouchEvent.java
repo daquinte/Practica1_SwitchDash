@@ -31,7 +31,6 @@ public class TouchEvent {
     public int get_x() {
         return _x;
     }
-
     public int get_y() {
         return _y;
     }
