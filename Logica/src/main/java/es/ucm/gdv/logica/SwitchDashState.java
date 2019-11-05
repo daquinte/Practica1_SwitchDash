@@ -9,13 +9,21 @@ import es.ucm.gdv.interfaces.Sprite;
 public class SwitchDashState implements GameState {
 
     Game _game;
+    AbstractGraphics graphics;
+
+    Sprite testSprite;
     public SwitchDashState (){
 
     }
 
     @Override
     public void init(Game game) {
+
         _game = game;
+        graphics = _game.getGraphics();
+
+        Image test = graphics.newImage("howToPlay.png");
+        testSprite = new Sprite(test, 0, 0, test.getWidth(), test.getHeight());
     }
 
     @Override
@@ -27,12 +35,12 @@ public class SwitchDashState implements GameState {
     }
 
     public void render() {
-        AbstractGraphics graphics = _game.getGraphics();
-        Image test = graphics.newImage("howToPlay.png");
-        Sprite sprite = new Sprite(test, 0, 0, test.getWidth(), test.getHeight());
-        int x = graphics.getWidth()/2 - test.getWidth()/2;
+        int x = 600; //Todo: POR QUE COJONES ESTA X ESCALA LA IMAGEN???? (por el rectangulo, el escalado entonces está ahí ahí)
         int y = 290;
-        sprite.draw(graphics, x, y);
+
+        //IDEA: Igual el escalado de cada imagen es independiente. En plan, quieres que alguno esté en X
+        //O tener un "factor de escalado X e Y" que vamos a aplicar a todos los objetos.
+        testSprite.draw(graphics, x, y);
     }
 
 

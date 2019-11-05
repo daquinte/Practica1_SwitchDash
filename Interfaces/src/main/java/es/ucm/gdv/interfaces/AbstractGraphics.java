@@ -6,7 +6,7 @@ public abstract class AbstractGraphics implements Graphics {
     int baseHeight = 1920;
 
 /*
-    //Código común de escalado -> DEBERIA VOLVER A ABSTRACT GRAPHICS
+    //Código común de escalado
     //x e y estan en coordenadas ""logicas"" de canvas/juego
     public Rect Escalamelo(Image image, int x, int y) {
 
@@ -27,10 +27,12 @@ public abstract class AbstractGraphics implements Graphics {
         return new Rect(xFisico,yFisico, xFisico + sizeX, yFisico + sizeY);
     }
 */
-//Código común de escalado -> DEBERIA VOLVER A ABSTRACT GRAPHICS
+
+//Código común de escalado
 //x e y estan en coordenadas ""logicas"" de canvas/juego
-public Rect Escalamelo(Image image, int x, int y) {
+public Pair Escalamelo(Image image) {
     //https://stackoverflow.com/questions/10245220/java-image-resize-maintain-aspect-ratio
+    //No sirve del todo lmao
     int original_width = image.getWidth();
     int original_height = image.getHeight();
     int bound_width = getWidth();
@@ -53,10 +55,20 @@ public Rect Escalamelo(Image image, int x, int y) {
         //scale width to maintain aspect ratio
         new_width = (new_height * original_width) / original_height;
     }
-    return  null;
+    return new Pair(new_width, new_height);
     //return new Rect(xFisico,yFisico, xFisico + sizeX, yFisico + sizeY);
 }
 
+public Pair Colocamelo(Image image, int x, int y){
+    //SI A 1080 TU X es X, ENTONCES A GET WIDTH SERÁ ...
+    // 1080 -> xParam
+    // getWidth -> ????
+    // (getWidth*xParam) / 1080 = ????
+
+    int nuevaX = (getWidth()*x)/baseWidth;
+    int nuevaY = (getWidth()*x)/baseHeight;
+    return new Pair(nuevaX, nuevaY);
+}
     private int Translate(int screenSize, int param, int physicSize){
         return (physicSize * param) / screenSize;
     }
