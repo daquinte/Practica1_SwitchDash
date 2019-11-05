@@ -38,6 +38,7 @@ public interface Graphics {
      */
     void drawFromSpriteSheetWithAlpha(Image image, Rect destino, Rect spriteFromSpriteSheet, int alpha);
 
+    //void setCanvasSize(int x, int y);
 
     //Getters de la ventana
     int getWidth();                             //Ancho

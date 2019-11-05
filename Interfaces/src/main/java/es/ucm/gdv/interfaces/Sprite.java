@@ -29,9 +29,8 @@ public class Sprite {
      * */
     public void draw(AbstractGraphics graphics, int x, int y) {
 
-        Pair nuevaEscala = graphics.Escalamelo(_spriteImage);
-        Pair nuevaPos = graphics.Colocamelo(_spriteImage, x, y);
-        _rectDestiny = new Rect(nuevaPos._first,nuevaPos._second, nuevaPos._first + _spriteImage.getWidth(), nuevaPos._second + _spriteImage.getHeight());
+        Rect nuevaEscala = graphics.Escalamelo(_spriteImage);
+        _rectDestiny = nuevaEscala;
         graphics.drawImageFromSpritesheet(_spriteImage, _rectDestiny, _source);
     }
 
