@@ -78,11 +78,18 @@ public class GraphicsPC extends AbstractGraphics {
         _Canvas = Escalamelo();
     }
 
+    @Override
+    public Rect getCanvas() {
+        return _Canvas;
+    }
+
     private Rect coordenadasACanvas(int x, int y, int width, int height) {
 
         //Posicion
         int nuevaX = scaleCoordinate(x, _Canvas.width, baseSizeWidth);
+        nuevaX += _Canvas.x + 30;
         int nuevaY = scaleCoordinate(y, _Canvas.height, baseSizeHeight);
+        nuevaY += _Canvas.y + 5;
         int newWidth = nuevaX + scaleCoordinate(width, _Canvas.width, baseSizeWidth);
         int newHeigth = nuevaY + scaleCoordinate(height, _Canvas.height, baseSizeHeight);
         return new Rect(nuevaX, nuevaY, newWidth, newHeigth);
@@ -101,7 +108,6 @@ public class GraphicsPC extends AbstractGraphics {
     public int getHeight() {
         return _frame.getHeight();
     }
-
 
     //Atributos privados
     java.awt.Graphics2D _graphics;   //Graphics de java

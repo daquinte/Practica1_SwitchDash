@@ -24,8 +24,8 @@ public class GamePC implements Game, Runnable {
     private JFrame _frame;
 
     //Atributos de pantalla
-    private final int _anchoPantalla = 1080;
-    private final int _altoPantalla = 1920;
+    private final int _anchoPantalla = 800;
+    private final int _altoPantalla = 600;
 
     //Para el ciclo de juego
     long lastFrameTime = System.nanoTime();
@@ -93,6 +93,9 @@ public class GamePC implements Game, Runnable {
             nanoElapsedTime = currentTime - lastFrameTime;
             lastFrameTime = currentTime;
             double elapsedTime = (double) nanoElapsedTime / 1.0E9;
+
+            //ESKERE
+            _graphicsPC.setCanvasSize();
 
             //Tick de la lógica
             _currentGameState.tick(elapsedTime);
