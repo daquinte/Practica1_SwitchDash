@@ -1,6 +1,7 @@
 package es.ucm.gdv.motorpc; //Igual debería ser es.ucm.gdv.interfaces.motorpc
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
@@ -36,6 +37,7 @@ public class GamePC implements Game, Runnable {
     private Thread _runningThread;     //Hilo de juego
 
 
+
     public GamePC(String windowTitle) {
 
         _frame = new JFrame(windowTitle);
@@ -46,6 +48,9 @@ public class GamePC implements Game, Runnable {
 
     }
 
+    /*
+    Inicia la ventana
+    */
     public void init() {
         _frame.setSize(_anchoPantalla, _altoPantalla);
         _frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -97,7 +102,7 @@ public class GamePC implements Game, Runnable {
                 do {
                     //Actualizas el graphics que va a usar GraphicsPC
                     //TODO: ARREGLAR ESTA LINEA PORQUE DA UNA EXCEPCION AL REDIMENSIONAR
-                    java.awt.Graphics graphics = _bs.getDrawGraphics();
+                    java.awt.Graphics2D graphics = (Graphics2D)_bs.getDrawGraphics();
                     _graphicsPC.setGraphics(graphics);
                     try {
                         _graphicsPC.clear(0xFF000000);

@@ -1,14 +1,8 @@
 package es.ucm.gdv.interfaces;
-
-
 public interface Graphics {
 
     Image newImage(String name);                //Carga una imagen
     void clear(int color);                      //Limpia la pantalla, con el color dado por parámetro
-
-
-
-
 
     /**
      *
@@ -38,7 +32,7 @@ public interface Graphics {
      */
     void drawFromSpriteSheetWithAlpha(Image image, Rect destino, Rect spriteFromSpriteSheet, int alpha);
 
-    //void setCanvasSize(int x, int y);
+    void setCanvasSize();
 
     //Getters de la ventana
     int getWidth();                             //Ancho

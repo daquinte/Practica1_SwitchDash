@@ -8,16 +8,19 @@ import javax.swing.JFrame;
 import es.ucm.gdv.interfaces.AbstractGraphics;
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
+import es.ucm.gdv.interfaces.Pair;
 import es.ucm.gdv.interfaces.Rect;
 
 public class GraphicsPC extends AbstractGraphics {
 
-    public void setGraphics(java.awt.Graphics g) {
+    public void setGraphics(java.awt.Graphics2D g) {
         _graphics = g;
     }
 
     public GraphicsPC(JFrame jf) {
+
         _frame = jf;
+        setCanvasSize();
     }
 
     //-----Métodos de la interfaz-----
@@ -69,6 +72,23 @@ public class GraphicsPC extends AbstractGraphics {
     }
 
     @Override
+    public void setCanvasSize() {
+        _Canvas = Escalamelo();
+    }
+
+    private Rect coodenadasACanvas(int x, int y) {
+
+        //Posicion
+        int nuevaX = x * _Canvas.width / baseSizeWidth;
+        int nuevaY = y * _Canvas.height / baseSizeHeight;
+
+
+        // return new Pair(nuevaX,nuevaY);
+        return null;
+    }
+
+
+    @Override
     public int getWidth() {
         return _frame.getWidth();
     }
@@ -81,6 +101,8 @@ public class GraphicsPC extends AbstractGraphics {
 
 
     //Atributos privados
-    java.awt.Graphics _graphics;   //Graphics de java
+    java.awt.Graphics2D _graphics;   //Graphics de java
     JFrame _frame;                 //Ventana donde pintamos
+
+    Rect _Canvas;
 }

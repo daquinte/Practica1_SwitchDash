@@ -20,7 +20,7 @@ public class SwitchDashState implements GameState {
     public void init(Game game) {
 
         _game = game;
-        graphics = _game.getGraphics();
+        graphics = (AbstractGraphics)_game.getGraphics();
 
         Image test = graphics.newImage("laranjo.jpg");
         testSprite = new Sprite(test, 0, 0, test.getWidth(), test.getHeight());
@@ -35,7 +35,7 @@ public class SwitchDashState implements GameState {
     }
 
     public void render() {
-        int x = 0; //Todo: POR QUE COJONES ESTA X ESCALA LA IMAGEN???? (por el rectangulo, el escalado entonces está ahí ahí)
+        int x = 0;
         int y = 0;
 
         //IDEA: Igual el escalado de cada imagen es independiente. En plan, quieres que alguno esté en X
