@@ -28,10 +28,7 @@ public class Sprite {
      *
      * */
     public void draw(AbstractGraphics graphics, int x, int y) {
-
-        Rect nuevaEscala = graphics.Escalamelo();
-        _rectDestiny = nuevaEscala;
-
+        Rect _rectDestiny = new Rect(x, y, _spriteImage.getWidth(), _spriteImage.getHeight());
         graphics.drawImageFromSpritesheet(_spriteImage, _rectDestiny, _source);
     }
 

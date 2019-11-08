@@ -60,10 +60,12 @@ public class GraphicsPC extends AbstractGraphics {
     public void drawImageFromSpritesheet(Image image, Rect destino, Rect spriteFromSpriteSheet) {
         ImagePC img = (ImagePC) image;
         java.awt.Image awtImage = img.getImage();
-
-        _graphics.drawImage(awtImage, destino.x, destino.y, destino.width, destino.height,
+        Rect physicsCoordinates = coordenadasACanvas(destino.x, destino.y,
+                destino.width, destino.height);
+        _graphics.drawImage(awtImage, physicsCoordinates.x, physicsCoordinates.y,
+                physicsCoordinates.width, physicsCoordinates.height,
                 spriteFromSpriteSheet.x, spriteFromSpriteSheet.y, spriteFromSpriteSheet.width,
-                spriteFromSpriteSheet.height,null);
+                spriteFromSpriteSheet.height, null);
     }
 
     @Override
@@ -76,17 +78,19 @@ public class GraphicsPC extends AbstractGraphics {
         _Canvas = Escalamelo();
     }
 
-    private Rect coodenadasACanvas(int x, int y) {
+    private Rect coordenadasACanvas(int x, int y, int width, int height) {
 
         //Posicion
-        int nuevaX = x * _Canvas.width / baseSizeWidth;
-        int nuevaY = y * _Canvas.height / baseSizeHeight;
-
-
-        // return new Pair(nuevaX,nuevaY);
-        return null;
+        int nuevaX = scaleCoordinate(x, _Canvas.width, baseSizeWidth);
+        int nuevaY = scaleCoordinate(y, _Canvas.height, baseSizeHeight);
+        int newWidth = nuevaX + scaleCoordinate(width, _Canvas.width, baseSizeWidth);
+        int newHeigth = nuevaY + scaleCoordinate(height, _Canvas.height, baseSizeHeight);
+        return new Rect(nuevaX, nuevaY, newWidth, newHeigth);
     }
 
+    private int scaleCoordinate(int param1, int param2, int param3) {
+        return param1 * param2 / param3;
+    }
 
     @Override
     public int getWidth() {
@@ -97,7 +101,6 @@ public class GraphicsPC extends AbstractGraphics {
     public int getHeight() {
         return _frame.getHeight();
     }
-
 
 
     //Atributos privados
