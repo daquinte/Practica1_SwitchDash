@@ -12,6 +12,7 @@ import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.Input;
+import es.ucm.gdv.logica.Logica;
 
 public class GamePC implements Game, Runnable {
 
@@ -24,13 +25,13 @@ public class GamePC implements Game, Runnable {
     private JFrame _frame;
 
     //Atributos de pantalla
-    private final int _anchoPantalla = 1920/2;
+    private final int _anchoPantalla = (int)(1080 * 0.5625f);
     private final int _altoPantalla = 1080;
 
     //Para el ciclo de juego
     long lastFrameTime = System.nanoTime();
     long currentTime, nanoElapsedTime;
-    private GameState _currentGameState;
+    private Logica _currentGameState;
 
     //Para el hilo
     private volatile boolean _running; //Volatile hace que no revise en memoria
@@ -51,7 +52,7 @@ public class GamePC implements Game, Runnable {
     /*
     Inicia la ventana
     */
-    public void init() {
+    public void init(Logica logica) {
         _frame.setSize(_anchoPantalla, _altoPantalla);
         _frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         _frame.setVisible(true);
@@ -76,6 +77,7 @@ public class GamePC implements Game, Runnable {
         //Inicializa los motores
         _graphicsPC = new GraphicsPC(_frame);
         _inputPC = new InputPC(_frame);
+        _currentGameState = logica;
         _currentGameState.init(this); //TODO: Sincronizar esto, game tiene que estar creado y logica asignada.
     }
 
@@ -108,7 +110,8 @@ public class GamePC implements Game, Runnable {
                     java.awt.Graphics2D graphics = (Graphics2D)_bs.getDrawGraphics();
                     _graphicsPC.setGraphics(graphics);
                     try {
-                        _graphicsPC.clear(0xFF000000);
+                        _currentGameState.clear();
+                        _graphicsPC.DrawRect(0xFF00FFFF,_graphicsPC.getCanvas());
                         _currentGameState.render();
                     } finally {
                         graphics.dispose();
@@ -127,13 +130,6 @@ public class GamePC implements Game, Runnable {
     }
 
 
-    /**
-     * Cambia el gameState al que debe llamar el ciclo principal
-     * */
-    @Override
-    public void setGameState(GameState newGameState) {
-        _currentGameState = newGameState;
-    }
 
 
 

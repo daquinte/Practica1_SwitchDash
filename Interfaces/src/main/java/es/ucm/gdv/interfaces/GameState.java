@@ -1,5 +1,6 @@
 package es.ucm.gdv.interfaces;
 
+
 public interface GameState {
 
     public void init(Game game); //Inicia el gamestate

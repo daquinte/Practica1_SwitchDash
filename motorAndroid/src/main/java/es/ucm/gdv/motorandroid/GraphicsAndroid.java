@@ -74,13 +74,23 @@ public class GraphicsAndroid implements Graphics {
     }
 
     @Override
-    public void drawImageFromSpritesheet(Image image, es.ucm.gdv.interfaces.Rect destino, Rect spriteFromSpriteSheet) {
-        //Igual ni lo usamos
+    public void drawImageScaled(Image image, es.ucm.gdv.interfaces.Rect destino, Rect spriteFromSpriteSheet) {
+
     }
 
     @Override
-    public void drawFromSpriteSheetWithAlpha(Image image, Rect destino, Rect spriteFromSpriteSheet, int alpha) {
+    public void drawImageScaledWithAlpha(Image image, Rect destino, Rect spriteFromSpriteSheet, int alpha) {
 
+    }
+
+    @Override
+    public void setCanvasSize() {
+
+    }
+
+    @Override
+    public Rect getCanvas() {
+        return null;
     }
 
     @Override

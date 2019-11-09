@@ -48,6 +48,14 @@ public class GraphicsPC extends AbstractGraphics {
         _graphics.fillRect(0, 0, getWidth(), getHeight());
     }
 
+
+
+    public void DrawRect(int color, Rect rectangulo) {
+        Color rgb = new Color(color);
+        _graphics.setColor(rgb);
+        _graphics.fillRect(rectangulo.x, rectangulo.y, rectangulo.width, rectangulo.height);
+    }
+
     @Override
     public void drawImage(Image image, int x, int y) {
         //Siempre recibimos una imagen de PC, hacemos un casting hacia abajo
@@ -57,7 +65,7 @@ public class GraphicsPC extends AbstractGraphics {
     }
 
     @Override
-    public void drawImageFromSpritesheet(Image image, Rect destino, Rect spriteFromSpriteSheet) {
+    public void drawImageScaled(Image image, Rect destino, Rect spriteFromSpriteSheet) {
         ImagePC img = (ImagePC) image;
         java.awt.Image awtImage = img.getImage();
         Rect physicsCoordinates = coordenadasACanvas(destino.x, destino.y,
@@ -69,7 +77,7 @@ public class GraphicsPC extends AbstractGraphics {
     }
 
     @Override
-    public void drawFromSpriteSheetWithAlpha(Image image, Rect destino, Rect spriteFromSpriteSheet, int alpha) {
+    public void drawImageScaledWithAlpha(Image image, Rect destino, Rect spriteFromSpriteSheet, int alpha) {
 
     }
 
@@ -84,12 +92,13 @@ public class GraphicsPC extends AbstractGraphics {
     }
 
     private Rect coordenadasACanvas(int x, int y, int width, int height) {
-        int _height = height * getCanvas().height / baseSizeHeight;
-        int _width = _height * width / height;
+        int _height = (height * getCanvas().height / baseSizeHeight) + getCanvas().y;;
+        int _width = (width * getCanvas().width / baseSizeWidth) + getCanvas().x; //ANTIGUO _height * width / height;
+        System.out.println( "Imagen:" + _width);
+        System.out.println( "Canvas:" + getCanvas().width);
         int _y = (_height * y / baseSizeHeight) + getCanvas().y;
         int _x = (_width * x / baseSizeWidth) + getCanvas().x;
-        _width += _x;
-        _height += _y;
+
         return new Rect(_x, _y, _width, _height);
     }
 

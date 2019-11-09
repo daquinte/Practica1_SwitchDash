@@ -21,7 +21,7 @@ public interface Graphics {
      * @param destino
      * @param spriteFromSpriteSheet
      */
-    void drawImageFromSpritesheet(Image image, Rect destino, Rect spriteFromSpriteSheet);
+    void drawImageScaled(Image image, Rect destino, Rect spriteFromSpriteSheet);
 
     /**
      * Pintar con alfa es más caro, por eso vamos a tener un método aparte
@@ -30,7 +30,7 @@ public interface Graphics {
      * @param spriteFromSpriteSheet
      * @param alpha
      */
-    void drawFromSpriteSheetWithAlpha(Image image, Rect destino, Rect spriteFromSpriteSheet, int alpha);
+    void drawImageScaledWithAlpha(Image image, Rect destino, Rect spriteFromSpriteSheet, int alpha);
 
     void setCanvasSize();
     Rect getCanvas();

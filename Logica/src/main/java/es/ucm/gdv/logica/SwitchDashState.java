@@ -9,11 +9,14 @@ import es.ucm.gdv.interfaces.Sprite;
 public class SwitchDashState implements GameState {
 
     Game _game;
+    Logica _logica;
+    ResourceManager _resourceManager;
     AbstractGraphics graphics;
 
     Sprite testSprite;
-    public SwitchDashState (){
-
+    public SwitchDashState (Logica l){
+        _logica = l;
+        _resourceManager = l.getResourceManager();
     }
 
     @Override
@@ -22,21 +25,23 @@ public class SwitchDashState implements GameState {
         _game = game;
         graphics = (AbstractGraphics)_game.getGraphics();
 
-        Image test = graphics.newImage("howtoplay.png");
+        Image test = _resourceManager.getImage(ResourceManager.GameSprites.HOWTOPLAY);
         testSprite = new Sprite(test, 0, 0, test.getWidth(), test.getHeight());
+
+        _logica.SetClearColor(ResourceManager.GameColor.NEGRO);
     }
 
     @Override
     public void clear() {
-
+        _logica.clear();
     }
 
     public void tick(double elapsedTime) {
     }
 
     public void render() {
-        int x = graphics.getCanvas().width/2 - testSprite.getImage().getWidth()/2;
-        int y = 0;
+        int x = 1080/2 - testSprite.getImage().getWidth()/2;
+        int y = 240;
 
         //IDEA: Igual el escalado de cada imagen es independiente. En plan, quieres que alguno esté en X
         //O tener un "factor de escalado X e Y" que vamos a aplicar a todos los objetos.

@@ -120,10 +120,6 @@ public class GameAndroid implements Game, Runnable {
         return _inputAndroid;
     }
 
-    @Override
-    public void setGameState(GameState gameState) {
-
-    }
 
 
 }

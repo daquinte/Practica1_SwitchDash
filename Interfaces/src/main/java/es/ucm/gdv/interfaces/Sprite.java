@@ -29,7 +29,7 @@ public class Sprite {
      * */
     public void draw(AbstractGraphics graphics, int x, int y) {
         Rect _rectDestiny = new Rect(x, y, _spriteImage.getWidth(), _spriteImage.getHeight());
-        graphics.drawImageFromSpritesheet(_spriteImage, _rectDestiny, _source);
+        graphics.drawImageScaled(_spriteImage, _rectDestiny, _source);
     }
 
     public Image getImage(){ return _spriteImage; }

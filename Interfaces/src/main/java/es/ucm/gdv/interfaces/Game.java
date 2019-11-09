@@ -13,7 +13,4 @@ public interface Game {
     //Contiene la instancia de Input
     Input getInput();
 
-    //Set del gameState que se llamará en logica
-    void setGameState(GameState gameState);
-
 }
