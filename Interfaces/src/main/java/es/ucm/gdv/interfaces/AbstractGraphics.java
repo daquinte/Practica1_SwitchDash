@@ -8,12 +8,9 @@ public abstract class AbstractGraphics implements Graphics {
 
     private int actualResolutionWidth;
     public Rect Escalamelo() {
-        //https://stackoverflow.com/questions/10245220/java-image-resize-maintain-aspect-ratio
-        int original_width = getWidth();
-        //int original_height = image.getHeight();
-        int new_width = original_width;
-        int x = 0;
-        int y = 0;
+        int new_width = 0;
+        int x = 5;
+        int y = 30;
 
         if (this.getWidth() > this.getHeight()) {
             new_width = calculateNewAspectRatio(this.getHeight());

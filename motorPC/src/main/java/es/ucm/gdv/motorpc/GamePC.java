@@ -24,8 +24,8 @@ public class GamePC implements Game, Runnable {
     private JFrame _frame;
 
     //Atributos de pantalla
-    private final int _anchoPantalla = 800;
-    private final int _altoPantalla = 600;
+    private final int _anchoPantalla = 1920/2;
+    private final int _altoPantalla = 1080;
 
     //Para el ciclo de juego
     long lastFrameTime = System.nanoTime();

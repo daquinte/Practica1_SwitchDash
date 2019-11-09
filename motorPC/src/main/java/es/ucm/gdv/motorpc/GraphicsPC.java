@@ -84,19 +84,13 @@ public class GraphicsPC extends AbstractGraphics {
     }
 
     private Rect coordenadasACanvas(int x, int y, int width, int height) {
-
-        //Posicion
-        int nuevaX = scaleCoordinate(x, _Canvas.width, baseSizeWidth);
-        nuevaX += _Canvas.x + 30;
-        int nuevaY = scaleCoordinate(y, _Canvas.height, baseSizeHeight);
-        nuevaY += _Canvas.y + 5;
-        int newWidth = nuevaX + scaleCoordinate(width, _Canvas.width, baseSizeWidth);
-        int newHeigth = nuevaY + scaleCoordinate(height, _Canvas.height, baseSizeHeight);
-        return new Rect(nuevaX, nuevaY, newWidth, newHeigth);
-    }
-
-    private int scaleCoordinate(int param1, int param2, int param3) {
-        return param1 * param2 / param3;
+        int _height = height * getCanvas().height / baseSizeHeight;
+        int _width = _height * width / height;
+        int _y = (_height * y / baseSizeHeight) + getCanvas().y;
+        int _x = (_width * x / baseSizeWidth) + getCanvas().x;
+        _width += _x;
+        _height += _y;
+        return new Rect(_x, _y, _width, _height);
     }
 
     @Override
