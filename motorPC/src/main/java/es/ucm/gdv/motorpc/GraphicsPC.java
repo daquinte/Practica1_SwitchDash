@@ -1,5 +1,6 @@
 package es.ucm.gdv.motorpc;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.io.IOException;
 
@@ -77,8 +78,23 @@ public class GraphicsPC extends AbstractGraphics {
     }
 
     @Override
-    public void drawImageScaledWithAlpha(Image image, Rect destino, Rect spriteFromSpriteSheet, int alpha) {
+    public void drawImageScaledWithAlpha(Image image, Rect destino, Rect spriteFromSpriteSheet, float alpha) {
+        ImagePC img = (ImagePC) image;
+        java.awt.Image awtImage = img.getImage();
+        Rect physicsCoordinates = coordenadasACanvas(destino.x, destino.y,
+                destino.width, destino.height);
 
+        //Vamos a regular el alpha, porque en PC si pasa de 1 explota
+        if(alpha > 1f) alpha = 1f;
+        else if (alpha < 0) alpha = 0f;
+
+        //DST_Over = The destination is composited over the source and the result replaces the destination (Porter-Duff Destination Over Source rule).
+        _graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+
+        _graphics.drawImage(awtImage, physicsCoordinates.x, physicsCoordinates.y,
+                physicsCoordinates.width, physicsCoordinates.height,
+                spriteFromSpriteSheet.x, spriteFromSpriteSheet.y, spriteFromSpriteSheet.width,
+                spriteFromSpriteSheet.height, null);
     }
 
     @Override

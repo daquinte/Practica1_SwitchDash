@@ -14,6 +14,7 @@ public class SwitchDashState implements GameState {
     AbstractGraphics graphics;
 
     Sprite testSprite;
+    Sprite flechas; //OJO QUE LAS FLECHAS SE VAN A PINTAR EN TODOS LOS PUTOS ESTADOS
     public SwitchDashState (Logica l){
         _logica = l;
         _resourceManager = l.getResourceManager();
@@ -26,6 +27,9 @@ public class SwitchDashState implements GameState {
         graphics = (AbstractGraphics)_game.getGraphics();
 
         Image test = _resourceManager.getImage(ResourceManager.GameSprites.HOWTOPLAY);
+        Image flechasimg = _resourceManager.getImage(ResourceManager.GameSprites.ARROWS);
+
+        flechas = new Sprite(flechasimg,0,0,flechasimg.getWidth(),flechasimg.getHeight());
         testSprite = new Sprite(test, 0, 0, test.getWidth(), test.getHeight());
 
         _logica.SetClearColor(ResourceManager.GameColor.NEGRO);
@@ -46,6 +50,7 @@ public class SwitchDashState implements GameState {
         //IDEA: Igual el escalado de cada imagen es independiente. En plan, quieres que alguno esté en X
         //O tener un "factor de escalado X e Y" que vamos a aplicar a todos los objetos.
         testSprite.draw(graphics, x, y);
+        flechas.drawWithAlpha(graphics,0,0, 0.75f); //Idea: Juntar el draw y llamarlo con X parametros
     }
 
 

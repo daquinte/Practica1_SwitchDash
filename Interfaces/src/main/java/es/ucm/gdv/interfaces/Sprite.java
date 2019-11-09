@@ -32,5 +32,9 @@ public class Sprite {
         graphics.drawImageScaled(_spriteImage, _rectDestiny, _source);
     }
 
+    public void drawWithAlpha(AbstractGraphics graphics, int x, int y, float alpha){
+        Rect _rectDestiny = new Rect(x, y, _spriteImage.getWidth(), _spriteImage.getHeight());
+        graphics.drawImageScaledWithAlpha(_spriteImage, _rectDestiny, _source, alpha);
+    }
     public Image getImage(){ return _spriteImage; }
 }

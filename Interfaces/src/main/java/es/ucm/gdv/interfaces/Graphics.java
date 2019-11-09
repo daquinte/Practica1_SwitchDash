@@ -30,7 +30,7 @@ public interface Graphics {
      * @param spriteFromSpriteSheet
      * @param alpha
      */
-    void drawImageScaledWithAlpha(Image image, Rect destino, Rect spriteFromSpriteSheet, int alpha);
+    void drawImageScaledWithAlpha(Image image, Rect destino, Rect spriteFromSpriteSheet, float alpha);
 
     void setCanvasSize();
     Rect getCanvas();
