@@ -13,11 +13,16 @@ public class SwitchDashState implements GameState {
     ResourceManager _resourceManager;
     AbstractGraphics graphics;
 
-   Sprite [] tusPelotas; //Vas a tener un array de 4-5 pelotas y las vas a ir subiendo xdd
+    //Atributos del juego
+    Jugador jugador;
+    int pelotasRecogidas;
+    int velocidadActual;
+
+    Sprite [] tusPelotas; //Vas a tener un array de 4-5 pelotas y las vas a ir subiendo xdd
     public SwitchDashState (Logica l){
         _logica = l;
         _resourceManager = l.getResourceManager();
-        tusPelotas = new Sprite[5];
+
     }
 
     @Override
@@ -25,8 +30,13 @@ public class SwitchDashState implements GameState {
 
         _game = game;
         graphics = (AbstractGraphics)_game.getGraphics();
+        _logica.SetClearColor(ResourceManager.GameColor.BLACK); //Me lo darán antes, imagino
 
-        _logica.SetClearColor(ResourceManager.GameColor.NEGRO); //Me lo darán antes, imagino
+        //init de juego
+        tusPelotas = new Sprite[5];
+        //jugador = new Jugador(_resourceManager);
+        pelotasRecogidas = 0;
+        velocidadActual = 0;
     }
 
     @Override
@@ -35,6 +45,17 @@ public class SwitchDashState implements GameState {
     }
 
     public void tick(double elapsedTime) {
+
+        /*
+        * for (las pelotas)
+        * pelota[i].tick()
+        * if(i == laUltimaPelota)
+        *  if( pelota[i].GetPosY es mayor que 1200) {COLISIONES()}
+        *
+        *
+        * */
+
+
     }
 
     public void render() {

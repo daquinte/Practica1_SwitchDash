@@ -30,7 +30,7 @@ public class TestGameState implements GameState {
         flechas = new Sprite(flechasimg,0,0,flechasimg.getWidth(),flechasimg.getHeight());
         testSprite = new Sprite(test, 0, 0, test.getWidth(), test.getHeight());
 
-        _logica.SetClearColor(ResourceManager.GameColor.NEGRO);
+        _logica.SetClearColor(ResourceManager.GameColor.GREEN);
     }
 
     @Override
@@ -42,13 +42,13 @@ public class TestGameState implements GameState {
     }
 
     public void render() {
-        int x = 1080/2 + 40;
-        int y = 240;
+        int x = 1080/2 + testSprite.getImage().getWidth()/2;
+        int y = 290;
 
         //IDEA: Igual el escalado de cada imagen es independiente. En plan, quieres que alguno esté en X
         //O tener un "factor de escalado X e Y" que vamos a aplicar a todos los objetos.
         testSprite.drawScaled(graphics, x, y, testSprite.getImage().getWidth(), testSprite.getImage().getHeight());
-        flechas.draw(graphics,0 + graphics.getCanvas().x,0, graphics.getCanvas().width, graphics.getCanvas().height, 0.45f); //Idea: Juntar el draw y llamarlo con X parametros
+        flechas.draw(graphics,0 + graphics.getCanvas().x,0, graphics.getCanvas().width, graphics.getCanvas().height, 0.65f); //Idea: Juntar el draw y llamarlo con X parametros
     }
 
 }

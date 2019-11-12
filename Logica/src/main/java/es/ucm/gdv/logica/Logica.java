@@ -89,7 +89,7 @@ public class Logica implements GameState {
             case BEIGE:
                 _graphics.clear( 0xFF75706b);
                 break;
-            case NEGRO:
+            case BLACK:
                 _graphics.clear( 0xFF000000);
                 break;
             default:

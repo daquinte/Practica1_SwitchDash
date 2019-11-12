@@ -16,7 +16,7 @@ public class ResourceManager implements GameState {
     public enum GameSprites {ARROWS, BACKGROUNDS, BALLS, BUTTONS, GAMEOVER, HOWTOPLAY, INSTRUCTIONS,
                             PLAYAGAIN, PLAYERS, SCOREFRONT, SWITCHDASHLOGO, TAPTOPLAY,WHITE}
 
-    public enum GameColor{ GREEN, GREEN_BLUE, CYAN, LIGHT_BLUE, PURPLE, DARK_BLUE, ORANGE, RED, BEIGE, NEGRO, TOTALCOLORS}
+    public enum GameColor{ GREEN, GREEN_BLUE, CYAN, LIGHT_BLUE, PURPLE, DARK_BLUE, ORANGE, RED, BEIGE, BLACK, TOTALCOLORS}
     //
 
     public boolean allLoaded = false;
