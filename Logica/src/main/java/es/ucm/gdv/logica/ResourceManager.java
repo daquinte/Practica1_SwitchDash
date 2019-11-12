@@ -57,7 +57,7 @@ public class ResourceManager implements GameState {
     public void tick(double elapsedTime) {
         //Comprueba si se ha cargado to.do los elementos
         if(!allLoaded){}
-        else _logica.setCurrentGameState(new SwitchDashState(_logica));
+        else _logica.setCurrentGameState(new TestGameState(_logica));
     }
 
     @Override
