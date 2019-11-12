@@ -58,27 +58,55 @@ public class GraphicsPC extends AbstractGraphics {
     }
 
     @Override
-    public void drawImage(Image image, int x, int y) {
+    public void drawImage(Image image, Rect destino, Rect source) {
         //Siempre recibimos una imagen de PC, hacemos un casting hacia abajo
         ImagePC img = (ImagePC) image;
         java.awt.Image awtImage = img.getImage();
-        _graphics.drawImage(awtImage, x, y, null);
+
+
+        _graphics.drawImage(awtImage, destino.x, destino.y,
+                destino.x + destino.width, destino.y + destino.height,
+                source.x, source.y, source.x+source.width,
+                source.y+ source.height, null);
     }
 
     @Override
-    public void drawImageScaled(Image image, Rect destino, Rect spriteFromSpriteSheet) {
+    public void drawImage(Image image, Rect destino, Rect source, float alpha) {
+        //Siempre recibimos una imagen de PC, hacemos un casting hacia abajo
+        ImagePC img = (ImagePC) image;
+        java.awt.Image awtImage = img.getImage();
+
+
+        //DST_Over = The destination is composited over the source and the result replaces the destination (Porter-Duff Destination Over Source rule).
+        _graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+        _graphics.drawImage(awtImage, destino.x, destino.y,
+                destino.x + destino.width, destino.y + destino.height,
+                source.x, source.y, source.x+source.width,
+                source.y+ source.height, null);
+
+        /*
+         * The width and height dimensions on the destination area are calculated by the following expressions:
+         * (dstx2-dstx1), (dsty2-dsty1).
+         * If the dimensions of the source and destinations areas are different, the Java 2D API will scale up or scale down, as needed.*/
+
+    }
+
+
+    @Override
+    public void drawImageScaled(Image image, Rect destino, Rect source) {
         ImagePC img = (ImagePC) image;
         java.awt.Image awtImage = img.getImage();
         Rect physicsCoordinates = coordenadasACanvas(destino.x, destino.y,
                 destino.width, destino.height);
+
         _graphics.drawImage(awtImage, physicsCoordinates.x, physicsCoordinates.y,
-                physicsCoordinates.width, physicsCoordinates.height,
-                spriteFromSpriteSheet.x, spriteFromSpriteSheet.y, spriteFromSpriteSheet.width,
-                spriteFromSpriteSheet.height, null);
+                physicsCoordinates.x + physicsCoordinates.width, physicsCoordinates.y + physicsCoordinates.height,
+                source.x, source.y,  source.x + source.width,
+                source.y+source.height, null);
     }
 
     @Override
-    public void drawImageScaledWithAlpha(Image image, Rect destino, Rect spriteFromSpriteSheet, float alpha) {
+    public void drawImageScaledWithAlpha(Image image, Rect destino, Rect source, float alpha) {
         ImagePC img = (ImagePC) image;
         java.awt.Image awtImage = img.getImage();
         Rect physicsCoordinates = coordenadasACanvas(destino.x, destino.y,
@@ -92,9 +120,9 @@ public class GraphicsPC extends AbstractGraphics {
         _graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
 
         _graphics.drawImage(awtImage, physicsCoordinates.x, physicsCoordinates.y,
-                physicsCoordinates.width, physicsCoordinates.height,
-                spriteFromSpriteSheet.x, spriteFromSpriteSheet.y, spriteFromSpriteSheet.width,
-                spriteFromSpriteSheet.height, null);
+                physicsCoordinates.x+physicsCoordinates.width, physicsCoordinates.y+physicsCoordinates.height,
+                source.x, source.y,  source.x+source.width,
+                source.y + source.height, null);
     }
 
     @Override
@@ -108,8 +136,8 @@ public class GraphicsPC extends AbstractGraphics {
     }
 
     private Rect coordenadasACanvas(int x, int y, int width, int height) {
-        int _height = (height * getCanvas().height / baseSizeHeight) + getCanvas().y;;
-        int _width = (width * getCanvas().width / baseSizeWidth) + getCanvas().x; //ANTIGUO _height * width / height;
+        int _height = (height * getCanvas().height / baseSizeHeight);
+        int _width = (width * getCanvas().width / baseSizeWidth); //ANTIGUO _height * width / height;
         System.out.println( "Imagen:" + _width);
         System.out.println( "Canvas:" + getCanvas().width);
         int _y = (_height * y / baseSizeHeight) + getCanvas().y;

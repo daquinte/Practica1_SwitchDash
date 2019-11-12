@@ -9,10 +9,12 @@ public interface Graphics {
      * Dibuja completamente la imagen "image" en la posicion (x,y)
      * de la pantalla/ventana. Mapea cada pixel de la imagen en un pixel de la pantalla.
      * @param image Imagen a pintar
-     * @param x Posición X en la pantalla/ventana
-     * @param y Posicion Y en la pantalla/ventana
+     * @param destino
+     * @param source
      * */
-    void drawImage(Image image, int x, int y);  //Imagen y coordenadas de pintado
+    void drawImage(Image image, Rect destino, Rect source);  //Imagen y coordenadas de pintado
+    void drawImage(Image image, Rect destino, Rect source, float alpha);  //Imagen y coordenadas de pintado con alpha
+
 
     /**
      *  //The src parameters represent the area of the image to copy and draw.

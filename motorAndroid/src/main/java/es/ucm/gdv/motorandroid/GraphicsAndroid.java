@@ -79,9 +79,11 @@ public class GraphicsAndroid implements Graphics {
     }
 
     @Override
-    public void drawImageScaledWithAlpha(Image image, Rect destino, Rect spriteFromSpriteSheet, int alpha) {
+    public void drawImageScaledWithAlpha(Image image, Rect destino, Rect spriteFromSpriteSheet, float alpha) {
 
     }
+
+
 
     @Override
     public void setCanvasSize() {

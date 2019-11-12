@@ -22,18 +22,29 @@ public class Sprite {
     }
 
 
+    public void draw(AbstractGraphics graphics, int x, int y, int ancho, int alto){
+        Rect _rectDestiny = new Rect(x, y, ancho, alto);
+        graphics.drawImage(_spriteImage, _rectDestiny, _source);
+    }
+
+    public void draw(AbstractGraphics graphics, int x, int y, int ancho, int alto, float alpha){
+        Rect _rectDestiny = new Rect(x, y, ancho, alto);
+        graphics.drawImage(_spriteImage, _rectDestiny, _source, alpha);
+    }
+
+
     /**
      * Pinta la imagen en coordenadas de pantalla, que ya tienen que venir escaladas y desplazadas(Juego -> Canvas!!).
      * @param x Posicion x destino en coodenadas de pantalla (0 - getWidth()-1 <- Escalado y reposicionamiento FUERA, es llamada desde el escalado.
      *
      * */
-    public void draw(AbstractGraphics graphics, int x, int y) {
-        Rect _rectDestiny = new Rect(x, y, _spriteImage.getWidth(), _spriteImage.getHeight());
+    public void drawScaled(AbstractGraphics graphics, int x, int y, int ancho, int alto) {
+        Rect _rectDestiny = new Rect(x, y, ancho, alto);
         graphics.drawImageScaled(_spriteImage, _rectDestiny, _source);
     }
 
-    public void drawWithAlpha(AbstractGraphics graphics, int x, int y, float alpha){
-        Rect _rectDestiny = new Rect(x, y, _spriteImage.getWidth(), _spriteImage.getHeight());
+    public void drawWithAlphaScaled(AbstractGraphics graphics, int x, int y, int ancho, int alto, float alpha){
+        Rect _rectDestiny =  new Rect(x, y, ancho, alto);
         graphics.drawImageScaledWithAlpha(_spriteImage, _rectDestiny, _source, alpha);
     }
     public Image getImage(){ return _spriteImage; }

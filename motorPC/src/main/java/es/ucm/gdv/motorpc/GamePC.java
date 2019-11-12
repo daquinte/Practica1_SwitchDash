@@ -106,7 +106,8 @@ public class GamePC implements Game, Runnable {
             do {
                 do {
                     //Actualizas el graphics que va a usar GraphicsPC
-                    //TODO: ARREGLAR ESTA LINEA PORQUE DA UNA EXCEPCION AL REDIMENSIONAR
+                    //TODO: Comprobar que no hay más divisiones entre 0 al redimensionar
+                    //TODO: Errores de "Buffers have not been created
                     java.awt.Graphics2D graphics = (Graphics2D)_bs.getDrawGraphics();
                     _graphicsPC.setGraphics(graphics);
                     try {
