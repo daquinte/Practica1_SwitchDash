@@ -2,10 +2,8 @@ package es.ucm.gdv.logica;
 import es.ucm.gdv.interfaces.AbstractGraphics;
 import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
-import es.ucm.gdv.interfaces.Graphics;
-import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.Sprite;
-
+import java.util.Random;
 public class SwitchDashState implements GameState {
 
     Game _game;
@@ -15,14 +13,15 @@ public class SwitchDashState implements GameState {
 
     //Atributos del juego
     Jugador jugador;
+    Pelota [] pelotas; //Vas a tener un array de 4-5 pelotas y las vas a ir subiendo xdd
     int pelotasRecogidas;
     int velocidadActual;
 
-    Sprite [] tusPelotas; //Vas a tener un array de 4-5 pelotas y las vas a ir subiendo xdd
+
+
     public SwitchDashState (Logica l){
         _logica = l;
         _resourceManager = l.getResourceManager();
-
     }
 
     @Override
@@ -30,13 +29,16 @@ public class SwitchDashState implements GameState {
 
         _game = game;
         graphics = (AbstractGraphics)_game.getGraphics();
-        _logica.SetClearColor(ResourceManager.GameColor.BLACK); //Me lo darán antes, imagino
+
 
         //init de juego
-        tusPelotas = new Sprite[5];
+        pelotas = new Pelota[3];
+        jugador = new Jugador(_resourceManager, Jugador.colorJugador.BLANCO);
+
         //jugador = new Jugador(_resourceManager);
         pelotasRecogidas = 0;
         velocidadActual = 0;
+        _logica.SetClearColor(_resourceManager.getRandomGamecolor());
     }
 
     @Override
@@ -59,6 +61,12 @@ public class SwitchDashState implements GameState {
     }
 
     public void render() {
+
+        Sprite auxJugador = jugador.GetColorJugador();
+        int x = 1080/2 + auxJugador.getImage().getWidth()/2;
+        int y = 1200;
+
+        auxJugador.drawScaled(graphics, x, y, auxJugador.getImage().getWidth(), auxJugador.getImage().getHeight());
     }
 
 
