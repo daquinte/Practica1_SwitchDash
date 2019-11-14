@@ -69,7 +69,7 @@ public class ResourceManager implements GameState {
     public void tick(double elapsedTime) {
         //Comprueba si se ha cargado to.do los elementos
         if (!allLoaded) {
-        } else _logica.setCurrentGameState(new TestGameState(_logica));
+        } else _logica.setCurrentGameState(new SwitchDashState(_logica));
     }
 
     @Override
@@ -88,7 +88,7 @@ public class ResourceManager implements GameState {
     }
 
     public GameColor getRandomGamecolor() {
-        return gameColors[rnd.nextInt(gameColorSize) -1];
+        return gameColors[(rnd.nextInt(gameColorSize)+1)-1];
     }
 
     public int setGameColorSize() {

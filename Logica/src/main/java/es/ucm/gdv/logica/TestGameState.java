@@ -43,7 +43,7 @@ public class TestGameState implements GameState {
 
     public void render() {
         int x = 1080/2 + testSprite.getImage().getWidth()/2;
-        int y = 4200; //TODO: EL ESCALADO DE LA Y XDDD
+        int y = 290;
 
         //IDEA: Igual el escalado de cada imagen es independiente. En plan, quieres que alguno esté en X
         //O tener un "factor de escalado X e Y" que vamos a aplicar a todos los objetos.

@@ -63,7 +63,7 @@ public class SwitchDashState implements GameState {
     public void render() {
 
         Sprite auxJugador = jugador.GetColorJugador();
-        int x = 1080/2 + auxJugador.getImage().getWidth()/2;
+        int x = 1080/2 - auxJugador.getImage().getWidth()/2;
         int y = 1200;
 
         auxJugador.drawScaled(graphics, x, y, auxJugador.getImage().getWidth(), auxJugador.getImage().getHeight());

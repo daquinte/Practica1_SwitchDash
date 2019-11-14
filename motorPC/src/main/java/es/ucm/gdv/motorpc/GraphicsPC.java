@@ -138,10 +138,9 @@ public class GraphicsPC extends AbstractGraphics {
     private Rect coordenadasACanvas(int x, int y, int width, int height) {
         int _height = (height * getCanvas().height / baseSizeHeight);
         int _width = (width * getCanvas().width / baseSizeWidth); //ANTIGUO _height * width / height;
-        System.out.println( "Imagen:" + _width);
-        System.out.println( "Canvas:" + getCanvas().width);
-        int _y = (_height * y / baseSizeHeight) + getCanvas().y;
-        int _x = (_width * x / baseSizeWidth) + getCanvas().x;
+
+        int _y = (_height * y / height) + getCanvas().y;
+        int _x = (_width * x / width)+ getCanvas().x;
 
         return new Rect(_x, _y, _width, _height);
     }

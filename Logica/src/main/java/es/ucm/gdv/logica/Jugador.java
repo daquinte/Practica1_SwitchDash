@@ -14,13 +14,14 @@ public class Jugador {
 
     private Sprite jugadorNegro;
     private Sprite jugadorBlanco;
+    private Sprite test;
 
     public Jugador(ResourceManager res, colorJugador colJugador){
         _resourceManager = res;
         imagenJugador = _resourceManager.getImage(ResourceManager.GameSprites.PLAYERS);
-        jugadorNegro = new Sprite(imagenJugador, 0, 0, imagenJugador.getWidth(),150);
-        jugadorBlanco = new Sprite(imagenJugador, 150, 150, imagenJugador.getWidth(),imagenJugador.getWidth());
-
+        jugadorBlanco = new Sprite(imagenJugador, 0, 0, imagenJugador.getWidth(),imagenJugador.getHeight()/2);
+        jugadorNegro  = new Sprite(imagenJugador, 0, imagenJugador.getHeight()/2, imagenJugador.getWidth(),imagenJugador.getHeight());
+        test = new Sprite(imagenJugador, 0, 0, imagenJugador.getWidth(), imagenJugador.getHeight());
         _colorJugador = colJugador;
     }
 
@@ -30,13 +31,14 @@ public class Jugador {
 
     public Sprite GetColorJugador(){
         Sprite currentSprite = null;
-        switch (_colorJugador){
+        /*switch (_colorJugador){
             case NEGRO:
                currentSprite = jugadorNegro;
             case BLANCO:
                 currentSprite =  jugadorBlanco;
 
-        }
+        }*/
+        currentSprite = test;
         return currentSprite;
     }
 }
