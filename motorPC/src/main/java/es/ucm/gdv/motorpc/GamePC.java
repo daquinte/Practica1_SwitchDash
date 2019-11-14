@@ -28,9 +28,6 @@ public class GamePC implements Game, Runnable {
     private final int _anchoPantalla = (int)(1080 * 0.5625f);
     private final int _altoPantalla = 1080;
 
-    //Para el ciclo de juego
-    long lastFrameTime = System.nanoTime();
-    long currentTime, nanoElapsedTime;
     private Logica _currentGameState;
 
     //Para el hilo
@@ -91,13 +88,11 @@ public class GamePC implements Game, Runnable {
         long lastFrameTime = System.nanoTime();
         // Bucle principal
         while (true) {
-            currentTime = System.nanoTime();
-            nanoElapsedTime = currentTime - lastFrameTime;
+            long currentTime = System.nanoTime();
+            long nanoElapsedTime = currentTime - lastFrameTime;
             lastFrameTime = currentTime;
             double elapsedTime = (double) nanoElapsedTime / 1.0E9;
-
-            //ESKERE
-            _graphicsPC.setCanvasSize();
+            System.out.println(elapsedTime);
 
             //Tick de la lógica
             _currentGameState.tick(elapsedTime);
@@ -112,6 +107,7 @@ public class GamePC implements Game, Runnable {
                     _graphicsPC.setGraphics(graphics);
                     try {
                         _currentGameState.clear();
+                        _graphicsPC.setCanvasSize();
                         _graphicsPC.DrawRect(0xFF00FFFF,_graphicsPC.getCanvas());
                         _currentGameState.render();
                     } finally {

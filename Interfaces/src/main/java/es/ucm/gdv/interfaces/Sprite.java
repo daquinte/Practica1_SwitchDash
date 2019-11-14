@@ -47,5 +47,8 @@ public class Sprite {
         Rect _rectDestiny =  new Rect(x, y, ancho, alto);
         graphics.drawImageScaledWithAlpha(_spriteImage, _rectDestiny, _source, alpha);
     }
+
     public Image getImage(){ return _spriteImage; }
+    public int getSpriteWidth(){ return _source.width; }
+    public int getSpriteHeight(){ return _source.height; }
 }

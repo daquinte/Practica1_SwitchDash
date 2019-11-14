@@ -10,35 +10,31 @@ public class Jugador {
     private ResourceManager _resourceManager;
 
     private Image imagenJugador;
-    colorJugador _colorJugador = colorJugador.BLANCO;
+    colorJugador _colorJugador = colorJugador.NEGRO;
 
     private Sprite jugadorNegro;
     private Sprite jugadorBlanco;
-    private Sprite test;
+    private Sprite spriteJugador;
 
     public Jugador(ResourceManager res, colorJugador colJugador){
         _resourceManager = res;
         imagenJugador = _resourceManager.getImage(ResourceManager.GameSprites.PLAYERS);
         jugadorBlanco = new Sprite(imagenJugador, 0, 0, imagenJugador.getWidth(),imagenJugador.getHeight()/2);
         jugadorNegro  = new Sprite(imagenJugador, 0, imagenJugador.getHeight()/2, imagenJugador.getWidth(),imagenJugador.getHeight());
-        test = new Sprite(imagenJugador, 0, 0, imagenJugador.getWidth(), imagenJugador.getHeight());
+
         _colorJugador = colJugador;
+        ChangeColorJugador(_colorJugador);
     }
 
-    public void SetColorJugador(colorJugador colorJugador){
-        _colorJugador = colorJugador;
+    public void ChangeColorJugador(colorJugador colorJugador){
+        if(_colorJugador == Jugador.colorJugador.BLANCO)
+            spriteJugador = jugadorBlanco;
+        else if(_colorJugador == Jugador.colorJugador.NEGRO){
+            spriteJugador = jugadorNegro;
+        }
     }
 
     public Sprite GetColorJugador(){
-        Sprite currentSprite = null;
-        /*switch (_colorJugador){
-            case NEGRO:
-               currentSprite = jugadorNegro;
-            case BLANCO:
-                currentSprite =  jugadorBlanco;
-
-        }*/
-        currentSprite = test;
-        return currentSprite;
+        return spriteJugador;
     }
 }

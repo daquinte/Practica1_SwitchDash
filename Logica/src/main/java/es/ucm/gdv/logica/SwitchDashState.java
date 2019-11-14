@@ -32,13 +32,22 @@ public class SwitchDashState implements GameState {
 
 
         //init de juego
-        pelotas = new Pelota[3];
+        pelotas = new Pelota[1];
         jugador = new Jugador(_resourceManager, Jugador.colorJugador.BLANCO);
+        initPelotas();
 
         //jugador = new Jugador(_resourceManager);
         pelotasRecogidas = 0;
-        velocidadActual = 0;
+        velocidadActual = 90;
         _logica.SetClearColor(_resourceManager.getRandomGamecolor());
+    }
+
+    private void initPelotas(){
+        for (int i = 0; i < 1; i++){
+            Pelota aux = new Pelota(_resourceManager, Pelota.colorPelota.NEGRO);
+            aux.setPosY(400);
+            pelotas[i] = aux;
+        }
     }
 
     @Override
@@ -46,6 +55,7 @@ public class SwitchDashState implements GameState {
         _logica.clear();
     }
 
+    @Override
     public void tick(double elapsedTime) {
 
         /*
@@ -57,16 +67,32 @@ public class SwitchDashState implements GameState {
         *
         * */
 
+        for (Pelota p : pelotas) {
+            p.tick( elapsedTime, velocidadActual);
+        }
+
 
     }
 
+    @Override
     public void render() {
 
+        //JUGADOR
         Sprite auxJugador = jugador.GetColorJugador();
-        int x = 1080/2 - auxJugador.getImage().getWidth()/2;
+        int x = 1080/2 - auxJugador.getSpriteWidth()/2;
         int y = 1200;
 
-        auxJugador.drawScaled(graphics, x, y, auxJugador.getImage().getWidth(), auxJugador.getImage().getHeight());
+        auxJugador.drawScaled(graphics, x, y, auxJugador.getSpriteWidth(), auxJugador.getSpriteHeight()/2);
+
+        //PELOTAS
+        for (Pelota p : pelotas) {
+          Sprite spriteP = p.GetColorPelota();
+          x = 1080/2 - spriteP.getSpriteWidth()/2;
+          y = p.getPosY();
+
+          //TODO: se ve como un huevo porque tiene que estar en un 128 en vez de 100, o algo asi
+          spriteP.drawScaled(graphics, x, y, spriteP.getSpriteWidth(), spriteP.getSpriteHeight());
+        }
     }
 
 
