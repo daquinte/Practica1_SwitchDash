@@ -1,5 +1,7 @@
 package es.ucm.gdv.logica;
 
+import java.util.Random;
+
 import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.Sprite;
 
@@ -9,7 +11,7 @@ public class Pelota {
     private ResourceManager _resourceManager;
 
     private Image imagenPelota;
-    colorPelota _colorPelota;
+    private colorPelota _colorPelota;
 
     private Sprite pelotaNegra;
     private Sprite pelotaBlanca;
@@ -17,32 +19,42 @@ public class Pelota {
     private Sprite spritePelota;
 
 
+    private Random rnd;
     private int posY;
 
-    public Pelota(ResourceManager res, colorPelota colPelota){
+    public Pelota(ResourceManager res){
         _resourceManager = res;
         imagenPelota = _resourceManager.getImage(ResourceManager.GameSprites.BALLS);
         pelotaBlanca = new Sprite(imagenPelota, 0,0,128,128);
         pelotaNegra = new Sprite(imagenPelota, 0,128,128,128);
 
-        _colorPelota = colPelota;
-        changeColorPelota(_colorPelota);
+        rnd = new Random();
+        initPelota();
     }
 
-    public void changeColorPelota(colorPelota colorJugador){
+
+    private void initPelota(){
+        int binaryRnd = rnd.nextInt(2);
+        if(binaryRnd == 0)
+            setColorPelota(colorPelota.BLANCO);
+        else if (binaryRnd == 1)
+        setColorPelota(colorPelota.NEGRO);
+    }
+
+    public void tick(double elapsedTime, int velocidad){
+
+        posY += ((430 + velocidad) * elapsedTime);
+
+    }
+
+    public void setColorPelota(colorPelota colorJugador){
+        _colorPelota = colorJugador;
         if(_colorPelota == colorPelota.BLANCO)
             spritePelota = pelotaBlanca;
         else if(_colorPelota == colorPelota.NEGRO){
             spritePelota = pelotaNegra;
         }
     }
-
-    public void tick(double elapsedTime, int velocidad){
-
-        posY += ((430 + velocidad) * elapsedTime * 2);
-
-    }
-
 
     public void setPosY(int newPosY){
         posY = newPosY;
@@ -52,7 +64,23 @@ public class Pelota {
         return posY;
     }
 
-    public Sprite GetColorPelota(){
+    public Sprite GetSpritePelota(){
         return spritePelota;
+    }
+
+
+    public colorPelota GetColorPelota(){
+        return _colorPelota;
+    }
+
+    public colorPelota GetOppositeColorPelota(){
+        colorPelota cp = null;
+        if(_colorPelota == colorPelota.BLANCO){
+            cp = colorPelota.NEGRO;
+        }
+        else if(_colorPelota == colorPelota.NEGRO){
+            cp = colorPelota.BLANCO;
+        }
+        return cp;
     }
 }

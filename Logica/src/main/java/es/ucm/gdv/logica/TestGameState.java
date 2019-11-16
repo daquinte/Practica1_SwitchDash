@@ -48,7 +48,7 @@ public class TestGameState implements GameState {
         //IDEA: Igual el escalado de cada imagen es independiente. En plan, quieres que alguno esté en X
         //O tener un "factor de escalado X e Y" que vamos a aplicar a todos los objetos.
         testSprite.drawScaled(graphics, x, y, testSprite.getImage().getWidth(), testSprite.getImage().getHeight());
-        flechas.draw(graphics,0 + graphics.getCanvas().x,0, graphics.getCanvas().width, graphics.getCanvas().height, 0.65f); //Idea: Juntar el draw y llamarlo con X parametros
+        //flechas.draw(graphics,0 + graphics.getCanvas().x,0, graphics.getCanvas().width, graphics.getCanvas().height, 0.65f);
     }
 
 }

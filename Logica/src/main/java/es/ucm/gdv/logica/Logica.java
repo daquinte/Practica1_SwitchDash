@@ -12,6 +12,7 @@ public class Logica implements GameState {
     private ResourceManager _resourceManager;
 
     private ResourceManager.GameColor currentColor;
+    private Flechas flechas;
 
     public Logica (){
         _currentGameState = this;
@@ -26,6 +27,7 @@ public class Logica implements GameState {
         currentColor = ResourceManager.GameColor.GREEN;
         setCurrentGameState(new ResourceManager(this));
         _resourceManager = (ResourceManager) _currentGameState;
+        flechas = new Flechas(_game, _resourceManager);
 
     }
 
@@ -36,12 +38,15 @@ public class Logica implements GameState {
 
     @Override
     public void tick(double elapsedTime) {
+        flechas.tick(elapsedTime);
         _currentGameState.tick(elapsedTime);
     }
 
     @Override
     public void render() {
+
         _currentGameState.render();
+        flechas.render();
     }
 
     public ResourceManager getResourceManager(){

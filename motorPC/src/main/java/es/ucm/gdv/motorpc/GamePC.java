@@ -92,7 +92,6 @@ public class GamePC implements Game, Runnable {
             long nanoElapsedTime = currentTime - lastFrameTime;
             lastFrameTime = currentTime;
             double elapsedTime = (double) nanoElapsedTime / 1.0E9;
-            System.out.println(elapsedTime);
 
             //Tick de la lógica
             _currentGameState.tick(elapsedTime);

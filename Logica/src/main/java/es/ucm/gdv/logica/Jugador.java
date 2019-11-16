@@ -1,5 +1,7 @@
 package es.ucm.gdv.logica;
 
+import java.util.Random;
+
 import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.Sprite;
 
@@ -10,31 +12,58 @@ public class Jugador {
     private ResourceManager _resourceManager;
 
     private Image imagenJugador;
-    colorJugador _colorJugador = colorJugador.NEGRO;
+    private colorJugador _colorJugador = colorJugador.NEGRO;
 
     private Sprite jugadorNegro;
     private Sprite jugadorBlanco;
     private Sprite spriteJugador;
 
-    public Jugador(ResourceManager res, colorJugador colJugador){
+    private Random rnd;
+
+    public Jugador(ResourceManager res){
         _resourceManager = res;
         imagenJugador = _resourceManager.getImage(ResourceManager.GameSprites.PLAYERS);
         jugadorBlanco = new Sprite(imagenJugador, 0, 0, imagenJugador.getWidth(),imagenJugador.getHeight()/2);
         jugadorNegro  = new Sprite(imagenJugador, 0, imagenJugador.getHeight()/2, imagenJugador.getWidth(),imagenJugador.getHeight());
 
-        _colorJugador = colJugador;
-        ChangeColorJugador(_colorJugador);
+        rnd = new Random();
+        initJugador();
     }
 
-    public void ChangeColorJugador(colorJugador colorJugador){
-        if(_colorJugador == Jugador.colorJugador.BLANCO)
+    public void SetColorJugador(colorJugador colorJugador){
+        _colorJugador = colorJugador;
+        if(_colorJugador == Jugador.colorJugador.BLANCO) {
             spriteJugador = jugadorBlanco;
+        }
         else if(_colorJugador == Jugador.colorJugador.NEGRO){
             spriteJugador = jugadorNegro;
         }
     }
 
-    public Sprite GetColorJugador(){
+    //Cambia el color al color opuesto
+    public void ToggleColorJugador(){
+        if(_colorJugador == Jugador.colorJugador.BLANCO) {
+            spriteJugador = jugadorNegro;
+            _colorJugador = colorJugador.NEGRO;
+        }
+        else if(_colorJugador == Jugador.colorJugador.NEGRO){
+            spriteJugador = jugadorBlanco;
+            _colorJugador = colorJugador.BLANCO;
+        }
+    }
+
+    public Sprite GetSpriteJugador(){
         return spriteJugador;
+    }
+    public colorJugador GetColorJugador(){
+        return _colorJugador;
+    }
+
+    private void initJugador(){
+        int binaryRnd = rnd.nextInt(2);
+        if(binaryRnd == 0)
+            SetColorJugador(colorJugador.BLANCO);
+        else if (binaryRnd == 1)
+            SetColorJugador(colorJugador.NEGRO);
     }
 }
