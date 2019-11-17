@@ -16,11 +16,17 @@ public class Boton {
     private Rect logicRect;
     private Random rnd;
 
-    public Boton(Game g, ResourceManager resourceManager, int x, int y) {
+    public enum Buttons { AYUDA, SALIR, SONIDO, SILENCIO, HOME }
+
+    public Boton(Game g, Image imagebotones, Buttons spriteIndex, int x, int y) {
         _game = g;
-        Image imagebotones = resourceManager.getImage(ResourceManager.GameSprites.BUTTONS);
-        spriteBoton = new Sprite(imagebotones, 0, 0, 140, 140);
-        logicRect = new Rect(x + 60, y + 60, 140, 140);
+        spriteBoton = new Sprite(imagebotones, spriteIndex.ordinal() * 140, 0, 140, 140);
+        logicRect = new Rect(x, y + 60, 140, 140);
+    }
+
+    public void toggleSprite(ResourceManager resourceManager, Buttons spriteIndex) {
+        spriteBoton = new Sprite(resourceManager.getImage(ResourceManager.GameSprites.BUTTONS),
+                spriteIndex.ordinal() * 140, 0, 140, 140);
     }
 
     public Boolean isPressed(int pressX, int pressY) {
@@ -33,8 +39,8 @@ public class Boton {
 
     public void coordenadasACanvas(int x, int y, int width) {
         int _width = (width * _game.getGraphics().getCanvas().width / 1080);
-        int _y = (_width * y / width);
-        int _x = (_width * x / width);
+        int _y = (_width * y / width) + _game.getGraphics().getCanvas().y;
+        int _x = (_width * x / width) + _game.getGraphics().getCanvas().x;
         physicRect = new Rect (_x, _y, _width, _width);
     }
 

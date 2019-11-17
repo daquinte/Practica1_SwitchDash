@@ -38,15 +38,15 @@ public class Logica implements GameState {
 
     @Override
     public void tick(double elapsedTime) {
-        //flechas.tick(elapsedTime);
+        flechas.tick(elapsedTime);
         _currentGameState.tick(elapsedTime);
     }
 
     @Override
     public void render() {
 
+        flechas.render();
         _currentGameState.render();
-        //flechas.render();
     }
 
     public ResourceManager getResourceManager(){
