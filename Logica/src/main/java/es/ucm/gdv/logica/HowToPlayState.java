@@ -1,20 +1,16 @@
 package es.ucm.gdv.logica;
 
-import java.util.List;
-
 import es.ucm.gdv.interfaces.AbstractGraphics;
 import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Image;
-import es.ucm.gdv.interfaces.Rect;
 import es.ucm.gdv.interfaces.Sprite;
-import es.ucm.gdv.interfaces.TouchEvent;
 
-public class TituloState implements GameState {
-    public Boton sonido;
-    public Boton ayuda;
+public class HowToPlayState implements GameState {
+    public Boton close;
 
-    public Sprite logo;
+    public Sprite howToPlay;
+    public Sprite instructions;
     public Sprite tapToPlay;
 
     Game _game;
@@ -26,7 +22,7 @@ public class TituloState implements GameState {
     private float factor;
 
 
-    public TituloState(Logica l) {
+    public HowToPlayState(Logica l) {
         _logica = l;
         _resourceManager = l.getResourceManager();
     }
@@ -41,11 +37,13 @@ public class TituloState implements GameState {
 
     private void resourcesInit () {
         Image imageBotones = _resourceManager.getImage(ResourceManager.GameSprites.BUTTONS);
-        sonido = new Boton(_game, imageBotones, Boton.Buttons.SONIDO, -170, 30);
-        ayuda = new Boton(_game, imageBotones, Boton.Buttons.AYUDA, 1110, 30);
+        close = new Boton(_game, imageBotones, Boton.Buttons.SALIR, 1110, 30);
 
-        Image logoI = _resourceManager.getImage(ResourceManager.GameSprites.SWITCHDASHLOGO);
-        logo = new Sprite(logoI, 0, 0, logoI.getWidth(), logoI.getHeight());
+        Image howToPlayI = _resourceManager.getImage(ResourceManager.GameSprites.HOWTOPLAY);
+        howToPlay = new Sprite(howToPlayI, 0, 0, howToPlayI.getWidth(), howToPlayI.getHeight());
+
+        Image instructionsI = _resourceManager.getImage(ResourceManager.GameSprites.INSTRUCTIONS);
+        instructions = new Sprite(instructionsI, 0, 0, instructionsI.getWidth(), instructionsI.getHeight());
 
         Image tapToPlayI = _resourceManager.getImage(ResourceManager.GameSprites.TAPTOPLAY);
         tapToPlay = new Sprite(tapToPlayI, 0, 0, tapToPlayI.getWidth(), tapToPlayI.getHeight());
@@ -66,9 +64,9 @@ public class TituloState implements GameState {
 
     @Override
     public void render() {
-        sonido.render();
-        ayuda.render();
-        logo.drawScaled(graphics, 1080 / 2 - logo.getImage().getWidth() / 2, 356, logo.getImage().getWidth(), logo.getImage().getHeight());
-        tapToPlay.drawWithAlphaScaled(graphics, 1080 / 2 - tapToPlay.getImage().getWidth() / 2, 950, tapToPlay.getImage().getWidth(), tapToPlay.getImage().getHeight(), alpha);
+        close.render();
+        howToPlay.drawScaled(graphics, 1080 / 2 - howToPlay.getImage().getWidth() / 2, 290, howToPlay.getImage().getWidth(), howToPlay.getImage().getHeight());
+        instructions.drawScaled(graphics, 1080 / 2 - instructions.getImage().getWidth() / 2, 768, instructions.getImage().getWidth(), instructions.getImage().getHeight());
+        tapToPlay.drawWithAlphaScaled(graphics, 1080 / 2 - tapToPlay.getImage().getWidth() / 2, 1464, tapToPlay.getImage().getWidth(), tapToPlay.getImage().getHeight(), alpha);
     }
 }
