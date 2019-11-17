@@ -34,7 +34,7 @@ public class Flechas {
     }
 
     public void tick(double elapsedTime){
-        posY += (400 * elapsedTime);
+        posY += (384 * elapsedTime);
         if(posY >= _game.getGraphics().getCanvas().height){
             Sprite aux = flechas[0];
             flechas[0] = flechas[1];
@@ -42,16 +42,15 @@ public class Flechas {
 
             posY = 0;
         }
-
     }
 
     public void render(){
         flechas[0].draw((AbstractGraphics) _game.getGraphics(),_game.getGraphics().getCanvas().x,posY
                 ,_game.getGraphics().getCanvas().width, _game.getGraphics().getCanvas().height, 0.5f);
 
-        flechas[1].draw((AbstractGraphics) _game.getGraphics(),_game.getGraphics().getCanvas().x,posY - flechas[0].getSpriteHeight()
+        flechas[1].draw((AbstractGraphics) _game.getGraphics(),_game.getGraphics().getCanvas().x,posY - _game.getGraphics().getCanvas().height
                 ,_game.getGraphics().getCanvas().width, _game.getGraphics().getCanvas().height, 0.5f);
 
-        System.out.println(posY - flechas[0].getSpriteHeight());
+        System.out.println(posY - _game.getGraphics().getCanvas().height);
     }
 }

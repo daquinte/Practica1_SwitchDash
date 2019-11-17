@@ -19,16 +19,17 @@ public class Sprite {
     public Sprite (Image image, int x, int y, int width, int height){
         _spriteImage = image;
         _source = new Rect(x, y, width, height);
+        _rectDestiny = _source;
     }
 
 
     public void draw(AbstractGraphics graphics, int x, int y, int ancho, int alto){
-        Rect _rectDestiny = new Rect(x, y, ancho, alto);
+        _rectDestiny = new Rect(x, y, ancho, alto);
         graphics.drawImage(_spriteImage, _rectDestiny, _source);
     }
 
     public void draw(AbstractGraphics graphics, int x, int y, int ancho, int alto, float alpha){
-        Rect _rectDestiny = new Rect(x, y, ancho, alto);
+       _rectDestiny = new Rect(x, y, ancho, alto);
         graphics.drawImage(_spriteImage, _rectDestiny, _source, alpha);
     }
 
@@ -39,16 +40,20 @@ public class Sprite {
      *
      * */
     public void drawScaled(AbstractGraphics graphics, int x, int y, int ancho, int alto) {
-        Rect _rectDestiny = new Rect(x, y, ancho, alto);
+        _rectDestiny = new Rect(x, y, ancho, alto);
         graphics.drawImageScaled(_spriteImage, _rectDestiny, _source);
     }
 
     public void drawWithAlphaScaled(AbstractGraphics graphics, int x, int y, int ancho, int alto, float alpha){
-        Rect _rectDestiny =  new Rect(x, y, ancho, alto);
+        _rectDestiny =  new Rect(x, y, ancho, alto);
         graphics.drawImageScaledWithAlpha(_spriteImage, _rectDestiny, _source, alpha);
     }
 
     public Image getImage(){ return _spriteImage; }
     public int getSpriteWidth(){ return _source.width; }
     public int getSpriteHeight(){ return _source.height; }
+
+    public Rect getRectDestiny(){
+        return _rectDestiny;
+    }
 }

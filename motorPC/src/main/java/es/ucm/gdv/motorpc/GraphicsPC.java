@@ -136,15 +136,7 @@ public class GraphicsPC extends AbstractGraphics {
         return _Canvas;
     }
 
-    private Rect coordenadasACanvas(int x, int y, int width, int height) {
-        int _height = (height * getCanvas().height / baseSizeHeight);
-        int _width = (width * getCanvas().width / baseSizeWidth); //ANTIGUO _height * width / height;
 
-        int _y = (_height * y / height) + getCanvas().y;
-        int _x = (_width * x / width)+ getCanvas().x;
-
-        return new Rect(_x, _y, _width, _height);
-    }
 
     @Override
     public int getWidth() {
