@@ -111,6 +111,11 @@ public class SwitchDashState implements GameState {
         }
     }
 
+    @Override
+    public void handleInput() {
+
+    }
+
     private void CompruebaColision(Pelota p){
         int colorJugador = jugador.GetColorJugador().ordinal();
         int colorPelota = p.GetColorPelota().ordinal();

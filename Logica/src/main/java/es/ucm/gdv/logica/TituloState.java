@@ -25,6 +25,8 @@ public class TituloState implements GameState {
     private float alpha;
     private float factor;
 
+    private Boolean mute = false;
+
 
     public TituloState(Logica l) {
         _logica = l;
@@ -39,7 +41,7 @@ public class TituloState implements GameState {
         factor = 0.9f;
     }
 
-    private void resourcesInit () {
+    private void resourcesInit() {
         Image imageBotones = _resourceManager.getImage(ResourceManager.GameSprites.BUTTONS);
         sonido = new Boton(_game, imageBotones, Boton.Buttons.SONIDO, Boton.Direcciones.IZQUIERDA, 30);
         ayuda = new Boton(_game, imageBotones, Boton.Buttons.AYUDA, Boton.Direcciones.DERECHA, 30);
@@ -61,6 +63,30 @@ public class TituloState implements GameState {
         alpha += (factor * elapsedTime);
         if (alpha >= 1 || alpha <= 0) {
             factor = -factor;
+        }
+        handleInput();
+    }
+    @Override
+    public void handleInput() {
+        List<TouchEvent> touchEvents = _game.getInput().getTouchEvents();
+        for (TouchEvent touchEvent : touchEvents) {
+            if (touchEvent.get_touchEvent() == TouchEvent.TouchType.click) {
+                int pulsacionX = touchEvent.get_x();
+                int pulsacionY = touchEvent.get_y();
+                if (sonido.isPressed(pulsacionX, pulsacionY)) {
+                    if (!mute) {
+                        mute = true;
+                        sonido.toggleSprite(_resourceManager.getImage(ResourceManager.GameSprites.BUTTONS), Boton.Buttons.MUTE);
+                    }
+                    else {
+                        mute = false;
+                        sonido.toggleSprite(_resourceManager.getImage(ResourceManager.GameSprites.BUTTONS), Boton.Buttons.SONIDO);
+                    }
+                }
+                else {
+                    _logica.setCurrentGameState(new HowToPlayState(_logica));
+                }
+            }
         }
     }
 

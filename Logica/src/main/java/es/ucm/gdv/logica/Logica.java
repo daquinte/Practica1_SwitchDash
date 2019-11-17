@@ -49,6 +49,11 @@ public class Logica implements GameState {
         _currentGameState.render();
     }
 
+    @Override
+    public void handleInput() {
+
+    }
+
     public ResourceManager getResourceManager(){
         return _resourceManager;
     }

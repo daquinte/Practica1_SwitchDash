@@ -10,4 +10,7 @@ public interface GameState {
     public void tick(double elapsedTime);
 
     public void render();
+
+    public void handleInput();
+
 }

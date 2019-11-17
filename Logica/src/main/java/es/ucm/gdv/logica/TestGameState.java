@@ -78,4 +78,9 @@ public class TestGameState implements GameState {
         boton.render();
     }
 
+    @Override
+    public void handleInput() {
+
+    }
+
 }

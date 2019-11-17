@@ -1,10 +1,13 @@
 package es.ucm.gdv.logica;
 
+import java.util.List;
+
 import es.ucm.gdv.interfaces.AbstractGraphics;
 import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.Sprite;
+import es.ucm.gdv.interfaces.TouchEvent;
 
 public class HowToPlayState implements GameState {
     public Boton close;
@@ -60,6 +63,7 @@ public class HowToPlayState implements GameState {
         if (alpha >= 1 || alpha <= 0) {
             factor = -factor;
         }
+        handleInput();
     }
 
     @Override
@@ -68,5 +72,22 @@ public class HowToPlayState implements GameState {
         howToPlay.drawScaled(graphics, 1080 / 2 - howToPlay.getImage().getWidth() / 2, 290, howToPlay.getImage().getWidth(), howToPlay.getImage().getHeight());
         instructions.drawScaled(graphics, 1080 / 2 - instructions.getImage().getWidth() / 2, 768, instructions.getImage().getWidth(), instructions.getImage().getHeight());
         tapToPlay.drawWithAlphaScaled(graphics, 1080 / 2 - tapToPlay.getImage().getWidth() / 2, 1464, tapToPlay.getImage().getWidth(), tapToPlay.getImage().getHeight(), alpha);
+    }
+
+    @Override
+    public void handleInput() {
+        List<TouchEvent> touchEvents = _game.getInput().getTouchEvents();
+        for (TouchEvent touchEvent : touchEvents) {
+            if (touchEvent.get_touchEvent() == TouchEvent.TouchType.click) {
+                int pulsacionX = touchEvent.get_x();
+                int pulsacionY = touchEvent.get_y();
+                if (close.isPressed(pulsacionX, pulsacionY)) {
+                    _logica.setCurrentGameState(new SwitchDashState(_logica));
+                }
+                else {
+                    _logica.setCurrentGameState(new SwitchDashState(_logica));
+                }
+            }
+        }
     }
 }

@@ -18,7 +18,7 @@ public class Boton {
 
     public enum Direcciones {IZQUIERDA, DERECHA}
 
-    public enum Buttons {AYUDA, SALIR, SONIDO, SILENCIO, HOME}
+    public enum Buttons {AYUDA, SALIR, SONIDO, MUTE, HOME}
 
     public Boton(Game g, Image imagebotones, Buttons spriteIndex, Direcciones x, int y) {
         _game = g;
@@ -38,9 +38,8 @@ public class Boton {
         logicRect = new Rect(_x, y + 60, 140, 140);
     }
 
-    public void toggleSprite(ResourceManager resourceManager, Buttons spriteIndex) {
-        spriteBoton = new Sprite(resourceManager.getImage(ResourceManager.GameSprites.BUTTONS),
-                spriteIndex.ordinal() * 140, 0, 140, 140);
+    public void toggleSprite(Image imagebotones, Buttons spriteIndex) {
+        spriteBoton = new Sprite(imagebotones,spriteIndex.ordinal() * 140, 0, 140, 140);
     }
 
     public Boolean isPressed(int pressX, int pressY) {
