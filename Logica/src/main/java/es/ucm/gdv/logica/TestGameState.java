@@ -38,7 +38,7 @@ public class TestGameState implements GameState {
         flechas = new Sprite(flechasimg,0,0,flechasimg.getWidth(),flechasimg.getHeight());
         testSprite = new Sprite(test, 0, 0, test.getWidth(), test.getHeight());
 
-        boton = new Boton(game, botones, Boton.Buttons.AYUDA, 30, 30);
+        boton = new Boton(game, botones, Boton.Buttons.AYUDA, Boton.Direcciones.IZQUIERDA, 30);
 
         _logica.SetClearColor(ResourceManager.GameColor.GREEN);
     }

@@ -41,8 +41,8 @@ public class TituloState implements GameState {
 
     private void resourcesInit () {
         Image imageBotones = _resourceManager.getImage(ResourceManager.GameSprites.BUTTONS);
-        sonido = new Boton(_game, imageBotones, Boton.Buttons.SONIDO, -170, 30);
-        ayuda = new Boton(_game, imageBotones, Boton.Buttons.AYUDA, 1110, 30);
+        sonido = new Boton(_game, imageBotones, Boton.Buttons.SONIDO, Boton.Direcciones.IZQUIERDA, 30);
+        ayuda = new Boton(_game, imageBotones, Boton.Buttons.AYUDA, Boton.Direcciones.DERECHA, 30);
 
         Image logoI = _resourceManager.getImage(ResourceManager.GameSprites.SWITCHDASHLOGO);
         logo = new Sprite(logoI, 0, 0, logoI.getWidth(), logoI.getHeight());

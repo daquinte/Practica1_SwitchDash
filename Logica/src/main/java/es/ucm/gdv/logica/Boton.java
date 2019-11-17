@@ -16,12 +16,26 @@ public class Boton {
     private Rect logicRect;
     private Random rnd;
 
-    public enum Buttons { AYUDA, SALIR, SONIDO, SILENCIO, HOME }
+    public enum Direcciones {IZQUIERDA, DERECHA}
 
-    public Boton(Game g, Image imagebotones, Buttons spriteIndex, int x, int y) {
+    public enum Buttons {AYUDA, SALIR, SONIDO, SILENCIO, HOME}
+
+    public Boton(Game g, Image imagebotones, Buttons spriteIndex, Direcciones x, int y) {
         _game = g;
         spriteBoton = new Sprite(imagebotones, spriteIndex.ordinal() * 140, 0, 140, 140);
-        logicRect = new Rect(x, y + 60, 140, 140);
+        int _x;
+        switch (x) {
+            case IZQUIERDA:
+                _x = -170;
+                break;
+            case DERECHA:
+                _x = 1130;
+                break;
+            default:
+                _x = -170;
+                break;
+        }
+        logicRect = new Rect(_x, y + 60, 140, 140);
     }
 
     public void toggleSprite(ResourceManager resourceManager, Buttons spriteIndex) {
@@ -41,7 +55,7 @@ public class Boton {
         int _width = (width * _game.getGraphics().getCanvas().width / 1080);
         int _y = (_width * y / width) + _game.getGraphics().getCanvas().y;
         int _x = (_width * x / width) + _game.getGraphics().getCanvas().x;
-        physicRect = new Rect (_x, _y, _width, _width);
+        physicRect = new Rect(_x, _y, _width, _width);
     }
 
     public void render() {

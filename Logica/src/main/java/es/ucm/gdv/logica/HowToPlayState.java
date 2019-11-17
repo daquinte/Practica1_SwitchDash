@@ -37,7 +37,7 @@ public class HowToPlayState implements GameState {
 
     private void resourcesInit () {
         Image imageBotones = _resourceManager.getImage(ResourceManager.GameSprites.BUTTONS);
-        close = new Boton(_game, imageBotones, Boton.Buttons.SALIR, 1110, 30);
+        close = new Boton(_game, imageBotones, Boton.Buttons.SALIR, Boton.Direcciones.DERECHA, 30);
 
         Image howToPlayI = _resourceManager.getImage(ResourceManager.GameSprites.HOWTOPLAY);
         howToPlay = new Sprite(howToPlayI, 0, 0, howToPlayI.getWidth(), howToPlayI.getHeight());
