@@ -14,8 +14,7 @@ public abstract class AbstractGraphics implements Graphics {
 
         if (this.getWidth() > this.getHeight()) {
             new_width = calculateNewAspectRatio(this.getHeight());
-        }
-        else {
+        } else {
             new_width = calculateNewAspectRatio(this.getWidth());
         }
         x += (this.getWidth() / 2) - (new_width / 2);
@@ -30,10 +29,10 @@ public abstract class AbstractGraphics implements Graphics {
 
     public Rect coordenadasACanvas(int x, int y, int width, int height) {
         int _height = (height * getCanvas().height / baseSizeHeight);
-        int _width = (width * getCanvas().width / baseSizeWidth); //ANTIGUO _height * width / height;
+        int _width = (width * getCanvas().width / baseSizeWidth);
 
         int _y = (_height * y / height) + getCanvas().y;
-        int _x = (_width * x / width)+ getCanvas().x;
+        int _x = (_width * x / width) + getCanvas().x;
 
         return new Rect(_x, _y, _width, _height);
     }

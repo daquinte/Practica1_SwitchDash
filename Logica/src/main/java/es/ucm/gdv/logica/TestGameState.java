@@ -57,8 +57,9 @@ public class TestGameState implements GameState {
             if (touchEvent.get_touchEvent() == TouchEvent.TouchType.click) {
                 int pulsacionX = touchEvent.get_x();
                 int pulsacionY = touchEvent.get_y();
-
-
+                if (boton.isPressed(pulsacionX, pulsacionY)) {
+                    boton.move();
+                }
             }
         }
 
