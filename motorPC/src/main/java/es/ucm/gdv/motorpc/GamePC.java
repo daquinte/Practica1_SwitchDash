@@ -108,7 +108,7 @@ public class GamePC implements Game, Runnable {
                     try {
                         _currentGameState.clear();
                         _graphicsPC.setCanvasSize();
-                        _graphicsPC.DrawRect(0xFF00FFFF,_graphicsPC.getCanvas());
+                        //_graphicsPC.DrawRect(0xFF00FFFF,_graphicsPC.getCanvas());
                         _currentGameState.render();
                     } finally {
                         graphics.dispose();

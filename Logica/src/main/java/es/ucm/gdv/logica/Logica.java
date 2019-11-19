@@ -38,14 +38,14 @@ public class Logica implements GameState {
 
     @Override
     public void tick(double elapsedTime) {
-        //flechas.tick(elapsedTime);
+        flechas.tick(elapsedTime);
         _currentGameState.tick(elapsedTime);
     }
 
     @Override
     public void render() {
 
-        //flechas.render();
+        flechas.render();
         _currentGameState.render();
     }
 
@@ -59,8 +59,16 @@ public class Logica implements GameState {
     }
 
 
+    public void aumentaVelocidadFlechas(){
+        flechas.aumentaVelocidad();
+    }
 
-     public void setCurrentGameState(GameState gameState){
+    public void resetVelocidadFlechas(){
+        flechas.resetVelocidad();
+    }
+
+
+    public void setCurrentGameState(GameState gameState){
         _currentGameState = gameState;
         _currentGameState.init(_game);
      }

@@ -100,7 +100,7 @@ public class GraphicsAndroid extends AbstractGraphics {
 
     @Override
     public void drawImageScaledWithAlpha(Image image, Rect destino, Rect source, float alpha) {
-        drawImageScaled(image, destino, source);
+        drawImageScaled(image, destino, source); //TODO: this
     }
 
 
@@ -109,7 +109,7 @@ public class GraphicsAndroid extends AbstractGraphics {
     public void setCanvasSize() {
 
         _selfCanvas = Escalamelo();
-        _canvas.scale(_selfCanvas.x, _selfCanvas.y, _selfCanvas.width, _selfCanvas.height);
+        //_canvas.scale(_selfCanvas.x, _selfCanvas.y, _selfCanvas.width, _selfCanvas.height);
     }
 
     @Override

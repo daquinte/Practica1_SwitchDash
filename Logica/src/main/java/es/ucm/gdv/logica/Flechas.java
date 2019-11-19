@@ -15,6 +15,7 @@ public class Flechas {
     ResourceManager _resourceManager;
 
     private int posY;
+    private int velFlechas;
 
     public Flechas(Game game, ResourceManager res){
         _game = game;
@@ -25,6 +26,7 @@ public class Flechas {
     private void initFlechas(){
         flechas = new Sprite[2];
         posY = 0;
+        velFlechas = 0;
         Image flechasimg = _resourceManager.getImage(ResourceManager.GameSprites.ARROWS);
 
         for (int i = 0; i < 2; i++){
@@ -34,7 +36,7 @@ public class Flechas {
     }
 
     public void tick(double elapsedTime){
-        posY += (384 * elapsedTime);
+        posY += ((384 + velFlechas) * elapsedTime);
         if(posY >= _game.getGraphics().getCanvas().height){
             Sprite aux = flechas[0];
             flechas[0] = flechas[1];
@@ -43,6 +45,7 @@ public class Flechas {
             posY = 0;
         }
     }
+
 
     //TODO: Va lento porque pintamos dos bandas pero bueno such is life
     public void render(){
@@ -53,5 +56,14 @@ public class Flechas {
                 ,_game.getGraphics().getCanvas().width, _game.getGraphics().getCanvas().height, 0.5f);
 
         System.out.println(posY - _game.getGraphics().getCanvas().height);
+    }
+
+
+    public void aumentaVelocidad(){
+        velFlechas += 90;
+    }
+
+    public void resetVelocidad(){
+        velFlechas = 0;
     }
 }

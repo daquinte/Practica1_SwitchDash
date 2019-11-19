@@ -25,6 +25,8 @@ public class SwitchDashState implements GameState {
 
     Boton textoPuntos;
 
+    int puntosTotales;
+    Sprite puntuacionSprite;
     int pelotasRecogidas;
     int velocidadActual;
 
@@ -55,6 +57,9 @@ public class SwitchDashState implements GameState {
         initPelotas();
 
         //jugador = new Jugador(_resourceManager);
+        puntosTotales = 0;
+        puntuacionSprite = _resourceManager.numbers[0];
+        pelotasRecogidas = 0;
         velocidadActual = 0;
         _logica.SetClearColor(_resourceManager.getRandomGamecolor());
     }
@@ -113,6 +118,9 @@ public class SwitchDashState implements GameState {
           //TODO: se ve como un huevo porque tiene que estar en un 128 en vez de 100, o algo asi
           spriteP.drawScaled(graphics, x, y, 128, 100);
         }
+
+        //Puntos
+        puntuacionSprite.drawScaled(graphics, 1200, 400, puntuacionSprite.getSpriteWidth(), puntuacionSprite.getSpriteHeight());
     }
 
     @Override
@@ -128,13 +136,21 @@ public class SwitchDashState implements GameState {
         }
         else if(colorJugador == colorPelota){
             ResetPelota(p);
+            CalculaPuntuacion();
             pelotasRecogidas ++;
             if(pelotasRecogidas >= 10){
                 velocidadActual += 90;
+                _logica.aumentaVelocidadFlechas();
                 pelotasRecogidas = 0;
             }
 
         }
+    }
+
+
+    private void CalculaPuntuacion(){
+        if(puntosTotales <= 9) puntosTotales++;
+            puntuacionSprite = _resourceManager.numbers[puntosTotales];
     }
 
 

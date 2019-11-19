@@ -37,6 +37,7 @@ public class TituloState implements GameState {
     public void init(Game game) {
         _game = game;
         graphics = (AbstractGraphics) _game.getGraphics();
+        _logica.SetClearColor(_resourceManager.getRandomGamecolor());
         resourcesInit();
         factor = 0.9f;
     }
