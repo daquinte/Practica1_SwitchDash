@@ -75,7 +75,8 @@ public class GameAndroid implements Game, Runnable {
 
         //Espera a que se inicialice el surfaceView
         while (_graphicsAndroid.getWidth()<=0);
-
+        _currentGameState = new Logica();
+        _currentGameState.init(this);
         while (_running){
             SurfaceHolder sh = _surfaceView.getHolder();
             _currentGameState.tick(CalculaDeltaTime());
@@ -87,6 +88,8 @@ public class GameAndroid implements Game, Runnable {
     private void CanvasManagePaint(SurfaceHolder sh) {
         Canvas c = sh.lockHardwareCanvas();
         _graphicsAndroid.startFrame(c);
+        _currentGameState.clear();
+        _graphicsAndroid.setCanvasSize();
         _currentGameState.render();
         sh.unlockCanvasAndPost(c);
     }

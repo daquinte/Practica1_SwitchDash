@@ -10,7 +10,6 @@ import javax.swing.JFrame;
 
 import es.ucm.gdv.interfaces.Input;
 import  es.ucm.gdv.interfaces.TouchEvent;
-import sun.awt.image.ImageWatched;
 
 public class InputPC implements Input, MouseListener {
 

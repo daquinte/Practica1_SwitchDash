@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         _gameAndroid = new GameAndroid(this, this);
-        Logica logica = new Logica();
+
 
 
     }

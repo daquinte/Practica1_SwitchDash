@@ -24,10 +24,12 @@ public class GraphicsAndroid extends AbstractGraphics {
     private AssetManager _assetManager;     //Carga de imagenes
     private Canvas _canvas;                 //Viewport. Aquí se pinta.
 
+    private Rect _selfCanvas;
 
     GraphicsAndroid(SurfaceView surfaceView, AssetManager assetManager) {
         _surfaceView = surfaceView;
         _assetManager = assetManager;
+
     }
 
     public void startFrame(Canvas c){
@@ -81,13 +83,24 @@ public class GraphicsAndroid extends AbstractGraphics {
 
 
     @Override
-    public void drawImageScaled(Image image, es.ucm.gdv.interfaces.Rect destino, Rect spriteFromSpriteSheet) {
+    public void drawImageScaled(Image image, Rect destino, Rect source) {
+        if (image != null) {
+            ImageAndroid androidImg = (ImageAndroid) image;
+            Bitmap bm = androidImg.getBitmap();
 
+            Rect physicsCoords = coordenadasACanvas(destino.x, destino.y, destino.width, destino.height);
+            android.graphics.Rect dest = new android.graphics.Rect(physicsCoords.x, physicsCoords.y,
+                    physicsCoords.x + physicsCoords.height, physicsCoords.y + physicsCoords.height);
+
+            android.graphics.Rect src = new android.graphics.Rect(source.x, source.y, source.x + source.width, source.y + source.height);
+            _canvas.drawBitmap(bm, dest, src, null);
+
+        }
     }
 
     @Override
-    public void drawImageScaledWithAlpha(Image image, Rect destino, Rect spriteFromSpriteSheet, float alpha) {
-
+    public void drawImageScaledWithAlpha(Image image, Rect destino, Rect source, float alpha) {
+        drawImageScaled(image, destino, source);
     }
 
 
@@ -95,11 +108,13 @@ public class GraphicsAndroid extends AbstractGraphics {
     @Override
     public void setCanvasSize() {
 
+        _selfCanvas = Escalamelo();
+        _canvas.scale(_selfCanvas.x, _selfCanvas.y, _selfCanvas.width, _selfCanvas.height);
     }
 
     @Override
     public Rect getCanvas() {
-        return null;
+     return _selfCanvas;
     }
 
     @Override
