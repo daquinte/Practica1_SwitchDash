@@ -88,6 +88,7 @@ public class GraphicsPC extends AbstractGraphics {
          * The width and height dimensions on the destination area are calculated by the following expressions:
          * (dstx2-dstx1), (dsty2-dsty1).
          * If the dimensions of the source and destinations areas are different, the Java 2D API will scale up or scale down, as needed.*/
+        _graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
 
     }
 
@@ -123,6 +124,8 @@ public class GraphicsPC extends AbstractGraphics {
                 physicsCoordinates.x+physicsCoordinates.width, physicsCoordinates.y+physicsCoordinates.height,
                 source.x, source.y,  source.x+source.width,
                 source.y + source.height, null);
+
+        _graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
 
     }
 

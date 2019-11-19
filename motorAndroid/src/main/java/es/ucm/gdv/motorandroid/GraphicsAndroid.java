@@ -1,5 +1,6 @@
 package es.ucm.gdv.motorandroid;
 
+import es.ucm.gdv.interfaces.AbstractGraphics;
 import  es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.Rect;
@@ -16,7 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 
-public class GraphicsAndroid implements Graphics {
+public class GraphicsAndroid extends AbstractGraphics {
 
     //Atributos
     private SurfaceView _surfaceView;       //Ventana para android. Se usa para los guetters
@@ -64,14 +65,20 @@ public class GraphicsAndroid implements Graphics {
     }
 
     @Override
-    public void drawImage(Image image, int x, int y) {
+    public void drawImage(Image image, Rect destino, Rect source) {
         //Poner que si no es null, se pinta en canvas
         if (image != null) {
             ImageAndroid androidImg = (ImageAndroid) image;
             Bitmap bm = androidImg.getBitmap();
-            _canvas.drawBitmap(bm, x, y, null);
+            _canvas.drawBitmap(bm, destino.x, destino.y, null);
         }
     }
+
+    @Override
+    public void drawImage(Image image, Rect destino, Rect source, float alpha) {
+
+    }
+
 
     @Override
     public void drawImageScaled(Image image, es.ucm.gdv.interfaces.Rect destino, Rect spriteFromSpriteSheet) {

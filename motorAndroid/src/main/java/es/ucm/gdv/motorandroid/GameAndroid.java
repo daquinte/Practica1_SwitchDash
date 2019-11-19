@@ -6,17 +6,17 @@ import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import es.ucm.gdv.interfaces.AbstractGraphics;
 import es.ucm.gdv.interfaces.Game;
-import es.ucm.gdv.interfaces.GameState;
-import es.ucm.gdv.interfaces.Graphics;
-import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.Input;
+import es.ucm.gdv.logica.Logica;
 
 public class GameAndroid implements Game, Runnable {
 
     //Referencias para el patrón Singleton
     private GraphicsAndroid _graphicsAndroid;
     private InputAndroid _inputAndroid;
+    private Logica _currentGameState;
 
     SurfaceView _surfaceView;
 
@@ -34,7 +34,7 @@ public class GameAndroid implements Game, Runnable {
         _graphicsAndroid = new GraphicsAndroid(_surfaceView, context.getAssets());
         _inputAndroid = new InputAndroid();
 
-        //surfaceView.setOnTouchListener(_inputAndroid);
+        _surfaceView.setOnTouchListener(_inputAndroid);
     }
 
     /**
@@ -70,26 +70,24 @@ public class GameAndroid implements Game, Runnable {
     public void run() {
 
         if (_runningThread != Thread.currentThread()) {
-            throw new RuntimeException("run() should not be called directly!");
+            throw new RuntimeException("run() should not be called directly in Android!");
         }
 
         //Espera a que se inicialice el surfaceView
         while (_graphicsAndroid.getWidth()<=0);
+
         while (_running){
             SurfaceHolder sh = _surfaceView.getHolder();
-            //_logicaJuego.tick(CalculaDeltaTime());
+            _currentGameState.tick(CalculaDeltaTime());
             while (!sh.getSurface().isValid());
-            CanvasManagePaint(sh); //TODO: pasar esto a que use Sprite y tal
+            CanvasManagePaint(sh);
         }
     }
 
     private void CanvasManagePaint(SurfaceHolder sh) {
         Canvas c = sh.lockHardwareCanvas();
         _graphicsAndroid.startFrame(c);
-        //_logicaJuego.render();
-        _graphicsAndroid.clear(0xFF000000);
-        Image test = _graphicsAndroid.newImage("howToPlay.png");
-        _graphicsAndroid.drawImage(test, 100, 100);
+        _currentGameState.render();
         sh.unlockCanvasAndPost(c);
     }
 
@@ -111,7 +109,7 @@ public class GameAndroid implements Game, Runnable {
     //-----------------------------------------------
     //From Game Interface
     @Override
-    public Graphics getGraphics() {
+    public AbstractGraphics getGraphics() {
         return _graphicsAndroid;
     }
 

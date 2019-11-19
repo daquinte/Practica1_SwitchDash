@@ -3,19 +3,22 @@ package es.ucm.gdv.motorpc;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.JFrame;
 
 import es.ucm.gdv.interfaces.Input;
 import  es.ucm.gdv.interfaces.TouchEvent;
+import sun.awt.image.ImageWatched;
+
 public class InputPC implements Input, MouseListener {
 
     //Lista de TouchEvents
-    List <TouchEvent> inputList;
+    LinkedList<TouchEvent> inputList;
 
     public InputPC(JFrame jFrame){
-        inputList = new ArrayList<>();
+        inputList = new LinkedList<>();      //Linked list porque es más rapido añadir/borrar
         jFrame.addMouseListener(this);
     }
 

@@ -3,6 +3,7 @@ package es.ucm.gdv.practica1;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import es.ucm.gdv.logica.Logica;
 import es.ucm.gdv.motorandroid.GameAndroid;
 
 //Punto de entrada para Android//
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         _gameAndroid = new GameAndroid(this, this);
+        Logica logica = new Logica();
+
 
     }
 

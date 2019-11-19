@@ -47,7 +47,8 @@ public class GamePC implements Game, Runnable {
     }
 
     /*
-    Inicia la ventana
+    Inicia la ventana, y adquiere la lógica que se va a utilizar.
+    Además, la inicia.
     */
     public void init(Logica logica) {
         _frame.setSize(_anchoPantalla, _altoPantalla);
