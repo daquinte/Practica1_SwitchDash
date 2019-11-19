@@ -76,6 +76,11 @@ public class TestGameState implements GameState {
         //flechas.draw(graphics,0 + graphics.getCanvas().x,0, graphics.getCanvas().width, graphics.getCanvas().height, 0.65f);
 
         boton.render();
+        int meLaSuda = 100;
+        for ( Sprite s : _resourceManager.numbers) {
+            s.drawScaled(graphics, meLaSuda, meLaSuda, s.getSpriteWidth(), s.getSpriteHeight());
+            meLaSuda += 100;
+        }
     }
 
     @Override

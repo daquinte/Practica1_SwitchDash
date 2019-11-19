@@ -62,15 +62,23 @@ public class ResourceManager implements GameState {
         initPoints();
     }
 
-    /*private void initPoints() {
+    private void initPoints() {
         Image pointsI = getImage(GameSprites.SCOREFRONT);
         /*for (int i = 0; i < points.length; i++) {
-            logo = new Sprite(logoI, 0, 0, logoI.getWidth(), logoI.getHeight());
+            points[i] = new Sprite(pointsI, 0, 0, pointsI.getWidth(), pointsI.getHeight());
         }*/
-        /*for (int j = 0; j < numbers.length; j++) {
-            numbers[j] = new Sprite(pointsI, 0, 0, 93, 112);
+
+        int itX = 7;
+        int itY = 3;
+        for (int j = 0; j < numbers.length; j++) {
+            numbers[j] = new Sprite(pointsI, itX * 125, itY *160, 125, 160);
+            itX ++;
+            if(j == 7){
+                itX = 0;
+                itY++;
+            }
         }
-    }*/
+    }
 
     @Override
     public void clear() {
@@ -81,7 +89,7 @@ public class ResourceManager implements GameState {
     public void tick(double elapsedTime) {
         //Comprueba si se ha cargado to.do los elementos
         if (!allLoaded) {
-        } else _logica.setCurrentGameState(new TituloState(_logica));
+        } else _logica.setCurrentGameState(new TestGameState(_logica));
     }
 
     @Override

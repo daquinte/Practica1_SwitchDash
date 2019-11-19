@@ -44,6 +44,7 @@ public class Flechas {
         }
     }
 
+    //TODO: Va lento porque pintamos dos bandas pero bueno such is life
     public void render(){
         flechas[0].draw((AbstractGraphics) _game.getGraphics(),_game.getGraphics().getCanvas().x,posY
                 ,_game.getGraphics().getCanvas().width, _game.getGraphics().getCanvas().height, 0.5f);

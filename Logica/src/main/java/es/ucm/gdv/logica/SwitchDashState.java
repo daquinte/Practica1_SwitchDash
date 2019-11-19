@@ -21,6 +21,10 @@ public class SwitchDashState implements GameState {
     //Pelota [] pelotas; //Vas a tener un array de 4-5 pelotas y las vas a ir subiendo xdd
     Queue<Pelota> pelotas;
     Pelota ultimaPelota;
+
+
+    Boton textoPuntos;
+
     int pelotasRecogidas;
     int velocidadActual;
 
