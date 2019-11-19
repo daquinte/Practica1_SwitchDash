@@ -143,7 +143,6 @@ public class ResourceManager implements GameState {
     //Carga imagenes de las rutas obtenidas en Resource Manager
     private void CargaImagenes() {
         for (int i = 0; i < gameImagesRoute.length; i++) {
-            System.out.println("IMAGEN CARGADA: " + i);
             Image aux = _graphics.newImage(gameImagesRoute[i]);
             gameImages.add(aux);
         }

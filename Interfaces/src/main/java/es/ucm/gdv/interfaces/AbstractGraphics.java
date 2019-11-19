@@ -32,12 +32,11 @@ public abstract class AbstractGraphics implements Graphics {
     }
 
     public Rect coordenadasACanvas(int x, int y, int width, int height) {
-        int _height = (height * getCanvas().height / baseSizeHeight);
         int _width = (width * getCanvas().width / baseSizeWidth);
+        int _height = height * _width / width;
 
-        int _y = (_height * y / height) + getCanvas().y;
-        int _x = (_width * x / width) + getCanvas().x;
-
+        int _y = (getCanvas().height * y / baseSizeHeight) + getCanvas().y;
+        int _x = (getCanvas().width * x / baseSizeWidth) + getCanvas().x;
         return new Rect(_x, _y, _width, _height);
     }
 }

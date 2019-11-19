@@ -5,7 +5,6 @@ import es.ucm.gdv.motorpc.GamePC;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Switch Dash Game :D");
         Logica logica = new Logica();                                         //Lógica que vas a usar en el juego.
         GamePC game = new GamePC("Switch Dash - Practica de Moviles edition");
         game.init(logica);

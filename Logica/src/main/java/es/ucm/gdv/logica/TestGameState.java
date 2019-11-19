@@ -21,6 +21,8 @@ public class TestGameState implements GameState {
     Sprite flechas; //OJO QUE LAS FLECHAS SE VAN A PINTAR EN TODOS LOS PUTOS ESTADOS
 
     Boton boton;
+    public Sprite logo;
+
 
     public TestGameState (Logica l){
         _logica = l;
@@ -38,6 +40,9 @@ public class TestGameState implements GameState {
         flechas = new Sprite(flechasimg,0,0,flechasimg.getWidth(),flechasimg.getHeight());
         testSprite = new Sprite(test, 0, 0, test.getWidth(), test.getHeight());
 
+        Image logoI = _resourceManager.getImage(ResourceManager.GameSprites.SWITCHDASHLOGO);
+        logo = new Sprite(logoI, 0, 0, logoI.getWidth(), logoI.getHeight());
+
         boton = new Boton(game, botones, Boton.Buttons.AYUDA, Boton.Direcciones.IZQUIERDA, 30);
 
         _logica.SetClearColor(ResourceManager.GameColor.GREEN);
@@ -50,7 +55,7 @@ public class TestGameState implements GameState {
 
     public void tick(double elapsedTime) {
 
-        List<TouchEvent> touchEvents = _game.getInput().getTouchEvents();
+        /*List<TouchEvent> touchEvents = _game.getInput().getTouchEvents();
         for (TouchEvent touchEvent : touchEvents) {
             if (touchEvent.get_touchEvent() == TouchEvent.TouchType.click) {
                 int pulsacionX = touchEvent.get_x();
@@ -59,7 +64,7 @@ public class TestGameState implements GameState {
                     boton.move();
                 }
             }
-        }
+        }*/
 
 
     }
@@ -67,7 +72,7 @@ public class TestGameState implements GameState {
 
 
     public void render() {
-        int x = 1080/2 + testSprite.getImage().getWidth()/2;
+        /*int x = 1080/2 + testSprite.getImage().getWidth()/2;
         int y = 290;
 
         //IDEA: Igual el escalado de cada imagen es independiente. En plan, quieres que alguno esté en X
@@ -80,7 +85,9 @@ public class TestGameState implements GameState {
         for ( Sprite s : _resourceManager.numbers) {
             s.drawScaled(graphics, meLaSuda, meLaSuda, s.getSpriteWidth(), s.getSpriteHeight());
             meLaSuda += 100;
-        }
+        }*/
+        logo.drawScaled(graphics, ((1080 / 2) - (logo.getImage().getWidth() / 2)),
+                ((1920 / 2) - (logo.getImage().getHeight() / 2)), logo.getImage().getWidth(), logo.getImage().getHeight());
     }
 
     @Override

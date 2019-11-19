@@ -43,9 +43,6 @@ public class Boton {
     }
 
     public Boolean isPressed(int pressX, int pressY) {
-        System.out.println("Rect: (" + physicRect.x + ", " + physicRect.y + ", " + (physicRect.x + physicRect.width) + ", " + (physicRect.y + physicRect.height) + ")");
-        System.out.println("Pair: (" + pressX + ", " + pressY + ")");
-        System.out.println("Sprite: (" + spriteBoton.getSpriteWidth() + ", " + spriteBoton.getSpriteHeight() + ")");
         return (pressX > physicRect.x && pressX < physicRect.x + physicRect.width
                 && pressY > physicRect.y && pressY < physicRect.y + physicRect.height);
     }

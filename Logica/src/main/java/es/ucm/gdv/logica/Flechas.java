@@ -55,7 +55,7 @@ public class Flechas {
         flechas[1].draw((AbstractGraphics) _game.getGraphics(),_game.getGraphics().getCanvas().x,posY - _game.getGraphics().getCanvas().height
                 ,_game.getGraphics().getCanvas().width, _game.getGraphics().getCanvas().height, 0.5f);
 
-        System.out.println(posY - _game.getGraphics().getCanvas().height);
+        //System.out.println(posY - _game.getGraphics().getCanvas().height);
     }
 
 
