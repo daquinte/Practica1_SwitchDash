@@ -29,7 +29,7 @@ public class GraphicsAndroid extends AbstractGraphics {
     GraphicsAndroid(SurfaceView surfaceView, AssetManager assetManager) {
         _surfaceView = surfaceView;
         _assetManager = assetManager;
-
+        setCanvasSize();
     }
 
     public void startFrame(Canvas c){
@@ -90,7 +90,7 @@ public class GraphicsAndroid extends AbstractGraphics {
 
             Rect physicsCoords = coordenadasACanvas(destino.x, destino.y, destino.width, destino.height);
             android.graphics.Rect dest = new android.graphics.Rect(physicsCoords.x, physicsCoords.y,
-                    physicsCoords.x + physicsCoords.height, physicsCoords.y + physicsCoords.height);
+                    physicsCoords.x + physicsCoords.width, physicsCoords.y + physicsCoords.height);
 
             android.graphics.Rect src = new android.graphics.Rect(source.x, source.y, source.x + source.width, source.y + source.height);
             _canvas.drawBitmap(bm, dest, src, null);
