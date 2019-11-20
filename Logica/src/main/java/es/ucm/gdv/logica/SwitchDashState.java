@@ -1,4 +1,5 @@
 package es.ucm.gdv.logica;
+
 import es.ucm.gdv.interfaces.AbstractGraphics;
 import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
@@ -9,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Random;
+
 public class SwitchDashState implements GameState {
 
     Game _game;
@@ -24,7 +26,7 @@ public class SwitchDashState implements GameState {
 
 
     int puntosTotales;
-    Sprite [] puntuacionSprite;
+    Sprite[] puntuacionSprite;
 
 
     int pelotasRecogidas;
@@ -36,7 +38,7 @@ public class SwitchDashState implements GameState {
     //CONST
     private final int SeparacionPelotas = 395;
 
-    public SwitchDashState (Logica l){
+    public SwitchDashState(Logica l) {
         _logica = l;
         _resourceManager = l.getResourceManager();
     }
@@ -45,12 +47,12 @@ public class SwitchDashState implements GameState {
     public void init(Game game) {
 
         _game = game;
-        graphics =(AbstractGraphics)_game.getGraphics();
+        graphics = (AbstractGraphics) _game.getGraphics();
         rnd = new Random();
 
         //init de juego
         //pelotas = new Pelota[5];
-        pelotas =  new LinkedList<>();
+        pelotas = new LinkedList<>();
 
         jugador = new Jugador(_resourceManager);
         jugador.SetColorJugador(Jugador.colorJugador.NEGRO);
@@ -65,20 +67,22 @@ public class SwitchDashState implements GameState {
         _logica.SetClearColor(_resourceManager.getRandomGamecolor());
     }
 
-    private void initPelotas(){
-        for (int i = 0; i < 5; i++){
+    private void initPelotas() {
+        for (int i = 0; i < 5; i++) {
             Pelota aux = new Pelota(_resourceManager);
             aux.setPosY(SeparacionPelotas * -i);
             pelotas.add(aux);
 
-            if(i == 4) ultimaPelota = aux;
+            if (i == 4) ultimaPelota = aux;
         }
     }
-    private void initSpritePuntos(){
-        for (int i = 0; i < 3; i++){
-           puntuacionSprite[i] = _resourceManager.numbers[0];
+
+    private void initSpritePuntos() {
+        for (int i = 0; i < 3; i++) {
+            puntuacionSprite[i] = _resourceManager.numbers[0];
         }
     }
+
     @Override
     public void clear() {
         _logica.clear();
@@ -95,12 +99,12 @@ public class SwitchDashState implements GameState {
         }
 
         for (Pelota p : pelotas) {
-            p.tick( elapsedTime, velocidadActual);
+            p.tick(elapsedTime, velocidadActual);
         }
 
 
-        if(pelotas.peek().getPosY() + pelotas.peek().GetSpritePelota().getSpriteHeight() >= 1200){
-                CompruebaColision(pelotas.peek());
+        if (pelotas.peek().getPosY() + pelotas.peek().GetSpritePelota().getSpriteHeight() >= 1200) {
+            CompruebaColision(pelotas.peek());
         }
     }
 
@@ -109,24 +113,24 @@ public class SwitchDashState implements GameState {
 
         //JUGADOR
         Sprite auxJugador = jugador.GetSpriteJugador();
-        int x = 1080/2 - auxJugador.getSpriteWidth()/2;
+        int x = 1080 / 2 - auxJugador.getSpriteWidth() / 2;
         int y = 1200;
 
-        auxJugador.drawScaled(graphics, x, y, auxJugador.getSpriteWidth(), auxJugador.getSpriteHeight()/2);
+        auxJugador.drawScaled(graphics, x, y, auxJugador.getSpriteWidth(), auxJugador.getSpriteHeight() / 2);
 
         //PELOTAS
         for (Pelota p : pelotas) {
-          Sprite spriteP = p.GetSpritePelota();
-          x = 1080/2 - spriteP.getSpriteWidth()/2;
-          y = p.getPosY();
+            Sprite spriteP = p.GetSpritePelota();
+            x = 1080 / 2 - spriteP.getSpriteWidth() / 2;
+            y = p.getPosY();
 
-          //TODO: se ve como un huevo porque tiene que estar en un 128 en vez de 100, o algo asi
-          spriteP.drawScaled(graphics, x, y, 128, 100);
+            //TODO: se ve como un huevo porque tiene que estar en un 128 en vez de 100, o algo asi
+            spriteP.drawScaled(graphics, x, y, 128, 100);
         }
 
         //Puntos
-        for (int i = 0; i < 3 ; i++){
-            puntuacionSprite[i].drawScaled(graphics, 1200, 400, puntuacionSprite[2].getSpriteWidth(), puntuacionSprite[2].getSpriteHeight());
+        for (int i = 0; i < 3; i++) {
+            puntuacionSprite[i].drawScaled(graphics, 1200 + ( i *125), 400, puntuacionSprite[2].getSpriteWidth(), puntuacionSprite[2].getSpriteHeight());
 
         }
     }
@@ -136,17 +140,16 @@ public class SwitchDashState implements GameState {
 
     }
 
-    private void CompruebaColision(Pelota p){
+    private void CompruebaColision(Pelota p) {
         int colorJugador = jugador.GetColorJugador().ordinal();
         int colorPelota = p.GetColorPelota().ordinal();
-        if(colorJugador != colorPelota){
+        if (colorJugador != colorPelota) {
             _logica.setCurrentGameState(new TestGameState(_logica));
-        }
-        else if(colorJugador == colorPelota){
+        } else if (colorJugador == colorPelota) {
             ResetPelota(p);
             CalculaPuntuacion();
-            pelotasRecogidas ++;
-            if(pelotasRecogidas >= 10){
+            pelotasRecogidas++;
+            if (pelotasRecogidas >= 10) {
                 velocidadActual += 90;
                 _logica.aumentaVelocidadFlechas();
                 pelotasRecogidas = 0;
@@ -156,32 +159,30 @@ public class SwitchDashState implements GameState {
     }
 
 
-    private void CalculaPuntuacion(){
+    private void CalculaPuntuacion() {
         puntosTotales++;
         int resultadoDivision = puntosTotales;
         int indexSprite = 2;
-        while(resultadoDivision > 0){
-            int restoDiv = resultadoDivision%10;
-            resultadoDivision/=10;
-            puntuacionSprite[indexSprite] = _resourceManager.numbers[restoDiv];
+        while (resultadoDivision > 0) {
+            puntuacionSprite[indexSprite] = _resourceManager.numbers[resultadoDivision % 10];
+            resultadoDivision /= 10;
             indexSprite--;
         }
     }
 
 
     //Ajusta posicion y color de la nueva bola
-    private void ResetPelota(Pelota p){
+    private void ResetPelota(Pelota p) {
         p.setPosY(ultimaPelota.getPosY() - SeparacionPelotas);
         ultimaPelota = p;
         pelotas.poll();
         pelotas.add(p);
 
         //Random de colores
-        int rndColor= rnd.nextInt(10);
-        if(rndColor >=7) {
+        int rndColor = rnd.nextInt(10);
+        if (rndColor >= 7) {
             p.setColorPelota(ultimaPelota.GetColorPelota());
-        }
-        else{
+        } else {
             p.setColorPelota(ultimaPelota.GetOppositeColorPelota());
         }
     }
