@@ -27,7 +27,6 @@ public class GraphicsAndroid extends AbstractGraphics {
     private Canvas _canvas;                 //Viewport. Aquí se pinta.
 
     private Paint _paint;
-
     private Rect _selfCanvas;
 
     GraphicsAndroid(SurfaceView surfaceView, AssetManager assetManager) {
@@ -74,9 +73,10 @@ public class GraphicsAndroid extends AbstractGraphics {
 
     public void DrawRect(Rect rectangulo) {
         _paint.setColor(Color.BLUE);
-        _paint.setAlpha(30);
-        _canvas.drawRect(_selfCanvas.x, _selfCanvas.y,_selfCanvas.x+ _selfCanvas.width, _selfCanvas.y+_selfCanvas.height, _paint);
-        _paint.reset();
+
+        _canvas.drawRect(_selfCanvas.x, _selfCanvas.y,
+                _selfCanvas.x + _selfCanvas.width, _selfCanvas.y+_selfCanvas.height, _paint);
+
     }
     @Override
     public void drawImage(Image image, Rect destino, Rect source) {
@@ -84,13 +84,20 @@ public class GraphicsAndroid extends AbstractGraphics {
         if (image != null) {
             ImageAndroid androidImg = (ImageAndroid) image;
             Bitmap bm = androidImg.getBitmap();
-            _canvas.drawBitmap(bm, destino.x, destino.y, _paint);
+            android.graphics.Rect dest = new android.graphics.Rect(destino.x, destino.y,
+                    destino.x+ destino.width, destino.y+destino.height);
+
+            android.graphics.Rect src = new android.graphics.Rect(source.x, source.y,
+                    source.x + source.width, source.y + source.height);
+            _canvas.drawBitmap(bm,src, dest , _paint);
         }
     }
 
     @Override
     public void drawImage(Image image, Rect destino, Rect source, float alpha) {
-
+        _paint.setAlpha((int)alpha);
+        drawImage(image, destino, source);
+        _paint.reset();
     }
 
 
@@ -104,7 +111,8 @@ public class GraphicsAndroid extends AbstractGraphics {
             android.graphics.Rect dest = new android.graphics.Rect(physicsCoords.x, physicsCoords.y,
                     physicsCoords.x+ physicsCoords.width, physicsCoords.y+physicsCoords.height);
 
-            android.graphics.Rect src = new android.graphics.Rect(source.x, source.y, source.x+ source.width, source.y + source.height);
+            android.graphics.Rect src = new android.graphics.Rect(source.x, source.y,
+                    source.x + source.width, source.y + source.height);
             _canvas.drawBitmap(bm, src, dest, _paint);
 
         }
@@ -112,7 +120,10 @@ public class GraphicsAndroid extends AbstractGraphics {
 
     @Override
     public void drawImageScaledWithAlpha(Image image, Rect destino, Rect source, float alpha) {
-        drawImageScaled(image, source, destino); //TODO: this
+
+        _paint.setAlpha((int)alpha);
+        drawImageScaled(image, destino, source);
+        _paint.reset();
     }
 
 

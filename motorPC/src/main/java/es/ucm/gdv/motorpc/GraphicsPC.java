@@ -68,13 +68,23 @@ public class GraphicsPC extends AbstractGraphics {
                 destino.x + destino.width, destino.y + destino.height,
                 source.x, source.y, source.x+source.width,
                 source.y+ source.height, null);
+        /*
+         * The width and height dimensions on the destination area are calculated by the following expressions:
+         * (dstx2-dstx1), (dsty2-dsty1).
+         * If the dimensions of the source and destinations areas are different, the Java 2D API will scale up or scale down, as needed.*/
     }
 
     @Override
+    //TODO: Unir esto con el de alpha -> Llamada al metodo sin alpha.
     public void drawImage(Image image, Rect destino, Rect source, float alpha) {
         //Siempre recibimos una imagen de PC, hacemos un casting hacia abajo
         ImagePC img = (ImagePC) image;
         java.awt.Image awtImage = img.getImage();
+
+        //Vamos a regular el alpha, porque en PC está en escala 0-1
+        alpha /= 100f;
+        if(alpha< 0 ) alpha = 0;
+        else if (alpha > 1) alpha = 1;
 
 
         //DST_Over = The destination is composited over the source and the result replaces the destination (Porter-Duff Destination Over Source rule).
@@ -84,10 +94,7 @@ public class GraphicsPC extends AbstractGraphics {
                 source.x, source.y, source.x+source.width,
                 source.y+ source.height, null);
 
-        /*
-         * The width and height dimensions on the destination area are calculated by the following expressions:
-         * (dstx2-dstx1), (dsty2-dsty1).
-         * If the dimensions of the source and destinations areas are different, the Java 2D API will scale up or scale down, as needed.*/
+
         _graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
 
     }
@@ -113,9 +120,10 @@ public class GraphicsPC extends AbstractGraphics {
         Rect physicsCoordinates = coordenadasACanvas(destino.x, destino.y,
                 destino.width, destino.height);
 
-        //Vamos a regular el alpha, porque en PC si pasa de 1 explota
-        if(alpha > 1f) alpha = 1f;
-        else if (alpha < 0) alpha = 0f;
+        //Vamos a regular el alpha, porque en PC está en escala 0-1
+         alpha /= 100f;
+         if(alpha< 0 ) alpha = 0;
+         else if (alpha > 1) alpha = 1;
 
         //DST_Over = The destination is composited over the source and the result replaces the destination (Porter-Duff Destination Over Source rule).
         _graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));

@@ -35,7 +35,7 @@ public class HowToPlayState implements GameState {
         _game = game;
         graphics = (AbstractGraphics) _game.getGraphics();
         resourcesInit();
-        factor = 0.9f;
+        factor = 60;
     }
 
     private void resourcesInit () {
@@ -60,7 +60,7 @@ public class HowToPlayState implements GameState {
     @Override
     public void tick(double elapsedTime) {
         alpha += (factor * elapsedTime);
-        if (alpha >= 1 || alpha <= 0) {
+        if (alpha >= 100 || alpha <= 0) {
             factor = -factor;
         }
         handleInput();

@@ -55,7 +55,7 @@ public class TestGameState implements GameState {
 
     public void tick(double elapsedTime) {
 
-        /*List<TouchEvent> touchEvents = _game.getInput().getTouchEvents();
+        List<TouchEvent> touchEvents = _game.getInput().getTouchEvents();
         for (TouchEvent touchEvent : touchEvents) {
             if (touchEvent.get_touchEvent() == TouchEvent.TouchType.click) {
                 int pulsacionX = touchEvent.get_x();
@@ -64,7 +64,7 @@ public class TestGameState implements GameState {
                     boton.move();
                 }
             }
-        }*/
+        }
 
 
     }
@@ -80,12 +80,13 @@ public class TestGameState implements GameState {
         //testSprite.drawScaled(graphics, x, y, testSprite.getImage().getWidth(), testSprite.getImage().getHeight());
         //flechas.draw(graphics,0 + graphics.getCanvas().x,0, graphics.getCanvas().width, graphics.getCanvas().height, 0.65f);
 
-        boton.render();
+
         int meLaSuda = 100;
         for ( Sprite s : _resourceManager.numbers) {
             s.drawScaled(graphics, meLaSuda, meLaSuda, s.getSpriteWidth(), s.getSpriteHeight());
             meLaSuda += 100;
         }*/
+        boton.render();
         logo.drawScaled(graphics, ((1080 / 2) - (logo.getSpriteWidth() / 2)),
                 ((1920 / 2) - (logo.getSpriteHeight() / 2)), logo.getSpriteWidth(), logo.getImage().getHeight());
     }

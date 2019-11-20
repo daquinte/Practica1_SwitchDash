@@ -95,8 +95,7 @@ public class GameAndroid extends SurfaceView implements Game, Runnable {
         _graphicsAndroid.startFrame(c);
         _currentGameState.clear();
         _graphicsAndroid.setCanvasSize();
-        _graphicsAndroid.DrawRect(_graphicsAndroid.getCanvas());
-        _graphicsAndroid.DrawRect(new Rect(0,0,100,100));
+        //_graphicsAndroid.DrawRect(_graphicsAndroid.getCanvas());
 
         _currentGameState.render();
         sh.unlockCanvasAndPost(c);

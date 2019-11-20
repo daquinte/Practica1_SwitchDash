@@ -23,10 +23,10 @@ public class SwitchDashState implements GameState {
     Pelota ultimaPelota;
 
 
-    Boton textoPuntos;
-
     int puntosTotales;
-    Sprite puntuacionSprite;
+    Sprite [] puntuacionSprite;
+
+
     int pelotasRecogidas;
     int velocidadActual;
 
@@ -58,7 +58,8 @@ public class SwitchDashState implements GameState {
 
         //jugador = new Jugador(_resourceManager);
         puntosTotales = 0;
-        puntuacionSprite = _resourceManager.numbers[0];
+        puntuacionSprite = new Sprite[3];
+        initSpritePuntos();
         pelotasRecogidas = 0;
         velocidadActual = 0;
         _logica.SetClearColor(_resourceManager.getRandomGamecolor());
@@ -73,7 +74,11 @@ public class SwitchDashState implements GameState {
             if(i == 4) ultimaPelota = aux;
         }
     }
-
+    private void initSpritePuntos(){
+        for (int i = 0; i < 3; i++){
+           puntuacionSprite[i] = _resourceManager.numbers[0];
+        }
+    }
     @Override
     public void clear() {
         _logica.clear();
@@ -120,7 +125,10 @@ public class SwitchDashState implements GameState {
         }
 
         //Puntos
-        puntuacionSprite.drawScaled(graphics, 1200, 400, puntuacionSprite.getSpriteWidth(), puntuacionSprite.getSpriteHeight());
+        for (int i = 0; i < 3 ; i++){
+            puntuacionSprite[i].drawScaled(graphics, 1200, 400, puntuacionSprite[2].getSpriteWidth(), puntuacionSprite[2].getSpriteHeight());
+
+        }
     }
 
     @Override
@@ -149,8 +157,15 @@ public class SwitchDashState implements GameState {
 
 
     private void CalculaPuntuacion(){
-        if(puntosTotales <= 9) puntosTotales++;
-            puntuacionSprite = _resourceManager.numbers[puntosTotales];
+        puntosTotales++;
+        int resultadoDivision = puntosTotales;
+        int indexSprite = 2;
+        while(resultadoDivision > 0){
+            int restoDiv = resultadoDivision%10;
+            resultadoDivision/=10;
+            puntuacionSprite[indexSprite] = _resourceManager.numbers[restoDiv];
+            indexSprite--;
+        }
     }
 
 

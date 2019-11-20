@@ -49,11 +49,11 @@ public class Flechas {
 
     //TODO: Va lento porque pintamos dos bandas pero bueno such is life
     public void render(){
-        flechas[0].draw((AbstractGraphics) _game.getGraphics(),_game.getGraphics().getCanvas().x,posY
-                ,_game.getGraphics().getCanvas().width, _game.getGraphics().getCanvas().height, 0.5f);
+        flechas[0].draw( _game.getGraphics(),_game.getGraphics().getCanvas().x,posY
+                ,_game.getGraphics().getCanvas().width, _game.getGraphics().getCanvas().height, 50);
 
-        flechas[1].draw((AbstractGraphics) _game.getGraphics(),_game.getGraphics().getCanvas().x,posY - _game.getGraphics().getCanvas().height
-                ,_game.getGraphics().getCanvas().width, _game.getGraphics().getCanvas().height, 0.5f);
+        flechas[1].draw( _game.getGraphics(),_game.getGraphics().getCanvas().x,posY - _game.getGraphics().getCanvas().height
+                ,_game.getGraphics().getCanvas().width, _game.getGraphics().getCanvas().height, 50);
 
         //System.out.println(posY - _game.getGraphics().getCanvas().height);
     }
