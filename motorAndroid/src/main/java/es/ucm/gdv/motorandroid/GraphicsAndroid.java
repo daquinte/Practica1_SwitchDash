@@ -10,6 +10,8 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.SurfaceView;
 
 
@@ -24,14 +26,18 @@ public class GraphicsAndroid extends AbstractGraphics {
     private AssetManager _assetManager;     //Carga de imagenes
     private Canvas _canvas;                 //Viewport. Aquí se pinta.
 
+    private Paint _paint;
+
     private Rect _selfCanvas;
 
     GraphicsAndroid(SurfaceView surfaceView, AssetManager assetManager) {
         _surfaceView = surfaceView;
         _assetManager = assetManager;
+        _paint = new Paint();
         setCanvasSize();
     }
 
+    //Canvas = Objeto usado para enviar los comandos de dibujado
     public void startFrame(Canvas c){
         _canvas = c;
     }
@@ -66,13 +72,19 @@ public class GraphicsAndroid extends AbstractGraphics {
         _canvas.drawColor(color);
     }
 
+    public void DrawRect(Rect rectangulo) {
+        _paint.setColor(Color.BLUE);
+        _paint.setAlpha(30);
+        _canvas.drawRect(_selfCanvas.x, _selfCanvas.y, _selfCanvas.width, _selfCanvas.height, _paint);
+        _paint.reset();
+    }
     @Override
     public void drawImage(Image image, Rect destino, Rect source) {
         //Poner que si no es null, se pinta en canvas
         if (image != null) {
             ImageAndroid androidImg = (ImageAndroid) image;
             Bitmap bm = androidImg.getBitmap();
-            _canvas.drawBitmap(bm, destino.x, destino.y, null);
+            _canvas.drawBitmap(bm, destino.x, destino.y, _paint);
         }
     }
 
@@ -93,7 +105,7 @@ public class GraphicsAndroid extends AbstractGraphics {
                     physicsCoords.x + physicsCoords.width, physicsCoords.y + physicsCoords.height);
 
             android.graphics.Rect src = new android.graphics.Rect(source.x, source.y, source.x + source.width, source.y + source.height);
-            _canvas.drawBitmap(bm, dest, src, null);
+            _canvas.drawBitmap(bm, dest, src, _paint);
 
         }
     }
