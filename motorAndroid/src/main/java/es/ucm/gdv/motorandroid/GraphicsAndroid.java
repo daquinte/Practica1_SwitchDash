@@ -75,7 +75,7 @@ public class GraphicsAndroid extends AbstractGraphics {
     public void DrawRect(Rect rectangulo) {
         _paint.setColor(Color.BLUE);
         _paint.setAlpha(30);
-        _canvas.drawRect(_selfCanvas.x, _selfCanvas.y, _selfCanvas.width, _selfCanvas.height, _paint);
+        _canvas.drawRect(_selfCanvas.x, _selfCanvas.y,_selfCanvas.x+ _selfCanvas.width, _selfCanvas.y+_selfCanvas.height, _paint);
         _paint.reset();
     }
     @Override
@@ -102,17 +102,17 @@ public class GraphicsAndroid extends AbstractGraphics {
 
             Rect physicsCoords = coordenadasACanvas(destino.x, destino.y, destino.width, destino.height);
             android.graphics.Rect dest = new android.graphics.Rect(physicsCoords.x, physicsCoords.y,
-                    physicsCoords.x + physicsCoords.width, physicsCoords.y + physicsCoords.height);
+                    physicsCoords.x+ physicsCoords.width, physicsCoords.y+physicsCoords.height);
 
-            android.graphics.Rect src = new android.graphics.Rect(source.x, source.y, source.x + source.width, source.y + source.height);
-            _canvas.drawBitmap(bm, dest, src, _paint);
+            android.graphics.Rect src = new android.graphics.Rect(source.x, source.y, source.x+ source.width, source.y + source.height);
+            _canvas.drawBitmap(bm, src, dest, _paint);
 
         }
     }
 
     @Override
     public void drawImageScaledWithAlpha(Image image, Rect destino, Rect source, float alpha) {
-        drawImageScaled(image, destino, source); //TODO: this
+        drawImageScaled(image, source, destino); //TODO: this
     }
 
 

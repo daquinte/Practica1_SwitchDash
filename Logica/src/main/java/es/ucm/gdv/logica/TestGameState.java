@@ -86,8 +86,8 @@ public class TestGameState implements GameState {
             s.drawScaled(graphics, meLaSuda, meLaSuda, s.getSpriteWidth(), s.getSpriteHeight());
             meLaSuda += 100;
         }*/
-        logo.drawScaled(graphics, ((1080 / 2) - (logo.getImage().getWidth() / 2)),
-                ((1920 / 2) - (logo.getImage().getHeight() / 2)), logo.getImage().getWidth(), logo.getImage().getHeight());
+        logo.drawScaled(graphics, ((1080 / 2) - (logo.getSpriteWidth() / 2)),
+                ((1920 / 2) - (logo.getSpriteHeight() / 2)), logo.getSpriteWidth(), logo.getImage().getHeight());
     }
 
     @Override

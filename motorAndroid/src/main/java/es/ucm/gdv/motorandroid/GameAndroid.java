@@ -9,16 +9,20 @@ import android.view.SurfaceView;
 import es.ucm.gdv.interfaces.AbstractGraphics;
 import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.Input;
+import es.ucm.gdv.interfaces.Rect;
 import es.ucm.gdv.logica.Logica;
 
-public class GameAndroid implements Game, Runnable {
+/*
+* Clase que recubre
+* */
+public class GameAndroid extends SurfaceView implements Game, Runnable {
 
     //Referencias para el patrón Singleton
     private GraphicsAndroid _graphicsAndroid;
     private InputAndroid _inputAndroid;
     private Logica _currentGameState;
 
-    SurfaceView _surfaceView;
+    //SurfaceView _surfaceView;
 
     //Para el update
     long lastFrameTime = System.nanoTime();
@@ -28,13 +32,14 @@ public class GameAndroid implements Game, Runnable {
     private volatile boolean _running; //Volatile hace que no revise en memoria
     private Thread _runningThread;     //Hilo de juego
 
-    public GameAndroid(Activity a, Context context){
-         _surfaceView = new SurfaceView(context);
-         a.setContentView(_surfaceView);
-        _graphicsAndroid = new GraphicsAndroid(_surfaceView, context.getAssets());
+    public GameAndroid(Activity activity, Context context){
+        super(activity);
+
+        activity.setContentView(this);
+        _graphicsAndroid = new GraphicsAndroid(this, context.getAssets());
         _inputAndroid = new InputAndroid();
 
-        _surfaceView.setOnTouchListener(_inputAndroid);
+       setOnTouchListener(_inputAndroid);
     }
 
     /**
@@ -78,7 +83,7 @@ public class GameAndroid implements Game, Runnable {
         _currentGameState = new Logica();
         _currentGameState.init(this);
         while (_running){
-            SurfaceHolder sh = _surfaceView.getHolder();
+            SurfaceHolder sh = getHolder();
             _currentGameState.tick(CalculaDeltaTime());
             while (!sh.getSurface().isValid());
             CanvasManagePaint(sh);
@@ -91,6 +96,8 @@ public class GameAndroid implements Game, Runnable {
         _currentGameState.clear();
         _graphicsAndroid.setCanvasSize();
         _graphicsAndroid.DrawRect(_graphicsAndroid.getCanvas());
+        _graphicsAndroid.DrawRect(new Rect(0,0,100,100));
+
         _currentGameState.render();
         sh.unlockCanvasAndPost(c);
     }
