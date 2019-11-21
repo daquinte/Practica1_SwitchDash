@@ -7,10 +7,9 @@ public abstract class AbstractGraphics implements Graphics {
     protected final int baseSizeHeight = 1920;
 
 
-    //TODO: Multiplicas por el rect y luego divides entre la resolucion correspondiente para cada imagen
-    // segun Blanca sería algo como "widthLogico * rect.w / 16" porque 16 es la resolucion.
-    // Nosotros no estamos respetando el aspect ratio sino que escalamos las imagenes.
-    // Además habría que hacerlo en funcion del alto tambien???
+//TODO: Igual podriamos redimensionar solo cuando reciba eventos.
+
+    //TODO: "Bandas negras" en forma de separación superior cuando alto >>>> ancho, para que los botones no desaparezcan.
     public Rect Escalamelo() {
         int new_width = 0;
         int x = 0;

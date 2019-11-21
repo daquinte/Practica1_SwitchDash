@@ -13,16 +13,16 @@ import es.ucm.gdv.interfaces.Rect;
 import es.ucm.gdv.logica.Logica;
 
 /*
-* Clase que recubre
+* TODO: comentar
 * */
-public class GameAndroid extends SurfaceView implements Game, Runnable {
+public class GameAndroid implements Game, Runnable {
 
     //Referencias para el patrón Singleton
     private GraphicsAndroid _graphicsAndroid;
     private InputAndroid _inputAndroid;
     private Logica _currentGameState;
 
-    //SurfaceView _surfaceView;
+    SurfaceView _surfaceView;
 
     //Para el update
     long lastFrameTime = System.nanoTime();
@@ -33,13 +33,14 @@ public class GameAndroid extends SurfaceView implements Game, Runnable {
     private Thread _runningThread;     //Hilo de juego
 
     public GameAndroid(Activity activity, Context context){
-        super(activity);
 
-        activity.setContentView(this);
-        _graphicsAndroid = new GraphicsAndroid(this, context.getAssets());
+        _surfaceView = new SurfaceView(activity);
+
+        activity.setContentView(_surfaceView);
+        _graphicsAndroid = new GraphicsAndroid(_surfaceView, context.getAssets());
         _inputAndroid = new InputAndroid();
 
-       setOnTouchListener(_inputAndroid);
+        _surfaceView.setOnTouchListener(_inputAndroid);
     }
 
     /**
@@ -83,7 +84,7 @@ public class GameAndroid extends SurfaceView implements Game, Runnable {
         _currentGameState = new Logica();
         _currentGameState.init(this);
         while (_running){
-            SurfaceHolder sh = getHolder();
+            SurfaceHolder sh = _surfaceView.getHolder();
             _currentGameState.tick(CalculaDeltaTime());
             while (!sh.getSurface().isValid());
             CanvasManagePaint(sh);
