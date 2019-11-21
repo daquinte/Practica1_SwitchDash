@@ -19,10 +19,11 @@ public class ResourceManager implements GameState {
         PLAYAGAIN, PLAYERS, SCOREFRONT, SWITCHDASHLOGO, TAPTOPLAY, WHITE, TOTALSPRITES
     }
 
-    public enum GameColor {GREEN, GREEN_BLUE, CYAN, LIGHT_BLUE, PURPLE, DARK_BLUE, ORANGE, RED, BEIGE, BLACK, TOTALCOLORS}
+    public enum GameColor {GREEN, GREEN_BLUE, CYAN, LIGHT_BLUE, PURPLE, DARK_BLUE, ORANGE, RED, BEIGE}
 
     //
     public Sprite [] numbers = new Sprite[10];
+    public Sprite [] bgColours;
     public Sprite [] points = new Sprite[6];
     public boolean allLoaded = false;
 
@@ -55,6 +56,7 @@ public class ResourceManager implements GameState {
 
         CargaRutasDeImagenes();
         CargaImagenes();
+        CargaImagenesFondo();
 
         rnd = new Random(); //Para generar alturas aleatorias
         gameColors = GameColor.values();
@@ -62,23 +64,7 @@ public class ResourceManager implements GameState {
         initPoints();
     }
 
-    private void initPoints() {
-        Image pointsI = getImage(GameSprites.SCOREFRONT);
-        /*for (int i = 0; i < points.length; i++) {
-            points[i] = new Sprite(pointsI, 0, 0, pointsI.getWidth(), pointsI.getHeight());
-        }*/
 
-        int itX = 7;
-        int itY = 3;
-        for (int j = 0; j < numbers.length; j++) {
-            numbers[j] = new Sprite(pointsI, itX * 125, itY *160, 125, 160);
-            itX ++;
-            if(j == 7){
-                itX = 0;
-                itY++;
-            }
-        }
-    }
 
     @Override
     public void clear() {
@@ -149,6 +135,34 @@ public class ResourceManager implements GameState {
 
         allLoaded = true;
     }
+
+    private void initPoints() {
+        Image pointsI = getImage(GameSprites.SCOREFRONT);
+        /*for (int i = 0; i < points.length; i++) {
+            points[i] = new Sprite(pointsI, 0, 0, pointsI.getWidth(), pointsI.getHeight());
+        }*/
+
+        int itX = 7;
+        int itY = 3;
+        for (int j = 0; j < numbers.length; j++) {
+            numbers[j] = new Sprite(pointsI, itX * 125, itY *160, 125, 160);
+            itX ++;
+            if(j == 7){
+                itX = 0;
+                itY++;
+            }
+        }
+    }
+
+    private void CargaImagenesFondo(){
+        bgColours = new Sprite[9];
+        Image bgBase = getImage(GameSprites.BACKGROUNDS);
+        int itX = 0;
+        for(int i = 0; i < bgColours.length; i++){
+            bgColours[i] = new Sprite(bgBase, i * 32, 0, 32, 32);
+        }
+    }
+
 
 
 }

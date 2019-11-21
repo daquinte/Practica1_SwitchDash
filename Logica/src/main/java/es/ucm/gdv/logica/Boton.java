@@ -59,6 +59,7 @@ public class Boton {
         spriteBoton.draw(_game.getGraphics(), physicRect.x, physicRect.y, physicRect.width, physicRect.height);
     }
 
+    //TODO: borrar esto
     public void move() {
         rnd = new Random();
         logicRect.x = rnd.nextInt(800) + 60;

@@ -13,6 +13,7 @@ import java.util.Random;
 
 public class SwitchDashState implements GameState {
 
+    //Atributos del motor de juego
     Game _game;
     Logica _logica;
     ResourceManager _resourceManager;
@@ -20,7 +21,6 @@ public class SwitchDashState implements GameState {
 
     //Atributos del juego
     Jugador jugador;
-    //Pelota [] pelotas; //Vas a tener un array de 4-5 pelotas y las vas a ir subiendo xdd
     Queue<Pelota> pelotas;
     Pelota ultimaPelota;
 
@@ -29,7 +29,7 @@ public class SwitchDashState implements GameState {
     Sprite[] puntuacionSprite;
 
 
-    int pelotasRecogidas;
+    int pelotasRecogidas;           //Contador de pelotas. Cada 10, sube la velocidad.
     int velocidadActual;
 
 
@@ -65,6 +65,7 @@ public class SwitchDashState implements GameState {
         pelotasRecogidas = 0;
         velocidadActual = 0;
         _logica.SetClearColor(_resourceManager.getRandomGamecolor());
+        _logica.resetVelocidadFlechas();
     }
 
     private void initPelotas() {

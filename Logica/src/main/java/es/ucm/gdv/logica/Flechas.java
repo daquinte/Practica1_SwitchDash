@@ -25,7 +25,7 @@ public class Flechas {
 
     private void initFlechas(){
 
-        posY = -800;
+        posY = -500;
         velFlechas = 0;
         Image flechasimg = _resourceManager.getImage(ResourceManager.GameSprites.ARROWS);
         flechas = new Sprite(flechasimg,0,0,flechasimg.getWidth(),flechasimg.getHeight());
@@ -35,8 +35,8 @@ public class Flechas {
 
     public void tick(double elapsedTime){
         posY += ((384 + velFlechas) * elapsedTime);
-        if(posY >= 75){
-            posY = -800;
+        if(posY >= 25){
+            posY = -500;
         }
     }
 
@@ -46,6 +46,7 @@ public class Flechas {
         flechas.draw( _game.getGraphics(),_game.getGraphics().getCanvas().x, posY
                 ,_game.getGraphics().getCanvas().width, flechas.getImage().getHeight() , 50);
 
+        System.out.println(flechas.getImage().getHeight());
         /*flechas[1].draw( _game.getGraphics(),_game.getGraphics().getCanvas().x,posY - _game.getGraphics().getCanvas().height
                 ,_game.getGraphics().getCanvas().width, _game.getGraphics().getCanvas().height, 50);
         */

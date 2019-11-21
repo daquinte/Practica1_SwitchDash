@@ -1,17 +1,21 @@
 package es.ucm.gdv.logica;
 
+import es.ucm.gdv.interfaces.AbstractGraphics;
 import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;
+import es.ucm.gdv.interfaces.Rect;
+import es.ucm.gdv.interfaces.Sprite;
 
 
 public class Logica implements GameState {
     private Game _game;
-    private Graphics _graphics;
+    private AbstractGraphics _graphics;
     private GameState _currentGameState;
     private ResourceManager _resourceManager;
 
     private ResourceManager.GameColor currentColor;
+    private Sprite bgSprite;
     private Flechas flechas;
 
     public Logica (){
@@ -75,6 +79,7 @@ public class Logica implements GameState {
 
      public void SetClearColor(ResourceManager.GameColor newColor){
         currentColor = newColor;
+        bgSprite = _resourceManager.bgColours[newColor.ordinal()];
      }
 
     //Métodos privados de la lógica
@@ -107,11 +112,13 @@ public class Logica implements GameState {
             case BEIGE:
                 _graphics.clear( 0xFF75706b);
                 break;
-            case BLACK:
-                _graphics.clear( 0xFF000000);
-                break;
             default:
                 break;
         }
+
+        //Pintamos el background
+
+            bgSprite.draw( _game.getGraphics(),_game.getGraphics().getCanvas().x, _game.getGraphics().getCanvas().y
+                    ,_game.getGraphics().getCanvas().width, _game.getGraphics().getCanvas().height);
     }
 }
