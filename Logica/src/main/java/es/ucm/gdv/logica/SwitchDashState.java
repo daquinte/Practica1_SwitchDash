@@ -131,7 +131,7 @@ public class SwitchDashState implements GameState {
 
         //Puntos
         for (int i = 0; i < 3; i++) {
-            puntuacionSprite[i].drawScaled(graphics, 1200 + ( i *125), 400, puntuacionSprite[2].getSpriteWidth(), puntuacionSprite[2].getSpriteHeight());
+            puntuacionSprite[i].drawScaled(graphics, 1100 + ( i *100), 200, puntuacionSprite[2].getSpriteWidth(), puntuacionSprite[2].getSpriteHeight());
 
         }
     }
@@ -145,7 +145,7 @@ public class SwitchDashState implements GameState {
         int colorJugador = jugador.GetColorJugador().ordinal();
         int colorPelota = p.GetColorPelota().ordinal();
         if (colorJugador != colorPelota) {
-            _logica.setCurrentGameState(new TestGameState(_logica));
+            _logica.setCurrentGameState(new GameOverState(_logica, puntosTotales));
         } else if (colorJugador == colorPelota) {
             ResetPelota(p);
             CalculaPuntuacion();
@@ -162,12 +162,16 @@ public class SwitchDashState implements GameState {
 
     private void CalculaPuntuacion() {
         puntosTotales++;
-        int resultadoDivision = puntosTotales;
-        int indexSprite = 2;
-        while (resultadoDivision > 0) {
-            puntuacionSprite[indexSprite] = _resourceManager.numbers[resultadoDivision % 10];
-            resultadoDivision /= 10;
-            indexSprite--;
+
+        //No creo que nadie llegue, pero nunca sabes
+        if(puntosTotales <= 999) {
+            int resultadoDivision = puntosTotales;
+            int indexSprite = 2;
+            while (resultadoDivision > 0) {
+                puntuacionSprite[indexSprite] = _resourceManager.numbers[resultadoDivision % 10];
+                resultadoDivision /= 10;
+                indexSprite--;
+            }
         }
     }
 

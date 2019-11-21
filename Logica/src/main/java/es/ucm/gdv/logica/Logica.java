@@ -55,7 +55,7 @@ public class Logica implements GameState {
 
     @Override
     public void handleInput() {
-
+        //Logica no hace handle input, sólo sus estados.
     }
 
     public ResourceManager getResourceManager(){
@@ -117,8 +117,7 @@ public class Logica implements GameState {
         }
 
         //Pintamos el background
-
-            bgSprite.draw( _game.getGraphics(),_game.getGraphics().getCanvas().x, _game.getGraphics().getCanvas().y
+         bgSprite.draw( _game.getGraphics(),_game.getGraphics().getCanvas().x, _game.getGraphics().getCanvas().y
                     ,_game.getGraphics().getCanvas().width, _game.getGraphics().getCanvas().height);
     }
 }

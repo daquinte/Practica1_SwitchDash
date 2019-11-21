@@ -46,7 +46,6 @@ public class Flechas {
         flechas.draw( _game.getGraphics(),_game.getGraphics().getCanvas().x, posY
                 ,_game.getGraphics().getCanvas().width, flechas.getImage().getHeight() , 50);
 
-        System.out.println(flechas.getImage().getHeight());
         /*flechas[1].draw( _game.getGraphics(),_game.getGraphics().getCanvas().x,posY - _game.getGraphics().getCanvas().height
                 ,_game.getGraphics().getCanvas().width, _game.getGraphics().getCanvas().height, 50);
         */

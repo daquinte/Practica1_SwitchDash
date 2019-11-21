@@ -22,9 +22,9 @@ public class ResourceManager implements GameState {
     public enum GameColor {GREEN, GREEN_BLUE, CYAN, LIGHT_BLUE, PURPLE, DARK_BLUE, ORANGE, RED, BEIGE}
 
     //
-    public Sprite [] numbers = new Sprite[10];
+    public Sprite [] numbers;
+    public Sprite [] alphabet;
     public Sprite [] bgColours;
-    public Sprite [] points = new Sprite[6];
     public boolean allLoaded = false;
 
     //Private
@@ -58,10 +58,14 @@ public class ResourceManager implements GameState {
         CargaImagenes();
         CargaImagenesFondo();
 
+        numbers = new Sprite[10];
+        alphabet = new Sprite[27];
+
         rnd = new Random(); //Para generar alturas aleatorias
         gameColors = GameColor.values();
         gameColorSize = gameColors.length;
         initPoints();
+        initAlphabet();
     }
 
 
@@ -76,7 +80,7 @@ public class ResourceManager implements GameState {
         //Comprueba si se ha cargado to.do los elementos
         if (!allLoaded) {
         }
-        else _logica.setCurrentGameState(new TituloState(_logica));
+        else _logica.setCurrentGameState(new TituloState(_logica)); //TODO: Asegurate que está en Titulo al final
     }
 
     @Override
@@ -86,7 +90,7 @@ public class ResourceManager implements GameState {
 
     @Override
     public void handleInput() {
-
+        //No hay input
     }
 
 
@@ -148,6 +152,24 @@ public class ResourceManager implements GameState {
             numbers[j] = new Sprite(pointsI, itX * 125, itY *160, 125, 160);
             itX ++;
             if(j == 7){
+                itX = 0;
+                itY++;
+            }
+        }
+    }
+
+    private void initAlphabet() {
+        Image alphabetI = getImage(GameSprites.SCOREFRONT);
+        /*for (int i = 0; i < points.length; i++) {
+            points[i] = new Sprite(pointsI, 0, 0, pointsI.getWidth(), pointsI.getHeight());
+        }*/
+
+        int itX = 0;
+        int itY = 0;
+        for (int j = 0; j < alphabet.length; j++) {
+            alphabet[j] = new Sprite(alphabetI, itX * 125, itY *160, 125, 160);
+            itX ++;
+            if(j == 14){
                 itX = 0;
                 itY++;
             }

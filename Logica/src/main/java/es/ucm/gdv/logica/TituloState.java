@@ -10,16 +10,20 @@ import es.ucm.gdv.interfaces.Sprite;
 import es.ucm.gdv.interfaces.TouchEvent;
 
 public class TituloState implements GameState {
-    public Boton sonido;
-    public Boton ayuda;
 
-    public Sprite logo;
-    public Sprite tapToPlay;
+    //Atributos del motor
 
     Game _game;
     Logica _logica;
     ResourceManager _resourceManager;
     AbstractGraphics graphics;
+
+    //Atributos del estado
+    public Boton sonido;
+    public Boton ayuda;
+
+    public Sprite logo;
+    public Sprite tapToPlay;
 
     private float alpha;
     private float factor;
@@ -27,6 +31,7 @@ public class TituloState implements GameState {
     private Boolean mute = false;
 
 
+    //TODO: hay alguna forma de unificar constructoras?? -> Super, o algo asi
     public TituloState(Logica l) {
         _logica = l;
         _resourceManager = l.getResourceManager();
@@ -35,7 +40,7 @@ public class TituloState implements GameState {
     @Override
     public void init(Game game) {
         _game = game;
-        graphics = (AbstractGraphics) _game.getGraphics();
+        graphics = _game.getGraphics();
         _logica.SetClearColor(_resourceManager.getRandomGamecolor());
         resourcesInit();
         factor = 60;
@@ -56,7 +61,7 @@ public class TituloState implements GameState {
 
     @Override
     public void clear() {
-
+        _logica.clear();
     }
 
     @Override
