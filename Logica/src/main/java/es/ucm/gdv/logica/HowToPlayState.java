@@ -36,6 +36,7 @@ public class HowToPlayState implements GameState {
         graphics = (AbstractGraphics) _game.getGraphics();
         resourcesInit();
         factor = 60;
+        _logica.resetVelocidadFlechas();
     }
 
     private void resourcesInit () {
