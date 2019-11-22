@@ -4,6 +4,7 @@ import es.ucm.gdv.interfaces.AbstractGraphics;
 import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;
+import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.Rect;
 import es.ucm.gdv.interfaces.Sprite;
 
@@ -16,9 +17,12 @@ public class Logica implements GameState {
 
     private ResourceManager.GameColor currentColor;
     private Sprite bgSprite;
+    private Sprite flash;
     private Flechas flechas;
+    private Boolean activateFlash = false;
+    private int alpha = 200;
 
-    public Logica (){
+    public Logica() {
         _currentGameState = this;
     }
 
@@ -33,6 +37,8 @@ public class Logica implements GameState {
         _resourceManager = (ResourceManager) _currentGameState;
         flechas = new Flechas(_game, _resourceManager);
 
+        Image flashI = _resourceManager.getImage(ResourceManager.GameSprites.WHITE);
+        flash = new Sprite(flashI, 0, 0, flashI.getWidth(), flashI.getHeight());
     }
 
     @Override
@@ -44,6 +50,14 @@ public class Logica implements GameState {
     public void tick(double elapsedTime) {
         flechas.tick(elapsedTime);
         _currentGameState.tick(elapsedTime);
+        if (activateFlash) {
+            alpha -= (20 * elapsedTime);
+            if (alpha <= 0) {
+                activateFlash = false;
+                alpha = 100;
+            }
+        }
+
     }
 
     @Override
@@ -58,66 +72,73 @@ public class Logica implements GameState {
         //Logica no hace handle input, sólo sus estados.
     }
 
-    public ResourceManager getResourceManager(){
+    public ResourceManager getResourceManager() {
         return _resourceManager;
     }
 
 
-    public void aumentaVelocidadFlechas(){
+    public void aumentaVelocidadFlechas() {
         flechas.aumentaVelocidad();
     }
 
-    public void resetVelocidadFlechas(){
+    public void resetVelocidadFlechas() {
         flechas.resetVelocidad();
     }
 
 
-    public void setCurrentGameState(GameState gameState){
+    public void setCurrentGameState(GameState gameState) {
+        activateFlash = true;
+        alpha = 100;
         _currentGameState = gameState;
         _currentGameState.init(_game);
-     }
+    }
 
-     public void SetClearColor(ResourceManager.GameColor newColor){
+    public void SetClearColor(ResourceManager.GameColor newColor) {
         currentColor = newColor;
         bgSprite = _resourceManager.bgColours[newColor.ordinal()];
-     }
+    }
 
     //Métodos privados de la lógica
-    private void ClearScreen(ResourceManager.GameColor gameColor){
-        switch (gameColor){
+    private void ClearScreen(ResourceManager.GameColor gameColor) {
+        switch (gameColor) {
             case GREEN:
-                _graphics.clear( 0xFF41a85f);
+                _graphics.clear(0xFF41a85f);
                 break;
             case GREEN_BLUE:
-                _graphics.clear( 0xFF00a885);
+                _graphics.clear(0xFF00a885);
                 break;
             case CYAN:
-                _graphics.clear( 0xFF3d8eb9);
+                _graphics.clear(0xFF3d8eb9);
                 break;
             case LIGHT_BLUE:
-                _graphics.clear( 0xFF2969b0);
+                _graphics.clear(0xFF2969b0);
                 break;
             case PURPLE:
-                _graphics.clear( 0xFF553982);
+                _graphics.clear(0xFF553982);
                 break;
             case DARK_BLUE:
-                _graphics.clear( 0xFF28324e);
+                _graphics.clear(0xFF28324e);
                 break;
             case ORANGE:
-                _graphics.clear( 0xFFf37934);
+                _graphics.clear(0xFFf37934);
                 break;
             case RED:
-                _graphics.clear( 0xFFd14b41);
+                _graphics.clear(0xFFd14b41);
                 break;
             case BEIGE:
-                _graphics.clear( 0xFF75706b);
+                _graphics.clear(0xFF75706b);
                 break;
             default:
                 break;
         }
 
         //Pintamos el background
-         bgSprite.draw( _game.getGraphics(),_game.getGraphics().getCanvas().x, _game.getGraphics().getCanvas().y
-                    ,_game.getGraphics().getCanvas().width, _game.getGraphics().getCanvas().height);
+        bgSprite.draw(_game.getGraphics(), _game.getGraphics().getCanvas().x, _game.getGraphics().getCanvas().y
+                , _game.getGraphics().getCanvas().width, _game.getGraphics().getCanvas().height);
+
+        if (activateFlash) {
+            flash.draw(_game.getGraphics(), 0, 0
+                    , _game.getGraphics().getWidth(), _game.getGraphics().getHeight(), alpha);
+        }
     }
 }

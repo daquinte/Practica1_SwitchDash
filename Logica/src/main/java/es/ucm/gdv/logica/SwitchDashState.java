@@ -127,7 +127,6 @@ public class SwitchDashState implements GameState {
         //Puntos
         for (int i = 0; i < 3; i++) {
             puntuacionSprite[i].drawScaled(graphics, 1100 + (i * 100), 200, puntuacionSprite[2].getSpriteWidth(), puntuacionSprite[2].getSpriteHeight());
-
         }
     }
 
