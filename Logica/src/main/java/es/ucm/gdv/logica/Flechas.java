@@ -15,49 +15,44 @@ public class Flechas {
     ResourceManager _resourceManager;
 
     private int posY;
+    private int startPosition;
     private int velFlechas;
 
-    public Flechas(Game game, ResourceManager res){
+    public Flechas(Game game, ResourceManager res) {
         _game = game;
         _resourceManager = res;
         initFlechas();
     }
 
-    private void initFlechas(){
+    private void initFlechas() {
 
-        posY = -500;
-        velFlechas = 0;
         Image flechasimg = _resourceManager.getImage(ResourceManager.GameSprites.ARROWS);
-        flechas = new Sprite(flechasimg,0,0,flechasimg.getWidth(),flechasimg.getHeight());
+        posY = startPosition = - flechasimg.getHeight() / 5;
+        velFlechas = 0;
+        flechas = new Sprite(flechasimg, 0, 0, flechasimg.getWidth(), flechasimg.getHeight());
 
 
     }
 
-    public void tick(double elapsedTime){
+    public void tick(double elapsedTime) {
         posY += ((384 + velFlechas) * elapsedTime);
-        if(posY >= 25){
-            posY = -500;
+        if (posY >= 0) {
+            posY = startPosition;
         }
     }
 
 
-    //TODO: Va lento porque pintamos dos bandas pero bueno such is life
-    public void render(){
-        flechas.draw( _game.getGraphics(),_game.getGraphics().getCanvas().x, posY
-                ,_game.getGraphics().getCanvas().width, flechas.getImage().getHeight() , 50);
-
-        /*flechas[1].draw( _game.getGraphics(),_game.getGraphics().getCanvas().x,posY - _game.getGraphics().getCanvas().height
-                ,_game.getGraphics().getCanvas().width, _game.getGraphics().getCanvas().height, 50);
-        */
-        //System.out.println(posY - _game.getGraphics().getCanvas().height);
+    public void render() {
+        flechas.draw(_game.getGraphics(), _game.getGraphics().getCanvas().x, posY
+                , _game.getGraphics().getCanvas().width, flechas.getImage().getHeight(), 50);
     }
 
 
-    public void aumentaVelocidad(){
+    public void aumentaVelocidad() {
         velFlechas += 90;
     }
 
-    public void resetVelocidad(){
+    public void resetVelocidad() {
         velFlechas = 0;
     }
 }
