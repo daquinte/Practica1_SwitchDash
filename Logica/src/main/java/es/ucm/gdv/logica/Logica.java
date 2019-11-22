@@ -51,10 +51,10 @@ public class Logica implements GameState {
         flechas.tick(elapsedTime);
         _currentGameState.tick(elapsedTime);
         if (activateFlash) {
-            alpha -= (20 * elapsedTime);
+            alpha -= (60 * elapsedTime);
             if (alpha <= 0) {
                 activateFlash = false;
-                alpha = 100;
+                alpha = 200;
             }
         }
 
