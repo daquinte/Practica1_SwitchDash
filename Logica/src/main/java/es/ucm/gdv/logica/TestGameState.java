@@ -18,7 +18,7 @@ public class TestGameState implements GameState {
     AbstractGraphics graphics;
 
     Sprite testSprite;
-    Sprite flechas; //OJO QUE LAS FLECHAS SE VAN A PINTAR EN TODOS LOS PUTOS ESTADOS
+    Sprite flechas;
 
     Boton boton;
     public Sprite logo;

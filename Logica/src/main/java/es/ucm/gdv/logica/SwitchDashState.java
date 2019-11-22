@@ -103,8 +103,9 @@ public class SwitchDashState implements GameState {
             p.tick(elapsedTime, velocidadActual);
         }
 
-
-        if (pelotas.peek().getPosY() + pelotas.peek().GetSpritePelota().getSpriteHeight() >= 1200) {
+        int yJugador = graphics.translateCoordinate(graphics.getCanvas().height, jugador.getY(), graphics.getBaseSizeHeight(), graphics.getCanvas().y);
+        int yPelota = graphics.translateCoordinate(graphics.getCanvas().height, pelotas.peek().getPosY(), graphics.getBaseSizeHeight(), graphics.getCanvas().y);
+        if (yPelota >= yJugador) {
             CompruebaColision(pelotas.peek());
         }
     }
@@ -114,24 +115,18 @@ public class SwitchDashState implements GameState {
 
         //JUGADOR
         Sprite auxJugador = jugador.GetSpriteJugador();
-        int x = 1080 / 2 - auxJugador.getSpriteWidth() / 2;
-        int y = 1200;
-
-        auxJugador.drawScaled(graphics, x, y, auxJugador.getSpriteWidth(), auxJugador.getSpriteHeight() / 2);
+        auxJugador.drawScaled(graphics, jugador.getX(), jugador.getY(), auxJugador.getSpriteWidth(), auxJugador.getSpriteHeight() / 2);
 
         //PELOTAS
         for (Pelota p : pelotas) {
             Sprite spriteP = p.GetSpritePelota();
-            x = 1080 / 2 - spriteP.getSpriteWidth() / 2;
-            y = p.getPosY();
-
             //TODO: se ve como un huevo porque tiene que estar en un 128 en vez de 100, o algo asi
-            spriteP.drawScaled(graphics, x, y, 128, 100);
+            spriteP.drawScaled(graphics, 1080 / 2 - spriteP.getSpriteWidth() / 2, p.getPosY(), 128, 100);
         }
 
         //Puntos
         for (int i = 0; i < 3; i++) {
-            puntuacionSprite[i].drawScaled(graphics, 1100 + ( i *100), 200, puntuacionSprite[2].getSpriteWidth(), puntuacionSprite[2].getSpriteHeight());
+            puntuacionSprite[i].drawScaled(graphics, 1100 + (i * 100), 200, puntuacionSprite[2].getSpriteWidth(), puntuacionSprite[2].getSpriteHeight());
 
         }
     }
@@ -146,7 +141,7 @@ public class SwitchDashState implements GameState {
         int colorPelota = p.GetColorPelota().ordinal();
         if (colorJugador != colorPelota) {
             _logica.setCurrentGameState(new GameOverState(_logica, puntosTotales));
-        } else if (colorJugador == colorPelota) {
+        } else {
             ResetPelota(p);
             CalculaPuntuacion();
             pelotasRecogidas++;
@@ -155,7 +150,6 @@ public class SwitchDashState implements GameState {
                 _logica.aumentaVelocidadFlechas();
                 pelotasRecogidas = 0;
             }
-
         }
     }
 
@@ -164,7 +158,7 @@ public class SwitchDashState implements GameState {
         puntosTotales++;
 
         //No creo que nadie llegue, pero nunca sabes
-        if(puntosTotales <= 999) {
+        if (puntosTotales <= 999) {
             int resultadoDivision = puntosTotales;
             int indexSprite = 2;
             while (resultadoDivision > 0) {

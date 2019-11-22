@@ -34,8 +34,16 @@ public abstract class AbstractGraphics implements Graphics {
         int _width = (width * getCanvas().width / baseSizeWidth);
         int _height = height * _width / width;
 
-        int _y = (getCanvas().height * y / baseSizeHeight) + getCanvas().y;
+        int _y = translateCoordinate(getCanvas().height, y, baseSizeHeight, getCanvas().y);
         int _x = (getCanvas().width * x / baseSizeWidth) + getCanvas().x;
         return new Rect(_x, _y, _width, _height);
+    }
+
+    public int translateCoordinate(int canvasSize, int coord, int resolution, int canvasCoord) {
+        return (canvasSize * coord / resolution) + canvasCoord;
+    }
+
+    public int getBaseSizeHeight() {
+        return baseSizeHeight;
     }
 }
