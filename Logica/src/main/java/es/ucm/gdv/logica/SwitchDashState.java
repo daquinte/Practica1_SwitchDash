@@ -101,14 +101,7 @@ public class SwitchDashState implements GameState {
         for (Pelota p : pelotas) {
             p.tick(elapsedTime, velocidadActual);
         }
-
-        int yJugador = graphics.translateCoordinate(graphics.getCanvas().height, jugador.getY(), graphics.getBaseSizeHeight(), graphics.getCanvas().y);
-        int yPelota = graphics.translateCoordinate(graphics.getCanvas().height, pelotas.peek().getPosY(), graphics.getBaseSizeHeight(), graphics.getCanvas().y);
-
-
-        if (yPelota >= yJugador) {
-            CompruebaColision(pelotas.peek());
-        }
+        CompruebaColision(pelotas.peek());
     }
 
     @Override
@@ -136,18 +129,23 @@ public class SwitchDashState implements GameState {
     }
 
     private void CompruebaColision(Pelota p) {
-        int colorJugador = jugador.GetColorJugador().ordinal();
-        int colorPelota = p.GetColorPelota().ordinal();
-        if (colorJugador != colorPelota) {
-            _logica.setCurrentGameState(new GameOverState(_logica, puntosTotales));
-        } else {
-            ResetPelota(p);
-            CalculaPuntuacion();
-            pelotasRecogidas++;
-            if (pelotasRecogidas >= 10) {
-                velocidadActual += 90;
-                _logica.aumentaVelocidadFlechas();
-                pelotasRecogidas = 0;
+
+        int yJugador = graphics.translateCoordinate(graphics.getCanvas().height, jugador.getY(), graphics.getBaseSizeHeight(), graphics.getCanvas().y);
+        int yPelota = graphics.translateCoordinate(graphics.getCanvas().height, pelotas.peek().getPosY(), graphics.getBaseSizeHeight(), graphics.getCanvas().y);
+        if ((yPelota + pelotas.peek().getHeight() / 2) >= yJugador) {
+            int colorJugador = jugador.GetColorJugador().ordinal();
+            int colorPelota = p.GetColorPelota().ordinal();
+            if (colorJugador != colorPelota) {
+                _logica.setCurrentGameState(new GameOverState(_logica, puntosTotales));
+            } else {
+                ResetPelota(p);
+                CalculaPuntuacion();
+                pelotasRecogidas++;
+                if (pelotasRecogidas >= 10) {
+                    velocidadActual += 90;
+                    _logica.aumentaVelocidadFlechas();
+                    pelotasRecogidas = 0;
+                }
             }
         }
     }
