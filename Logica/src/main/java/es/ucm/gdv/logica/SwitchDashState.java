@@ -55,7 +55,6 @@ public class SwitchDashState implements GameState {
         pelotas = new LinkedList<>();
 
         jugador = new Jugador(_resourceManager);
-        jugador.SetColorJugador(Jugador.colorJugador.NEGRO);
         initPelotas();
 
         //jugador = new Jugador(_resourceManager);
@@ -105,6 +104,9 @@ public class SwitchDashState implements GameState {
 
         int yJugador = graphics.translateCoordinate(graphics.getCanvas().height, jugador.getY(), graphics.getBaseSizeHeight(), graphics.getCanvas().y);
         int yPelota = graphics.translateCoordinate(graphics.getCanvas().height, pelotas.peek().getPosY(), graphics.getBaseSizeHeight(), graphics.getCanvas().y);
+
+
+        //System.out.println("Jugador: (" + jugador.getX() + ", " + jugador.getY() + ", " + jugador.GetSpriteJugador().getSpriteWidth() + ", " + jugador.GetSpriteJugador().getSpriteWidth() + ")");
         if (yPelota >= yJugador) {
             CompruebaColision(pelotas.peek());
         }
@@ -115,7 +117,7 @@ public class SwitchDashState implements GameState {
 
         //JUGADOR
         Sprite auxJugador = jugador.GetSpriteJugador();
-        auxJugador.drawScaled(graphics, jugador.getX(), jugador.getY(), auxJugador.getSpriteWidth(), auxJugador.getSpriteHeight() / 2);
+        auxJugador.drawScaled(graphics, jugador.getX(), jugador.getY(), auxJugador.getSpriteWidth(), auxJugador.getSpriteHeight());
 
         //PELOTAS
         for (Pelota p : pelotas) {

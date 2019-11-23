@@ -142,9 +142,6 @@ public class ResourceManager implements GameState {
 
     private void initPoints() {
         Image pointsI = getImage(GameSprites.SCOREFRONT);
-        /*for (int i = 0; i < points.length; i++) {
-            points[i] = new Sprite(pointsI, 0, 0, pointsI.getWidth(), pointsI.getHeight());
-        }*/
 
         int itX = 7;
         int itY = 3;
@@ -160,9 +157,6 @@ public class ResourceManager implements GameState {
 
     private void initAlphabet() {
         Image alphabetI = getImage(GameSprites.SCOREFRONT);
-        /*for (int i = 0; i < points.length; i++) {
-            points[i] = new Sprite(pointsI, 0, 0, pointsI.getWidth(), pointsI.getHeight());
-        }*/
 
         int itX = 0;
         int itY = 0;

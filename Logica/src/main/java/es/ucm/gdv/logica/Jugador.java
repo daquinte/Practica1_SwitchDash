@@ -29,7 +29,7 @@ public class Jugador {
         _resourceManager = res;
         imagenJugador = _resourceManager.getImage(ResourceManager.GameSprites.PLAYERS);
         jugadorBlanco = new Sprite(imagenJugador, 0, 0, imagenJugador.getWidth(), imagenJugador.getHeight() / 2);
-        jugadorNegro = new Sprite(imagenJugador, 0, imagenJugador.getHeight() / 2, imagenJugador.getWidth(), imagenJugador.getHeight());
+        jugadorNegro = new Sprite(imagenJugador, 0, imagenJugador.getHeight() / 2, imagenJugador.getWidth(), imagenJugador.getHeight() / 2);
         rnd = new Random();
         initJugador();
         x = 1080 / 2 - spriteJugador.getSpriteWidth() / 2;
