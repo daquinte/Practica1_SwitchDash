@@ -106,7 +106,6 @@ public class SwitchDashState implements GameState {
         int yPelota = graphics.translateCoordinate(graphics.getCanvas().height, pelotas.peek().getPosY(), graphics.getBaseSizeHeight(), graphics.getCanvas().y);
 
 
-        //System.out.println("Jugador: (" + jugador.getX() + ", " + jugador.getY() + ", " + jugador.GetSpriteJugador().getSpriteWidth() + ", " + jugador.GetSpriteJugador().getSpriteWidth() + ")");
         if (yPelota >= yJugador) {
             CompruebaColision(pelotas.peek());
         }
@@ -122,8 +121,7 @@ public class SwitchDashState implements GameState {
         //PELOTAS
         for (Pelota p : pelotas) {
             Sprite spriteP = p.GetSpritePelota();
-            //TODO: se ve como un huevo porque tiene que estar en un 128 en vez de 100, o algo asi
-            spriteP.drawScaled(graphics, 1080 / 2 - spriteP.getSpriteWidth() / 2, p.getPosY(), 128, 100);
+            spriteP.drawScaled(graphics, 1080 / 2 - spriteP.getSpriteWidth() / 2, p.getPosY(), p.getWidth(), p.getWidth());
         }
 
         //Puntos
