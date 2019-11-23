@@ -78,7 +78,6 @@ public class GameOverState implements GameState {
     private void initSpritePoints(char [] p) {
         points = new Sprite[6];
        for(int i = 0; i < points.length; i++){
-           System.out.println(p[i]);
            points[i] = _resourceManager.alphabet[p[i]%65];
        }
     }

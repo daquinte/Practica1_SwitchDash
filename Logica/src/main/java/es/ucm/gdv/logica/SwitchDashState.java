@@ -3,6 +3,7 @@ package es.ucm.gdv.logica;
 import es.ucm.gdv.interfaces.AbstractGraphics;
 import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
+import es.ucm.gdv.interfaces.Pair;
 import es.ucm.gdv.interfaces.Sprite;
 import es.ucm.gdv.interfaces.TouchEvent;
 
@@ -23,6 +24,9 @@ public class SwitchDashState implements GameState {
     Jugador jugador;
     Queue<Pelota> pelotas;
     Pelota ultimaPelota;
+
+    SistemaParticulas sistemaParticulas;
+
 
 
     int puntosTotales;
@@ -49,6 +53,8 @@ public class SwitchDashState implements GameState {
         _game = game;
         graphics = (AbstractGraphics) _game.getGraphics();
         rnd = new Random();
+
+        sistemaParticulas = new SistemaParticulas(_game);
 
         //init de juego
         //pelotas = new Pelota[5];
@@ -102,6 +108,9 @@ public class SwitchDashState implements GameState {
             p.tick(elapsedTime, velocidadActual);
         }
         CompruebaColision(pelotas.peek());
+
+        //Particulas
+        sistemaParticulas.tick(elapsedTime);
     }
 
     @Override
@@ -121,6 +130,9 @@ public class SwitchDashState implements GameState {
         for (int i = 0; i < 3; i++) {
             puntuacionSprite[i].drawScaled(graphics, 1100 + (i * 100), 200, puntuacionSprite[2].getSpriteWidth(), puntuacionSprite[2].getSpriteHeight());
         }
+
+        //Particulas
+        sistemaParticulas.render();
     }
 
     @Override
@@ -139,6 +151,7 @@ public class SwitchDashState implements GameState {
                 _logica.setCurrentGameState(new GameOverState(_logica, puntosTotales));
             } else {
                 ResetPelota(p);
+                sistemaParticulas.addParticles(p.GetSpritePelota(), 6, new Pair(1080 / 2 - p.GetSpritePelota().getSpriteWidth() / 2, p.getPosY()));
                 CalculaPuntuacion();
                 pelotasRecogidas++;
                 if (pelotasRecogidas >= 10) {
@@ -152,10 +165,9 @@ public class SwitchDashState implements GameState {
 
 
     private void CalculaPuntuacion() {
-        puntosTotales++;
-
         //No creo que nadie llegue, pero nunca sabes
         if (puntosTotales <= 999) {
+            puntosTotales++;
             int resultadoDivision = puntosTotales;
             int indexSprite = 2;
             while (resultadoDivision > 0) {
