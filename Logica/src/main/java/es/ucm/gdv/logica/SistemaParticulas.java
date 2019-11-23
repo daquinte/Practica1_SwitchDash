@@ -71,7 +71,7 @@ class Particula{
 
         pDirection = (rnd.nextInt(2) == 0) ? Direccion.DERECHA : Direccion.IZQUIERDA;
         posX = originalPos._first;
-        posY = originalPos._second;
+        posY = 0;
         do {
             alpha = rnd.nextInt(100) + 50;
         } while (alpha < 0);
@@ -84,11 +84,11 @@ class Particula{
         }
         else {
             posX = (int) ((pDirection == Direccion.IZQUIERDA) ? posX-(60*elapsedTime) : posX+(60*elapsedTime));
-            //posY-= 60 * elapsedTime;
+            posY-= 100 * elapsedTime;
         }
     }
 
     public void render(){
-        particleSprite.drawWithAlphaScaled(_game.getGraphics(), posX, 1200, particleSprite.getSpriteWidth(), particleSprite.getSpriteHeight(), alpha);
+        particleSprite.drawWithAlphaScaled(_game.getGraphics(), posX, 1100 - posY, particleSprite.getSpriteWidth(), particleSprite.getSpriteHeight(), alpha);
     }
 }
