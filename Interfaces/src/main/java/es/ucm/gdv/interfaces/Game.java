@@ -1,7 +1,5 @@
 package es.ucm.gdv.interfaces;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
-
 public interface Game {
 
     //Devuelve la referencia de Game

@@ -11,14 +11,13 @@ public class Boton {
 
     Game _game;
 
-    Sprite spriteBoton;
-    private Rect physicRect;
-    private Rect logicRect;
+    Sprite spriteBoton;                                     //
+    private Rect physicRect;                                //Rectangulo fisico del botón. Su representacion en la pantalla
+    private Rect logicRect;                                 //Rectangulo logico para la resolucion base de la lógica.
     private Random rnd;
 
-    public enum Direcciones {IZQUIERDA, DERECHA}
-
-    public enum Buttons {AYUDA, SALIR, SONIDO, MUTE, HOME}
+    public enum Direcciones {IZQUIERDA, DERECHA}             //Orientacion de los botones
+    public enum Buttons {AYUDA, SALIR, SONIDO, MUTE, HOME}   //Tipos de botones
 
     public Boton(Game g, Image imagebotones, Buttons spriteIndex, Direcciones x, int y) {
         _game = g;

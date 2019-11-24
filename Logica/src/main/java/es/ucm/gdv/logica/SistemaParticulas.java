@@ -7,6 +7,11 @@ import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.Pair;
 import es.ucm.gdv.interfaces.Sprite;
 
+/**
+ * Clase que representa el sistema de particulas.
+ * Contiene todas las particulas que estén activas en la ejecución y
+ * se encarga tanto de actualizarlas como de eliminarlas cuando sea necesario.
+ * */
 public class SistemaParticulas {
 
     private LinkedList<Particula> particulas;
@@ -51,24 +56,28 @@ public class SistemaParticulas {
     }
 }
 
+/*Particula del efecto de muerte de la pelota. El efecto se compone por varias particulas.
+* Cada particula tiene sus propios valores de escala, posicion y "fuerza"
+* -Evidentemente no hay fuerzas físicas, sólo desplazamientos-
+* */
 class Particula{
     Game _game;                             //Referencia al juego
     SistemaParticulas sistemaP;             //Referencia al sistema de particulas
 
-    enum Direccion {DERECHA, IZQUIERDA}     //Direccion de la particula
-    int alpha;
-    int randomXFactor;
-    int randomYFactor;
-    int randomScaleFactor;
-    int factor = 70;
+    Sprite particleSprite;                  //Sprite base, obtenido de la pelota destruida
+    Random rnd;                             //Random de la particula.
+
+
+    int alpha;                              //Componente alpha. Cuando llegue a cero, se destruye.
+    int randomXFactor;                      //Factor de "velocidad" en X
+    int randomYFactor;                      //Factor de "velocidad" en Y
+    int randomScaleFactor;                  //Escala de la particula
+    int factor = 70;                        //Factor por el cual decrece el valor de "alpha"
 
     final int MAXSPEED = 200;
     final int MAXSCALE = 3;
 
 
-    Sprite particleSprite;
-    Direccion pDirection;
-    Random rnd;
 
     int posX, posY;
     public Particula(SistemaParticulas sp, Game g, Sprite s, Pair originalPos){
@@ -77,7 +86,6 @@ class Particula{
         particleSprite = s;
         rnd = new Random();
 
-        pDirection = (rnd.nextInt(2) == 0) ? Direccion.DERECHA : Direccion.IZQUIERDA;
         posX = originalPos._first;
         posY = 0;
         randomScaleFactor = rnd.nextInt(MAXSCALE) +1;
@@ -85,12 +93,13 @@ class Particula{
         randomYFactor = rnd.nextInt(MAXSPEED*2)-MAXSPEED;
 
 
-        // smoothing out the diagonal speed
+        // Ajustamos la velocidad diagonal
         if (randomXFactor * randomXFactor + randomYFactor * randomYFactor > MAXSPEED * MAXSPEED) {
             randomXFactor *= 0.7;
             randomYFactor *= 0.7;
         }
 
+        //Valor de alpha
         do {
             alpha = rnd.nextInt(20) + 75;
         } while (alpha < 0);
@@ -103,7 +112,7 @@ class Particula{
         }
         else {
             posY += randomYFactor * elapsedTime;
-            posX += randomXFactor /** ((pDirection == Direccion.IZQUIERDA) ? -1 : 1) */* elapsedTime;
+            posX += randomXFactor * elapsedTime;
 
 
         }

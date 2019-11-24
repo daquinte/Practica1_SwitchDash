@@ -12,9 +12,6 @@ import es.ucm.gdv.interfaces.Input;
 import es.ucm.gdv.interfaces.Rect;
 import es.ucm.gdv.logica.Logica;
 
-/*
-* TODO: comentar
-* */
 public class GameAndroid implements Game, Runnable {
 
     //Referencias para el patrón Singleton
@@ -91,17 +88,18 @@ public class GameAndroid implements Game, Runnable {
         }
     }
 
+    //Métodos de render que vamos a llamar en el bucle ppal
     private void CanvasManagePaint(SurfaceHolder sh) {
         Canvas c = sh.lockHardwareCanvas();
         _graphicsAndroid.startFrame(c);
         _currentGameState.clear();
         _graphicsAndroid.setCanvasSize();
-        //_graphicsAndroid.DrawRect(_graphicsAndroid.getCanvas());
 
         _currentGameState.render();
         sh.unlockCanvasAndPost(c);
     }
 
+    //Calcula el deltatime que va a usar el estado actual.
     private double CalculaDeltaTime(){
         currentTime = System.nanoTime();
         nanoElapsedTime = currentTime - lastFrameTime;

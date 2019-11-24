@@ -106,7 +106,6 @@ public class GamePC implements Game, Runnable {
                     try {
                         _currentGameState.clear();
                         _graphicsPC.setCanvasSize();
-                        //_graphicsPC.DrawRect(0xFF00FFFF,_graphicsPC.getCanvas());
                         _currentGameState.render();
                     } finally {
                         graphics.dispose();
@@ -114,19 +113,8 @@ public class GamePC implements Game, Runnable {
                 } while (_bs.contentsRestored());
                 _bs.show();
             } while (_bs.contentsLost());
-			/*
-			// Posibilidad: cedemos algo de tiempo. es una medida conflictiva...
-			try {
-				Thread.sleep(1);
-			}
-			catch(Exception e) {}
-			*/
         } // while
     }
-
-
-
-
 
     //-----------------------------------------------
     //                   Getters

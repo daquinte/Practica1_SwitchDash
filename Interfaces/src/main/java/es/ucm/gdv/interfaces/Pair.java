@@ -1,5 +1,6 @@
 package es.ucm.gdv.interfaces;
 
+/*Clase de para usar pares de valores.*/
 public class Pair {
     public Pair (int x, int y){
         _first = x;

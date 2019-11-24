@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Random;
 
+/*Estado principal del juego*/
 public class SwitchDashState implements GameState {
 
     //Atributos del motor de juego
@@ -19,28 +20,24 @@ public class SwitchDashState implements GameState {
     Logica _logica;
     ResourceManager _resourceManager;
     AbstractGraphics graphics;
+    private Random rnd;
 
     //Atributos del juego
-    Jugador jugador;
-    Queue<Pelota> pelotas;
-    Pelota ultimaPelota;
+    Jugador jugador;                            //Referencia a la clase jugador.
 
-    SistemaParticulas sistemaParticulas;
+    Queue<Pelota> pelotas;                      //Cola con las pelotas que se reciclan a lo largo del juego.
+    Pelota ultimaPelota;                        //Referencia a la última pelota, la superior, para recolocar las pelotas destruidas.
+    int pelotasRecogidas;                       //Contador de pelotas. Cada 10, sube la velocidad.
+    int velocidadActual;                        //Velocidad actual de las pelotas
 
+    SistemaParticulas sistemaParticulas;        //Sistema de particulas para cuando se destruye una pelota
 
-
-    int puntosTotales;
-    Sprite[] puntuacionSprite;
-
-
-    int pelotasRecogidas;           //Contador de pelotas. Cada 10, sube la velocidad.
-    int velocidadActual;
-
-
-    private Random rnd;
+    int puntosTotales;                          //Contador de puntos
+    Sprite[] puntuacionSprite;                  //Sprites con los números de los puntos.
 
     //CONST
     private final int SeparacionPelotas = 395;
+
 
     public SwitchDashState(Logica l) {
         _logica = l;
@@ -49,30 +46,30 @@ public class SwitchDashState implements GameState {
 
     @Override
     public void init(Game game) {
-
         _game = game;
-        graphics = (AbstractGraphics) _game.getGraphics();
+        graphics = _game.getGraphics();
         rnd = new Random();
 
-        sistemaParticulas = new SistemaParticulas(_game);
-
-        //init de juego
-        //pelotas = new Pelota[5];
-        pelotas = new LinkedList<>();
-
-        jugador = new Jugador(_resourceManager);
-        initPelotas();
-
-        //jugador = new Jugador(_resourceManager);
+        //Init
         puntosTotales = 0;
-        puntuacionSprite = new Sprite[3];
-        initSpritePuntos();
         pelotasRecogidas = 0;
         velocidadActual = 0;
+
+        jugador = new Jugador(_resourceManager);
+        sistemaParticulas = new SistemaParticulas(_game);
+
+        pelotas = new LinkedList<>();
+        initPelotas();
+
+        puntuacionSprite = new Sprite[3];
+        initSpritePuntos();
+
         _logica.SetClearColor(_resourceManager.getRandomGamecolor());
         _logica.resetVelocidadFlechas();
     }
 
+    /*Inicializa las pelotas
+    situandolas fuera de la pantalla*/
     private void initPelotas() {
         for (int i = 0; i < 5; i++) {
             Pelota aux = new Pelota(_resourceManager);
@@ -140,6 +137,12 @@ public class SwitchDashState implements GameState {
 
     }
 
+    /**Comprueba si el color de la pelota coincide con el del jugador
+    * En caso favorable, reinicia la pelota según la última.
+    * Si no, pasara al estado de GameOver
+    *
+    * @param  p Pelota que ha colisionado con el jugador. Normalmente, la más baja.
+    * */
     private void CompruebaColision(Pelota p) {
 
         int yJugador = graphics.translateCoordinate(graphics.getCanvas().height, jugador.getY(), graphics.getBaseSizeHeight(), graphics.getCanvas().y);
