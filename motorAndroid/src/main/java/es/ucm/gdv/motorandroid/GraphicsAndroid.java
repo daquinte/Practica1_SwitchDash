@@ -1,7 +1,7 @@
 package es.ucm.gdv.motorandroid;
 
 import es.ucm.gdv.interfaces.AbstractGraphics;
-import  es.ucm.gdv.interfaces.Graphics;
+import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.Rect;
 
@@ -37,17 +37,17 @@ public class GraphicsAndroid extends AbstractGraphics {
     }
 
     //Canvas = Objeto usado para enviar los comandos de dibujado
-    public void startFrame(Canvas c){
+    public void startFrame(Canvas c) {
         _canvas = c;
     }
 
 
     @Override
-    public Image newImage(String name){
+    public Image newImage(String name) {
         ImageAndroid imageAndroid = null;
         InputStream rutaImage = null;
         try {
-            rutaImage = _assetManager.open(name);
+            rutaImage = _assetManager.open("images/" + name);
             Bitmap sprite = BitmapFactory.decodeStream(rutaImage); //Decode el asset manager
             imageAndroid = new ImageAndroid(sprite);
         } catch (IOException e) {
@@ -75,9 +75,10 @@ public class GraphicsAndroid extends AbstractGraphics {
         _paint.setColor(Color.BLUE);
 
         _canvas.drawRect(_selfCanvas.x, _selfCanvas.y,
-                _selfCanvas.x + _selfCanvas.width, _selfCanvas.y+_selfCanvas.height, _paint);
+                _selfCanvas.x + _selfCanvas.width, _selfCanvas.y + _selfCanvas.height, _paint);
 
     }
+
     @Override
     public void drawImage(Image image, Rect destino, Rect source) {
         //Poner que si no es null, se pinta en canvas
@@ -85,17 +86,17 @@ public class GraphicsAndroid extends AbstractGraphics {
             ImageAndroid androidImg = (ImageAndroid) image;
             Bitmap bm = androidImg.getBitmap();
             android.graphics.Rect dest = new android.graphics.Rect(destino.x, destino.y,
-                    destino.x+ destino.width, destino.y+destino.height);
+                    destino.x + destino.width, destino.y + destino.height);
 
             android.graphics.Rect src = new android.graphics.Rect(source.x, source.y,
                     source.x + source.width, source.y + source.height);
-            _canvas.drawBitmap(bm,src, dest , _paint);
+            _canvas.drawBitmap(bm, src, dest, _paint);
         }
     }
 
     @Override
     public void drawImage(Image image, Rect destino, Rect source, float alpha) {
-        _paint.setAlpha((int)alpha);
+        _paint.setAlpha((int) alpha);
         drawImage(image, destino, source);
         _paint.reset();
     }
@@ -109,7 +110,7 @@ public class GraphicsAndroid extends AbstractGraphics {
 
             Rect physicsCoords = coordenadasACanvas(destino.x, destino.y, destino.width, destino.height);
             android.graphics.Rect dest = new android.graphics.Rect(physicsCoords.x, physicsCoords.y,
-                    physicsCoords.x+ physicsCoords.width, physicsCoords.y+physicsCoords.height);
+                    physicsCoords.x + physicsCoords.width, physicsCoords.y + physicsCoords.height);
 
             android.graphics.Rect src = new android.graphics.Rect(source.x, source.y,
                     source.x + source.width, source.y + source.height);
@@ -121,11 +122,10 @@ public class GraphicsAndroid extends AbstractGraphics {
     @Override
     public void drawImageScaledWithAlpha(Image image, Rect destino, Rect source, float alpha) {
 
-        _paint.setAlpha((int)alpha);
+        _paint.setAlpha((int) alpha);
         drawImageScaled(image, destino, source);
         _paint.reset();
     }
-
 
 
     @Override
@@ -137,7 +137,7 @@ public class GraphicsAndroid extends AbstractGraphics {
 
     @Override
     public Rect getCanvas() {
-     return _selfCanvas;
+        return _selfCanvas;
     }
 
     @Override
