@@ -1,4 +1,4 @@
-package es.ucm.gdv.motorandroid; //Igual debería ser es.ucm.gdv.interfaces.motorandroid
+package es.ucm.gdv.motorandroid;
 
 import android.app.Activity;
 import android.content.Context;

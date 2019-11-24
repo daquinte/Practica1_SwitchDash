@@ -24,8 +24,6 @@ public class InputPC implements Input, MouseListener {
     /**
      * Método que devuelve los métodos encolados.
      * Sincronized porque los vas a pedir desde la hebra.
-     *
-     * TODO: IGUAL HAY MUCHOS SINCRONIZED EH
      * */
     @Override
     public synchronized List<TouchEvent> getTouchEvents() {

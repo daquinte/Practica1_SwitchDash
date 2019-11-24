@@ -76,7 +76,7 @@ public class GamePC implements Game, Runnable {
         _graphicsPC = new GraphicsPC(_frame);
         _inputPC = new InputPC(_frame);
         _currentGameState = logica;
-        _currentGameState.init(this); //TODO: Sincronizar esto, game tiene que estar creado y logica asignada.
+        _currentGameState.init(this);
     }
 
 
@@ -101,8 +101,6 @@ public class GamePC implements Game, Runnable {
             do {
                 do {
                     //Actualizas el graphics que va a usar GraphicsPC
-                    //TODO: Comprobar que no hay más divisiones entre 0 al redimensionar
-                    //TODO: Errores de "Buffers have not been created
                     java.awt.Graphics2D graphics = (Graphics2D)_bs.getDrawGraphics();
                     _graphicsPC.setGraphics(graphics);
                     try {

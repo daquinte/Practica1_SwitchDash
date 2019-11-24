@@ -75,7 +75,6 @@ public class GraphicsPC extends AbstractGraphics {
     }
 
     @Override
-    //TODO: Unir esto con el de alpha -> Llamada al metodo sin alpha.
     public void drawImage(Image image, Rect destino, Rect source, float alpha) {
         //Siempre recibimos una imagen de PC, hacemos un casting hacia abajo
         ImagePC img = (ImagePC) image;

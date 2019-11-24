@@ -30,8 +30,6 @@ public class TituloState implements GameState {
 
     private Boolean mute = false;
 
-
-    //TODO: hay alguna forma de unificar constructoras?? -> Super, o algo asi
     public TituloState(Logica l) {
         _logica = l;
         _resourceManager = l.getResourceManager();
