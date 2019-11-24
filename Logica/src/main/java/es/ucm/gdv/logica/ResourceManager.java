@@ -19,6 +19,7 @@ public class ResourceManager implements GameState {
         PLAYAGAIN, PLAYERS, SCOREFRONT, SWITCHDASHLOGO, TAPTOPLAY, WHITE, TOTALSPRITES
     }
 
+    //Enumerado de colores para el fondo
     public enum GameColor {GREEN, GREEN_BLUE, CYAN, LIGHT_BLUE, PURPLE, DARK_BLUE, ORANGE, RED, BEIGE}
 
     //
