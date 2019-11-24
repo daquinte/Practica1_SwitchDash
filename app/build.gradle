@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
-
-/*task copyPNGs(type: Copy){
+/*
+task copyPNGs(type: Copy){
     description = "Copying images into assets folder..."
     from(rootDir){
         include "images/**"
     }
-    into "src/main/assets"
+    into "motorAndroid/src/main/assets"
 
-} No lo pongo aun porque no quiero que explote*/
+}*/
 
 android {
     compileSdkVersion 28
@@ -37,4 +37,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     compile project(path: ':motorAndroid')
+
+}
+
+project.afterEvaluate{
+    preBuild.dependsOn copyPNGs
 }
