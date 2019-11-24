@@ -80,17 +80,17 @@ public class ResourceManager implements GameState {
         //Comprueba si se ha cargado to.do los elementos
         if (!allLoaded) {
         }
-        else _logica.setCurrentGameState(new TituloState(_logica)); //TODO: Asegurate que está en Titulo al final
+        else _logica.setCurrentGameState(new TituloState(_logica));
     }
 
     @Override
     public void render() {
-        //este método no pinta nada
+        //No hay render en este estado
     }
 
     @Override
     public void handleInput() {
-        //No hay input
+        //No hay input en este estado
     }
 
 

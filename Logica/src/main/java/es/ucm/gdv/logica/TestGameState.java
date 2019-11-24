@@ -61,7 +61,7 @@ public class TestGameState implements GameState {
                 int pulsacionX = touchEvent.get_x();
                 int pulsacionY = touchEvent.get_y();
                 if (boton.isPressed(pulsacionX, pulsacionY)) {
-                    boton.move();
+                    //boton.move();
                 }
             }
         }

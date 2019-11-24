@@ -7,9 +7,6 @@ public abstract class AbstractGraphics implements Graphics {
     protected final int baseSizeHeight = 1920;
 
 
-//TODO: Igual podriamos redimensionar solo cuando reciba eventos.
-
-    //TODO: "Bandas negras" en forma de separación superior cuando alto >>>> ancho, para que los botones no desaparezcan.
     public Rect Escalamelo() {
         int new_width = 0;
         int x = 0;

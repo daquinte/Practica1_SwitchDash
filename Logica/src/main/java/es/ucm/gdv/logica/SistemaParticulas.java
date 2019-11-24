@@ -52,28 +52,47 @@ public class SistemaParticulas {
 }
 
 class Particula{
-    enum Direccion {DERECHA, IZQUIERDA}
-    Game _game;
+    Game _game;                             //Referencia al juego
+    SistemaParticulas sistemaP;             //Referencia al sistema de particulas
+
+    enum Direccion {DERECHA, IZQUIERDA}     //Direccion de la particula
     int alpha;
-    int factor = 05;
+    int randomXFactor;
+    int randomYFactor;
+    int randomScaleFactor;
+    int factor = 70;
+
+    final int MAXSPEED = 200;
+    final int MAXSCALE = 3;
+
 
     Sprite particleSprite;
-    SistemaParticulas sistemaP;
     Direccion pDirection;
     Random rnd;
 
     int posX, posY;
     public Particula(SistemaParticulas sp, Game g, Sprite s, Pair originalPos){
         _game = g;
-        rnd = new Random();
         sistemaP = sp;
         particleSprite = s;
+        rnd = new Random();
 
         pDirection = (rnd.nextInt(2) == 0) ? Direccion.DERECHA : Direccion.IZQUIERDA;
         posX = originalPos._first;
         posY = 0;
+        randomScaleFactor = rnd.nextInt(MAXSCALE) +1;
+        randomXFactor = rnd.nextInt(MAXSPEED*2)-MAXSPEED;
+        randomYFactor = rnd.nextInt(MAXSPEED*2)-MAXSPEED;
+
+
+        // smoothing out the diagonal speed
+        if (randomXFactor * randomXFactor + randomYFactor * randomYFactor > MAXSPEED * MAXSPEED) {
+            randomXFactor *= 0.7;
+            randomYFactor *= 0.7;
+        }
+
         do {
-            alpha = rnd.nextInt(100) + 50;
+            alpha = rnd.nextInt(20) + 75;
         } while (alpha < 0);
     }
 
@@ -83,12 +102,14 @@ class Particula{
             sistemaP.eraseParticle(this);
         }
         else {
-            posX = (int) ((pDirection == Direccion.IZQUIERDA) ? posX-(60*elapsedTime) : posX+(60*elapsedTime));
-            posY-= 100 * elapsedTime;
+            posY += randomYFactor * elapsedTime;
+            posX += randomXFactor /** ((pDirection == Direccion.IZQUIERDA) ? -1 : 1) */* elapsedTime;
+
+
         }
     }
 
     public void render(){
-        particleSprite.drawWithAlphaScaled(_game.getGraphics(), posX, 1100 - posY, particleSprite.getSpriteWidth(), particleSprite.getSpriteHeight(), alpha);
+        particleSprite.drawWithAlphaScaled(_game.getGraphics(), posX, 1150 + posY, particleSprite.getSpriteWidth()/randomScaleFactor, particleSprite.getSpriteHeight()/randomScaleFactor, alpha);
     }
 }

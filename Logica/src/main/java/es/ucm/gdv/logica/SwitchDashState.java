@@ -150,7 +150,7 @@ public class SwitchDashState implements GameState {
             if (colorJugador != colorPelota) {
                 _logica.setCurrentGameState(new GameOverState(_logica, puntosTotales));
             } else {
-                sistemaParticulas.addParticles(p.GetSpritePelota(), 6, new Pair(1080 / 2 - p.GetSpritePelota().getSpriteWidth() / 2, p.getPosY()));
+                sistemaParticulas.addParticles(p.GetSpritePelota(), 15, new Pair(1080 / 2 - p.GetSpritePelota().getSpriteWidth() / 2, p.getPosY()));
                 ResetPelota(p);
                 CalculaPuntuacion();
                 pelotasRecogidas++;
