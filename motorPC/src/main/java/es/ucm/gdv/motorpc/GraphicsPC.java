@@ -102,8 +102,7 @@ public class GraphicsPC extends AbstractGraphics implements Graphics {
     public void drawImageScaled(Image image, Rect destino, Rect source) {
         ImagePC img = (ImagePC) image;
         java.awt.Image awtImage = img.getImage();
-        Rect physicsCoordinates = coordenadasACanvas(destino.x, destino.y,
-                destino.width, destino.height);
+        Rect physicsCoordinates = coordenadasACanvas(getCanvas(), destino);
 
         _graphics.drawImage(awtImage, physicsCoordinates.x, physicsCoordinates.y,
                 physicsCoordinates.x + physicsCoordinates.width, physicsCoordinates.y + physicsCoordinates.height,
@@ -115,8 +114,7 @@ public class GraphicsPC extends AbstractGraphics implements Graphics {
     public void drawImageScaledWithAlpha(Image image, Rect destino, Rect source, float alpha) {
         ImagePC img = (ImagePC) image;
         java.awt.Image awtImage = img.getImage();
-        Rect physicsCoordinates = coordenadasACanvas(destino.x, destino.y,
-                destino.width, destino.height);
+        Rect physicsCoordinates = coordenadasACanvas(getCanvas(), destino);
 
         //Vamos a regular el alpha, porque en PC está en escala 0-1
          alpha /= 100f;
@@ -137,7 +135,8 @@ public class GraphicsPC extends AbstractGraphics implements Graphics {
 
     @Override
     public void setCanvasSize() {
-        _Canvas = Escalamelo();
+        _Canvas = escalamelo(new Rect(_frame.getX(), _frame.getY(),
+                _frame.getWidth(), _frame.getHeight()));
     }
 
     @Override

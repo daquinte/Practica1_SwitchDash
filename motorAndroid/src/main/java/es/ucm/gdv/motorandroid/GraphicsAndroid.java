@@ -108,7 +108,7 @@ public class GraphicsAndroid extends AbstractGraphics implements Graphics {
             ImageAndroid androidImg = (ImageAndroid) image;
             Bitmap bm = androidImg.getBitmap();
 
-            Rect physicsCoords = coordenadasACanvas(destino.x, destino.y, destino.width, destino.height);
+            Rect physicsCoords = coordenadasACanvas(getCanvas(), destino);
             android.graphics.Rect dest = new android.graphics.Rect(physicsCoords.x, physicsCoords.y,
                     physicsCoords.x + physicsCoords.width, physicsCoords.y + physicsCoords.height);
 
@@ -130,9 +130,7 @@ public class GraphicsAndroid extends AbstractGraphics implements Graphics {
 
     @Override
     public void setCanvasSize() {
-
-        _selfCanvas = Escalamelo();
-        //_canvas.scale(_selfCanvas.x, _selfCanvas.y, _selfCanvas.width, _selfCanvas.height);
+        _selfCanvas = escalamelo(new Rect(0, 0, _canvas.getWidth(), _canvas.getHeight()));
     }
 
     @Override
