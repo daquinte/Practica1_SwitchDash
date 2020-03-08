@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 
-public class GraphicsAndroid extends AbstractGraphics {
+public class GraphicsAndroid extends AbstractGraphics implements Graphics {
 
     //Atributos
     private SurfaceView _surfaceView;       //Ventana para android. Se usa para los guetters

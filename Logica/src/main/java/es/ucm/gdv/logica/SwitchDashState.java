@@ -1,8 +1,8 @@
 package es.ucm.gdv.logica;
 
-import es.ucm.gdv.interfaces.AbstractGraphics;
 import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
+import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Pair;
 import es.ucm.gdv.interfaces.Sprite;
 import es.ucm.gdv.interfaces.TouchEvent;
@@ -19,7 +19,7 @@ public class SwitchDashState implements GameState {
     Game _game;
     Logica _logica;
     ResourceManager _resourceManager;
-    AbstractGraphics graphics;
+    Graphics graphics;
     private Random rnd;
 
     //Atributos del juego
@@ -145,8 +145,8 @@ public class SwitchDashState implements GameState {
     * */
     private void CompruebaColision(Pelota p) {
 
-        int yJugador = graphics.translateCoordinate(graphics.getCanvas().height, jugador.getY(), graphics.getBaseSizeHeight(), graphics.getCanvas().y);
-        int yPelota = graphics.translateCoordinate(graphics.getCanvas().height, (int)pelotas.peek().getPosY(), graphics.getBaseSizeHeight(), graphics.getCanvas().y);
+        int yJugador = jugador.getY();
+        int yPelota = (int)pelotas.peek().getPosY();
         if ((yPelota + pelotas.peek().getHeight() / 2) >= yJugador) {
             int colorJugador = jugador.GetColorJugador().ordinal();
             int colorPelota = p.GetColorPelota().ordinal();

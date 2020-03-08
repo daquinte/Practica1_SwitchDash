@@ -1,11 +1,7 @@
 package es.ucm.gdv.logica;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
-import es.ucm.gdv.interfaces.AbstractGraphics;
 import es.ucm.gdv.interfaces.Game;
-import es.ucm.gdv.interfaces.Graphics;
+
 import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.Sprite;
 

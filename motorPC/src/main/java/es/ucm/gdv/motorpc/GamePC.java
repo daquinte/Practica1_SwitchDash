@@ -6,11 +6,8 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
-import es.ucm.gdv.interfaces.AbstractGraphics;
 import  es.ucm.gdv.interfaces.Game;
-import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;
-import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.Input;
 import es.ucm.gdv.logica.Logica;
 
@@ -134,7 +131,7 @@ public class GamePC implements Game, Runnable {
      * @return Instancia de Graphics contenida en el motor
      * */
     @Override
-    public AbstractGraphics getGraphics() {
+    public Graphics getGraphics() {
         return _graphicsPC;
     }
 

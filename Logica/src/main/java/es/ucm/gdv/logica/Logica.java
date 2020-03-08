@@ -1,17 +1,15 @@
 package es.ucm.gdv.logica;
 
-import es.ucm.gdv.interfaces.AbstractGraphics;
 import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
-import es.ucm.gdv.interfaces.Rect;
 import es.ucm.gdv.interfaces.Sprite;
 
 
 public class Logica implements GameState {
     private Game _game;
-    private AbstractGraphics _graphics;
+    private Graphics _graphics;
     private GameState _currentGameState;
     private ResourceManager _resourceManager;
 

@@ -23,12 +23,12 @@ public class Sprite {
     }
 
 
-    public void draw(AbstractGraphics graphics, int x, int y, int ancho, int alto){
+    public void draw(Graphics graphics, int x, int y, int ancho, int alto){
         _rectDestiny = new Rect(x, y, ancho, alto);
         graphics.drawImage(_spriteImage, _rectDestiny, _source);
     }
 
-    public void draw(AbstractGraphics graphics, int x, int y, int ancho, int alto, float alpha){
+    public void draw(Graphics graphics, int x, int y, int ancho, int alto, float alpha){
        _rectDestiny = new Rect(x, y, ancho, alto);
         graphics.drawImage(_spriteImage, _rectDestiny, _source, alpha);
     }
@@ -39,12 +39,12 @@ public class Sprite {
      * @param x Posicion x destino en coodenadas de pantalla (0 - getWidth()-1 <- Escalado y reposicionamiento FUERA, es llamada desde el escalado.
      *
      * */
-    public void drawScaled(AbstractGraphics graphics, int x, int y, int ancho, int alto) {
+    public void drawScaled(Graphics graphics, int x, int y, int ancho, int alto) {
         _rectDestiny = new Rect(x, y, ancho, alto);
         graphics.drawImageScaled(_spriteImage, _rectDestiny, _source);
     }
 
-    public void drawWithAlphaScaled(AbstractGraphics graphics, int x, int y, int ancho, int alto, float alpha){
+    public void drawWithAlphaScaled(Graphics graphics, int x, int y, int ancho, int alto, float alpha){
         _rectDestiny =  new Rect(x, y, ancho, alto);
         graphics.drawImageScaledWithAlpha(_spriteImage, _rectDestiny, _source, alpha);
     }

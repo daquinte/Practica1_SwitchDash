@@ -2,9 +2,9 @@ package es.ucm.gdv.logica;
 
 import java.util.List;
 
-import es.ucm.gdv.interfaces.AbstractGraphics;
 import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
+import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.Sprite;
 import es.ucm.gdv.interfaces.TouchEvent;
@@ -16,7 +16,7 @@ public class TituloState implements GameState {
     Game _game;
     Logica _logica;
     ResourceManager _resourceManager;
-    AbstractGraphics graphics;
+    Graphics graphics;
 
     //Atributos del estado
     public Boton sonido;

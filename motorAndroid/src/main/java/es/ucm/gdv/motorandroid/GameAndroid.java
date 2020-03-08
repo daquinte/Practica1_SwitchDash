@@ -6,10 +6,9 @@ import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import es.ucm.gdv.interfaces.AbstractGraphics;
 import es.ucm.gdv.interfaces.Game;
+import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Input;
-import es.ucm.gdv.interfaces.Rect;
 import es.ucm.gdv.logica.Logica;
 
 public class GameAndroid implements Game, Runnable {
@@ -118,7 +117,7 @@ public class GameAndroid implements Game, Runnable {
     //-----------------------------------------------
     //From Game Interface
     @Override
-    public AbstractGraphics getGraphics() {
+    public Graphics getGraphics() {
         return _graphicsAndroid;
     }
 

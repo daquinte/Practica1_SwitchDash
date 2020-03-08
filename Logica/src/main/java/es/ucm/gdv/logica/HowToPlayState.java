@@ -5,6 +5,7 @@ import java.util.List;
 import es.ucm.gdv.interfaces.AbstractGraphics;
 import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
+import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.Sprite;
 import es.ucm.gdv.interfaces.TouchEvent;
@@ -19,7 +20,7 @@ public class HowToPlayState implements GameState {
     Game _game;
     Logica _logica;
     ResourceManager _resourceManager;
-    AbstractGraphics graphics;
+    Graphics graphics;
 
     private float alpha;
     private float factor;
@@ -33,7 +34,7 @@ public class HowToPlayState implements GameState {
     @Override
     public void init(Game game) {
         _game = game;
-        graphics = (AbstractGraphics) _game.getGraphics();
+        graphics = _game.getGraphics();
         resourcesInit();
         factor = 60;
         _logica.resetVelocidadFlechas();
