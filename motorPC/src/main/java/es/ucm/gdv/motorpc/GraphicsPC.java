@@ -58,48 +58,6 @@ public class GraphicsPC extends AbstractGraphics implements Graphics {
 
     @Override
     public void drawImage(Image image, Rect destino, Rect source) {
-        //Siempre recibimos una imagen de PC, hacemos un casting hacia abajo
-        ImagePC img = (ImagePC) image;
-        java.awt.Image awtImage = img.getImage();
-
-
-        _graphics.drawImage(awtImage, destino.x, destino.y,
-                destino.x + destino.width, destino.y + destino.height,
-                source.x, source.y, source.x+source.width,
-                source.y+ source.height, null);
-
-        /* REFERENCIA:
-         * The width and height dimensions on the destination area are calculated by the following expressions:
-         * (dstx2-dstx1), (dsty2-dsty1).
-         * If the dimensions of the source and destinations areas are different, the Java 2D API will scale up or scale down, as needed.*/
-    }
-
-    @Override
-    public void drawImage(Image image, Rect destino, Rect source, float alpha) {
-        //Siempre recibimos una imagen de PC, hacemos un casting hacia abajo
-        ImagePC img = (ImagePC) image;
-        java.awt.Image awtImage = img.getImage();
-
-        //Vamos a regular el alpha, porque en PC está en escala 0-1
-        alpha /= 100f;
-        if(alpha< 0 ) alpha = 0;
-        else if (alpha > 1) alpha = 1;
-
-
-        //DST_Over = The destination is composited over the source and the result replaces the destination (Porter-Duff Destination Over Source rule).
-        _graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
-        _graphics.drawImage(awtImage, destino.x, destino.y,
-                destino.x + destino.width, destino.y + destino.height,
-                source.x, source.y, source.x+source.width,
-                source.y+ source.height, null);
-
-        _graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
-
-    }
-
-
-    @Override
-    public void drawImageScaled(Image image, Rect destino, Rect source) {
         ImagePC img = (ImagePC) image;
         java.awt.Image awtImage = img.getImage();
         Rect physicsCoordinates = coordenadasACanvas(getCanvas(), destino);
@@ -111,7 +69,7 @@ public class GraphicsPC extends AbstractGraphics implements Graphics {
     }
 
     @Override
-    public void drawImageScaledWithAlpha(Image image, Rect destino, Rect source, float alpha) {
+    public void drawImage(Image image, Rect destino, Rect source, float alpha) {
         ImagePC img = (ImagePC) image;
         java.awt.Image awtImage = img.getImage();
         Rect physicsCoordinates = coordenadasACanvas(getCanvas(), destino);

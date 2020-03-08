@@ -115,17 +115,17 @@ public class SwitchDashState implements GameState {
 
         //JUGADOR
         Sprite auxJugador = jugador.GetSpriteJugador();
-        auxJugador.drawScaled(graphics, jugador.getX(), jugador.getY(), auxJugador.getSpriteWidth(), auxJugador.getSpriteHeight());
+        auxJugador.drawImage(graphics, jugador.getX(), jugador.getY(), auxJugador.getSpriteWidth(), auxJugador.getSpriteHeight());
 
         //PELOTAS
         for (Pelota p : pelotas) {
             Sprite spriteP = p.GetSpritePelota();
-            spriteP.drawScaled(graphics, 1080 / 2 - spriteP.getSpriteWidth() / 2, (int)p.getPosY(), p.getWidth(), p.getWidth());
+            spriteP.drawImage(graphics, 1080 / 2 - spriteP.getSpriteWidth() / 2, (int)p.getPosY(), p.getWidth(), p.getWidth());
         }
 
         //Puntos
         for (int i = 0; i < 3; i++) {
-            puntuacionSprite[i].drawScaled(graphics, 1100 + (i * 100), 200, puntuacionSprite[2].getSpriteWidth(), puntuacionSprite[2].getSpriteHeight());
+            puntuacionSprite[i].drawImage(graphics, 1100 + (i * 100), 200, puntuacionSprite[2].getSpriteWidth(), puntuacionSprite[2].getSpriteHeight());
         }
 
         //Particulas

@@ -39,7 +39,7 @@ public class Flechas {
 
 
     public void render() {
-        flechas.draw(_game.getGraphics(), _game.getGraphics().getCanvas().x, (int)posY
+        flechas.drawImage(_game.getGraphics(), _game.getGraphics().getCanvas().x, (int)posY
                 , _game.getGraphics().getCanvas().width, flechas.getImage().getHeight(), 50);
     }
 

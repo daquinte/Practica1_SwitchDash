@@ -55,7 +55,7 @@ public class Boton {
 
     public void render() {
         coordenadasACanvas(logicRect.x, logicRect.y, spriteBoton.getSpriteWidth());
-        spriteBoton.draw(_game.getGraphics(), physicRect.x, physicRect.y, physicRect.width, physicRect.height);
+        spriteBoton.drawImage(_game.getGraphics(), physicRect.x, physicRect.y, physicRect.width, physicRect.height);
     }
 
 

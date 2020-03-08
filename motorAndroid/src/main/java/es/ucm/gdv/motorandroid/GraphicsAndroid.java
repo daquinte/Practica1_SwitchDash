@@ -81,29 +81,6 @@ public class GraphicsAndroid extends AbstractGraphics implements Graphics {
 
     @Override
     public void drawImage(Image image, Rect destino, Rect source) {
-        //Poner que si no es null, se pinta en canvas
-        if (image != null) {
-            ImageAndroid androidImg = (ImageAndroid) image;
-            Bitmap bm = androidImg.getBitmap();
-            android.graphics.Rect dest = new android.graphics.Rect(destino.x, destino.y,
-                    destino.x + destino.width, destino.y + destino.height);
-
-            android.graphics.Rect src = new android.graphics.Rect(source.x, source.y,
-                    source.x + source.width, source.y + source.height);
-            _canvas.drawBitmap(bm, src, dest, _paint);
-        }
-    }
-
-    @Override
-    public void drawImage(Image image, Rect destino, Rect source, float alpha) {
-        _paint.setAlpha((int) alpha);
-        drawImage(image, destino, source);
-        _paint.reset();
-    }
-
-
-    @Override
-    public void drawImageScaled(Image image, Rect destino, Rect source) {
         if (image != null) {
             ImageAndroid androidImg = (ImageAndroid) image;
             Bitmap bm = androidImg.getBitmap();
@@ -120,10 +97,10 @@ public class GraphicsAndroid extends AbstractGraphics implements Graphics {
     }
 
     @Override
-    public void drawImageScaledWithAlpha(Image image, Rect destino, Rect source, float alpha) {
+    public void drawImage(Image image, Rect destino, Rect source, float alpha) {
 
         _paint.setAlpha((int) alpha);
-        drawImageScaled(image, destino, source);
+        drawImage(image, destino, source);
         _paint.reset();
     }
 

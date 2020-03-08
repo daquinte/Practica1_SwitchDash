@@ -139,23 +139,23 @@ public class GameOverState implements GameState {
 
     @Override
     public void render() {
-        gameOver.drawScaled(_graphics, 1080 / 2 - gameOver.getImage().getWidth() / 2,
+        gameOver.drawImage(_graphics, 1080 / 2 - gameOver.getImage().getWidth() / 2,
                 364, gameOver.getImage().getWidth(), gameOver.getImage().getHeight());
 
-        playAgain.drawWithAlphaScaled(_graphics, 1080 / 2 - playAgain.getImage().getWidth() / 2, 1396,
+        playAgain.drawImage(_graphics, 1080 / 2 - playAgain.getImage().getWidth() / 2, 1396,
                 playAgain.getImage().getWidth(), playAgain.getImage().getHeight(), alpha);
 
         ayuda.render();
         sonido.render();
         //Puntos
         for (int i = 0; i < puntuacionSprite.length; i++) {
-            puntuacionSprite[i].drawScaled(_graphics, (1080 / 2 - gameOver.getImage().getWidth() / 2 - 200) + ( i *200), 700,
+            puntuacionSprite[i].drawImage(_graphics, (1080 / 2 - gameOver.getImage().getWidth() / 2 - 200) + ( i *200), 700,
                     puntuacionSprite[2].getSpriteWidth() * 2, puntuacionSprite[2].getSpriteHeight() *2);
 
         }
 
         for (int i = 0; i < points.length; i++) {
-            points[i].drawScaled(_graphics, (1080 / 2 - gameOver.getImage().getWidth() / 2 - 190) + ( i *100), 1000,
+            points[i].drawImage(_graphics, (1080 / 2 - gameOver.getImage().getWidth() / 2 - 190) + ( i *100), 1000,
                     puntuacionSprite[2].getSpriteWidth(), puntuacionSprite[2].getSpriteHeight());
 
         }
