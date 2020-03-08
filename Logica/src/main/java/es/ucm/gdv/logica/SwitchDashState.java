@@ -120,7 +120,7 @@ public class SwitchDashState implements GameState {
         //PELOTAS
         for (Pelota p : pelotas) {
             Sprite spriteP = p.GetSpritePelota();
-            spriteP.drawScaled(graphics, 1080 / 2 - spriteP.getSpriteWidth() / 2, p.getPosY(), p.getWidth(), p.getWidth());
+            spriteP.drawScaled(graphics, 1080 / 2 - spriteP.getSpriteWidth() / 2, (int)p.getPosY(), p.getWidth(), p.getWidth());
         }
 
         //Puntos
@@ -146,14 +146,14 @@ public class SwitchDashState implements GameState {
     private void CompruebaColision(Pelota p) {
 
         int yJugador = graphics.translateCoordinate(graphics.getCanvas().height, jugador.getY(), graphics.getBaseSizeHeight(), graphics.getCanvas().y);
-        int yPelota = graphics.translateCoordinate(graphics.getCanvas().height, pelotas.peek().getPosY(), graphics.getBaseSizeHeight(), graphics.getCanvas().y);
+        int yPelota = graphics.translateCoordinate(graphics.getCanvas().height, (int)pelotas.peek().getPosY(), graphics.getBaseSizeHeight(), graphics.getCanvas().y);
         if ((yPelota + pelotas.peek().getHeight() / 2) >= yJugador) {
             int colorJugador = jugador.GetColorJugador().ordinal();
             int colorPelota = p.GetColorPelota().ordinal();
             if (colorJugador != colorPelota) {
                 _logica.setCurrentGameState(new GameOverState(_logica, puntosTotales));
             } else {
-                sistemaParticulas.addParticles(p.GetSpritePelota(), 15, new Pair(1080 / 2 - p.GetSpritePelota().getSpriteWidth() / 2, p.getPosY()));
+                sistemaParticulas.addParticles(p.GetSpritePelota(), 15, new Pair(1080 / 2 - p.GetSpritePelota().getSpriteWidth() / 2, (int)p.getPosY()));
                 ResetPelota(p);
                 CalculaPuntuacion();
                 pelotasRecogidas++;
@@ -184,7 +184,7 @@ public class SwitchDashState implements GameState {
 
     //Ajusta posicion y color de la nueva bola
     private void ResetPelota(Pelota p) {
-        p.setPosY(ultimaPelota.getPosY() - SeparacionPelotas);
+        p.setPosY((int)ultimaPelota.getPosY() - SeparacionPelotas);
         ultimaPelota = p;
         pelotas.poll();
         pelotas.add(p);

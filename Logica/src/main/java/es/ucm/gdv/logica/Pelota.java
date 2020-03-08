@@ -20,7 +20,7 @@ public class Pelota {
 
 
     private Random rnd;
-    private int posY;
+    private double posY;
     private int x;
     private int y;
     private int width;
@@ -68,7 +68,7 @@ public class Pelota {
         posY = newPosY;
     }
 
-    public int getPosY() {
+    public double getPosY() {
         return posY;
     }
 

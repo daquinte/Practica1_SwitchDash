@@ -14,7 +14,7 @@ public class Flechas {
     Game _game;
     ResourceManager _resourceManager;
 
-    private int posY;
+    private double posY;
     private int startPosition;
     private int velFlechas;
 
@@ -43,7 +43,7 @@ public class Flechas {
 
 
     public void render() {
-        flechas.draw(_game.getGraphics(), _game.getGraphics().getCanvas().x, posY
+        flechas.draw(_game.getGraphics(), _game.getGraphics().getCanvas().x, (int)posY
                 , _game.getGraphics().getCanvas().width, flechas.getImage().getHeight(), 50);
     }
 
