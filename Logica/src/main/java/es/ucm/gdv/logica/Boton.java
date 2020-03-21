@@ -47,10 +47,10 @@ public class Boton {
     }
 
     public void coordenadasACanvas(int x, int y, int width) {
-        int _width = (width * _game.getGraphics().getCanvas().width / 1080);
-        int _y = (_width * y / width) + _game.getGraphics().getCanvas().y;
-        int _x = (_width * x / width) + _game.getGraphics().getCanvas().x;
-        physicRect = new Rect(_x, _y, _width, _width);
+        /*int _width = (width * _game.getGraphics().getRectCanvas().width / 1080);
+        int _y = (_width * y / width) + _game.getGraphics().getRectCanvas().y;
+        int _x = (_width * x / width) + _game.getGraphics().getRectCanvas().x;
+        physicRect = new Rect(_x, _y, _width, _width);*/
     }
 
     public void render() {

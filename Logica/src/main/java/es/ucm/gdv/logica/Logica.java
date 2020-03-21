@@ -131,8 +131,8 @@ public class Logica implements GameState {
         }
 
         //Pintamos el background
-        bgSprite.drawImage(_game.getGraphics(), _game.getGraphics().getCanvas().x, _game.getGraphics().getCanvas().y
-                , _game.getGraphics().getCanvas().width, _game.getGraphics().getCanvas().height);
+        bgSprite.drawImage(_game.getGraphics(), _game.getGraphics().getRectCanvas().x, _game.getGraphics().getRectCanvas().y
+                , _game.getGraphics().getRectCanvas().width, _game.getGraphics().getRectCanvas().height);
 
         if (activateFlash) {
             flash.drawImage(_game.getGraphics(), 0, 0

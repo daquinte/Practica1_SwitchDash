@@ -9,6 +9,8 @@ import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.Sprite;
 import es.ucm.gdv.interfaces.TouchEvent;
 
+
+// TODO: Cuando arreglemos boton volver a activarlos
 public class TituloState implements GameState {
 
     //Atributos del motor
@@ -47,8 +49,8 @@ public class TituloState implements GameState {
 
     private void resourcesInit() {
         Image imageBotones = _resourceManager.getImage(ResourceManager.GameSprites.BUTTONS);
-        sonido = new Boton(_game, imageBotones, Boton.Buttons.SONIDO, Boton.Direcciones.IZQUIERDA, 30);
-        ayuda = new Boton(_game, imageBotones, Boton.Buttons.AYUDA, Boton.Direcciones.DERECHA, 30);
+//        sonido = new Boton(_game, imageBotones, Boton.Buttons.SONIDO, Boton.Direcciones.IZQUIERDA, 30);
+//        ayuda = new Boton(_game, imageBotones, Boton.Buttons.AYUDA, Boton.Direcciones.DERECHA, 30);
 
         Image logoI = _resourceManager.getImage(ResourceManager.GameSprites.SWITCHDASHLOGO);
         logo = new Sprite(logoI, 0, 0, logoI.getWidth(), logoI.getHeight());
@@ -77,7 +79,7 @@ public class TituloState implements GameState {
             if (touchEvent.get_touchEvent() == TouchEvent.TouchType.click) {
                 int pulsacionX = touchEvent.get_x();
                 int pulsacionY = touchEvent.get_y();
-                if (sonido.isPressed(pulsacionX, pulsacionY)) {
+                /*if (sonido.isPressed(pulsacionX, pulsacionY)) {
                     if (!mute) {
                         mute = true;
                         sonido.toggleSprite(_resourceManager.getImage(ResourceManager.GameSprites.BUTTONS), Boton.Buttons.MUTE);
@@ -89,15 +91,15 @@ public class TituloState implements GameState {
                 }
                 else {
                     _logica.setCurrentGameState(new HowToPlayState(_logica));
-                }
+                }*/
             }
         }
     }
 
     @Override
     public void render() {
-        sonido.render();
-        ayuda.render();
+        //sonido.render();
+        //ayuda.render();
         logo.drawImage(graphics, 1080 / 2 - logo.getImage().getWidth() / 2, 356, logo.getImage().getWidth(), logo.getImage().getHeight());
         tapToPlay.drawImage(graphics, 1080 / 2 - tapToPlay.getImage().getWidth() / 2, 950, tapToPlay.getImage().getWidth(), tapToPlay.getImage().getHeight(), alpha);
     }

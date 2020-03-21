@@ -2,7 +2,6 @@ package es.ucm.gdv.logica;
 
 import java.util.List;
 
-import es.ucm.gdv.interfaces.AbstractGraphics;
 import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;
@@ -10,6 +9,7 @@ import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.Sprite;
 import es.ucm.gdv.interfaces.TouchEvent;
 
+// TODO: Cuando arreglemos boton volver a activarlos
 public class HowToPlayState implements GameState {
     public Boton close;
 
@@ -42,7 +42,7 @@ public class HowToPlayState implements GameState {
 
     private void resourcesInit () {
         Image imageBotones = _resourceManager.getImage(ResourceManager.GameSprites.BUTTONS);
-        close = new Boton(_game, imageBotones, Boton.Buttons.SALIR, Boton.Direcciones.DERECHA, 30);
+//        close = new Boton(_game, imageBotones, Boton.Buttons.SALIR, Boton.Direcciones.DERECHA, 30);
 
         Image howToPlayI = _resourceManager.getImage(ResourceManager.GameSprites.HOWTOPLAY);
         howToPlay = new Sprite(howToPlayI, 0, 0, howToPlayI.getWidth(), howToPlayI.getHeight());
@@ -70,7 +70,7 @@ public class HowToPlayState implements GameState {
 
     @Override
     public void render() {
-        close.render();
+        //close.render();
         howToPlay.drawImage(graphics, 1080 / 2 - howToPlay.getImage().getWidth() / 2, 290, howToPlay.getImage().getWidth(), howToPlay.getImage().getHeight());
         instructions.drawImage(graphics, 1080 / 2 - instructions.getImage().getWidth() / 2, 768, instructions.getImage().getWidth(), instructions.getImage().getHeight());
         tapToPlay.drawImage(graphics, 1080 / 2 - tapToPlay.getImage().getWidth() / 2, 1464, tapToPlay.getImage().getWidth(), tapToPlay.getImage().getHeight(), alpha);
@@ -83,12 +83,12 @@ public class HowToPlayState implements GameState {
             if (touchEvent.get_touchEvent() == TouchEvent.TouchType.click) {
                 int pulsacionX = touchEvent.get_x();
                 int pulsacionY = touchEvent.get_y();
-                if (close.isPressed(pulsacionX, pulsacionY)) {
+                /*if (close.isPressed(pulsacionX, pulsacionY)) {
                     _logica.setCurrentGameState(new SwitchDashState(_logica));
                 }
                 else {
                     _logica.setCurrentGameState(new SwitchDashState(_logica));
-                }
+                }*/
             }
         }
     }

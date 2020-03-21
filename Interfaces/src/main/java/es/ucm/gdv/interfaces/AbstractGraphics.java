@@ -7,6 +7,9 @@ package es.ucm.gdv.interfaces;
 * y tiene funcionalidades para pasar de coordenadas logicas a fisicas.
 * */
 public abstract class AbstractGraphics {
+
+    protected Rect _canvas;
+
     protected final int baseWidthResolution = 9;
     protected final int baseHeighResolution = 16;
     protected final int baseSizeWidth = 1080;
@@ -22,12 +25,12 @@ public abstract class AbstractGraphics {
     }
 
     /*Pasa coordenadas lógicas en la resolucion base a coordenadas físicas con nuestra resolución.*/
-    protected Rect coordenadasACanvas(Rect canvas, Rect destino) {
-        int _width = (destino.width * canvas.width / baseSizeWidth);
+    protected Rect coordenadasACanvas(Rect destino) {
+        int _width = (destino.width * _canvas.width / baseSizeWidth);
         int _height = destino.height * _width / destino.width;
 
-        int _y = translateCoordinate(canvas.height, destino.y, baseSizeHeight, canvas.y);
-        int _x = (canvas.width * destino.x / baseSizeWidth) + canvas.x;
+        int _y = translateCoordinate(_canvas.height, destino.y, baseSizeHeight, _canvas.y);
+        int _x = (_canvas.width * destino.x / baseSizeWidth) + _canvas.x;
         return new Rect(_x, _y, _width, _height);
     }
 
@@ -37,6 +40,14 @@ public abstract class AbstractGraphics {
 
     private int calculateNewAspectRatio(int param) {
         return baseWidthResolution * param / baseHeighResolution;
+    }
+
+    public  void setCanvasSize(Rect actualCanvas) {
+        _canvas = escalamelo(new Rect(actualCanvas.x, actualCanvas.y,
+                actualCanvas.width, actualCanvas.height));
+    }
+    public Rect getRectCanvas() {
+        return _canvas;
     }
 }
 

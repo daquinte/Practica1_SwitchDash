@@ -102,7 +102,7 @@ public class GamePC implements Game, Runnable {
                     _graphicsPC.setGraphics(graphics);
                     try {
                         _currentGameState.clear();
-                        _graphicsPC.setCanvasSize();
+                        _graphicsPC.updateCanvasSize();
                         _currentGameState.render();
                     } finally {
                         graphics.dispose();

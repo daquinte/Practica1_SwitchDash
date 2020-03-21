@@ -91,8 +91,8 @@ public class GameAndroid implements Game, Runnable {
     private void CanvasManagePaint(SurfaceHolder sh) {
         Canvas c = sh.lockHardwareCanvas();
         _graphicsAndroid.startFrame(c);
+        _graphicsAndroid.updateCanvasSize();
         _currentGameState.clear();
-        _graphicsAndroid.setCanvasSize();
 
         _currentGameState.render();
         sh.unlockCanvasAndPost(c);

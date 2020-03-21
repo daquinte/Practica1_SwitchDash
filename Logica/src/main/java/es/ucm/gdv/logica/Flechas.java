@@ -1,7 +1,6 @@
 package es.ucm.gdv.logica;
 
 import es.ucm.gdv.interfaces.Game;
-
 import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.Sprite;
 
@@ -21,13 +20,10 @@ public class Flechas {
     }
 
     private void initFlechas() {
-
         Image flechasimg = _resourceManager.getImage(ResourceManager.GameSprites.ARROWS);
         posY = startPosition = - flechasimg.getHeight() / 5;
         velFlechas = 0;
         flechas = new Sprite(flechasimg, 0, 0, flechasimg.getWidth(), flechasimg.getHeight());
-
-
     }
 
     public void tick(double elapsedTime) {
@@ -39,8 +35,9 @@ public class Flechas {
 
 
     public void render() {
-        flechas.drawImage(_game.getGraphics(), _game.getGraphics().getCanvas().x, (int)posY
-                , _game.getGraphics().getCanvas().width, flechas.getImage().getHeight(), 50);
+        flechas.drawImage(_game.getGraphics(), _game.getGraphics().getRectCanvas().x,
+                (int)posY, _game.getGraphics().getRectCanvas().width,
+                _game.getGraphics().getRectCanvas().height, 50);
     }
 
 

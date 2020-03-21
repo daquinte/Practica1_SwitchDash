@@ -24,23 +24,21 @@ public class GraphicsAndroid extends AbstractGraphics implements Graphics {
     //Atributos
     private SurfaceView _surfaceView;       //Ventana para android. Se usa para los guetters
     private AssetManager _assetManager;     //Carga de imagenes
-    private Canvas _canvas;                 //Viewport. Aquí se pinta.
+    private Canvas _androidCanvas;                 //Viewport. Aquí se pinta.
 
     private Paint _paint;
-    private Rect _selfCanvas;
 
     GraphicsAndroid(SurfaceView surfaceView, AssetManager assetManager) {
         _surfaceView = surfaceView;
         _assetManager = assetManager;
         _paint = new Paint();
-        setCanvasSize();
+        //updateCanvasSize();
     }
 
     //Canvas = Objeto usado para enviar los comandos de dibujado
     public void startFrame(Canvas c) {
-        _canvas = c;
+        _androidCanvas = c;
     }
-
 
     @Override
     public Image newImage(String name) {
@@ -68,14 +66,14 @@ public class GraphicsAndroid extends AbstractGraphics implements Graphics {
 
     @Override
     public void clear(int color) {
-        _canvas.drawColor(color);
+        _androidCanvas.drawColor(color);
     }
 
     public void DrawRect(Rect rectangulo) {
         _paint.setColor(Color.BLUE);
 
-        _canvas.drawRect(_selfCanvas.x, _selfCanvas.y,
-                _selfCanvas.x + _selfCanvas.width, _selfCanvas.y + _selfCanvas.height, _paint);
+        _androidCanvas.drawRect(_canvas.x, _canvas.y,
+                _canvas.x + _canvas.width, _canvas.y + _canvas.height, _paint);
 
     }
 
@@ -85,13 +83,13 @@ public class GraphicsAndroid extends AbstractGraphics implements Graphics {
             ImageAndroid androidImg = (ImageAndroid) image;
             Bitmap bm = androidImg.getBitmap();
 
-            Rect physicsCoords = coordenadasACanvas(getCanvas(), destino);
+            Rect physicsCoords = coordenadasACanvas(destino);
             android.graphics.Rect dest = new android.graphics.Rect(physicsCoords.x, physicsCoords.y,
                     physicsCoords.x + physicsCoords.width, physicsCoords.y + physicsCoords.height);
 
             android.graphics.Rect src = new android.graphics.Rect(source.x, source.y,
                     source.x + source.width, source.y + source.height);
-            _canvas.drawBitmap(bm, src, dest, _paint);
+            _androidCanvas.drawBitmap(bm, src, dest, _paint);
 
         }
     }
@@ -104,15 +102,9 @@ public class GraphicsAndroid extends AbstractGraphics implements Graphics {
         _paint.reset();
     }
 
-
     @Override
-    public void setCanvasSize() {
-        _selfCanvas = escalamelo(new Rect(0, 0, _canvas.getWidth(), _canvas.getHeight()));
-    }
-
-    @Override
-    public Rect getCanvas() {
-        return _selfCanvas;
+    public void updateCanvasSize() {
+        setCanvasSize(new Rect(0, 0, _androidCanvas.getWidth(), _androidCanvas.getHeight()));
     }
 
     @Override

@@ -13,6 +13,10 @@ import es.ucm.gdv.interfaces.Rect;
 
 public class GraphicsPC extends AbstractGraphics implements Graphics {
 
+    //Atributos privados
+    java.awt.Graphics2D _graphics;   //Graphics de java
+    JFrame _frame;                 //Ventana donde pintamos
+
     public void setGraphics(java.awt.Graphics2D g) {
         _graphics = g;
     }
@@ -20,7 +24,7 @@ public class GraphicsPC extends AbstractGraphics implements Graphics {
     public GraphicsPC(JFrame jf) {
 
         _frame = jf;
-        setCanvasSize();
+        updateCanvasSize();
     }
 
     //-----Métodos de la interfaz-----
@@ -60,7 +64,7 @@ public class GraphicsPC extends AbstractGraphics implements Graphics {
     public void drawImage(Image image, Rect destino, Rect source) {
         ImagePC img = (ImagePC) image;
         java.awt.Image awtImage = img.getImage();
-        Rect physicsCoordinates = coordenadasACanvas(getCanvas(), destino);
+        Rect physicsCoordinates = coordenadasACanvas(destino);
 
         _graphics.drawImage(awtImage, physicsCoordinates.x, physicsCoordinates.y,
                 physicsCoordinates.x + physicsCoordinates.width, physicsCoordinates.y + physicsCoordinates.height,
@@ -72,7 +76,7 @@ public class GraphicsPC extends AbstractGraphics implements Graphics {
     public void drawImage(Image image, Rect destino, Rect source, float alpha) {
         ImagePC img = (ImagePC) image;
         java.awt.Image awtImage = img.getImage();
-        Rect physicsCoordinates = coordenadasACanvas(getCanvas(), destino);
+        Rect physicsCoordinates = coordenadasACanvas(destino);
 
         //Vamos a regular el alpha, porque en PC está en escala 0-1
          alpha /= 100f;
@@ -92,17 +96,10 @@ public class GraphicsPC extends AbstractGraphics implements Graphics {
     }
 
     @Override
-    public void setCanvasSize() {
-        _Canvas = escalamelo(new Rect(_frame.getX(), _frame.getY(),
+    public void updateCanvasSize() {
+        setCanvasSize(new Rect(_frame.getX(), _frame.getY(),
                 _frame.getWidth(), _frame.getHeight()));
     }
-
-    @Override
-    public Rect getCanvas() {
-        return _Canvas;
-    }
-
-
 
     @Override
     public int getWidth() {
@@ -113,10 +110,4 @@ public class GraphicsPC extends AbstractGraphics implements Graphics {
     public int getHeight() {
         return _frame.getHeight();
     }
-
-    //Atributos privados
-    java.awt.Graphics2D _graphics;   //Graphics de java
-    JFrame _frame;                 //Ventana donde pintamos
-
-    Rect _Canvas;
 }

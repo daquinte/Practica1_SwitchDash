@@ -8,7 +8,7 @@ import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.Sprite;
 import es.ucm.gdv.interfaces.TouchEvent;
-
+// TODO: Cuando arreglemos boton volver a activarlos
 public class GameOverState implements GameState {
 
     Game _game;
@@ -65,8 +65,8 @@ public class GameOverState implements GameState {
 
         // Botones //
         Image imageBotones = _resourceManager.getImage(ResourceManager.GameSprites.BUTTONS);
-        sonido = new Boton(_game, imageBotones, Boton.Buttons.SONIDO, Boton.Direcciones.IZQUIERDA, 30);
-        ayuda = new Boton(_game, imageBotones, Boton.Buttons.AYUDA, Boton.Direcciones.DERECHA, 30);
+//        sonido = new Boton(_game, imageBotones, Boton.Buttons.SONIDO, Boton.Direcciones.IZQUIERDA, 30);
+//        ayuda = new Boton(_game, imageBotones, Boton.Buttons.AYUDA, Boton.Direcciones.DERECHA, 30);
     }
 
     private void initSpritePuntos() {
@@ -104,7 +104,7 @@ public class GameOverState implements GameState {
             if (touchEvent.get_touchEvent() == TouchEvent.TouchType.click) {
                 int pulsacionX = touchEvent.get_x();
                 int pulsacionY = touchEvent.get_y();
-                if (sonido.isPressed(pulsacionX, pulsacionY)) {
+                /*if (sonido.isPressed(pulsacionX, pulsacionY)) {
                     if (!mute) {
                         mute = true;
                         sonido.toggleSprite(_resourceManager.getImage(ResourceManager.GameSprites.BUTTONS), Boton.Buttons.MUTE);
@@ -117,9 +117,9 @@ public class GameOverState implements GameState {
                 else if(ayuda.isPressed(pulsacionX,pulsacionY)){
                     _logica.setCurrentGameState(new HowToPlayState(_logica));
                 }
-                else {
+                else {*/
                     _logica.setCurrentGameState(new SwitchDashState(_logica));
-                }
+                //}
             }
         }
     }
@@ -145,8 +145,8 @@ public class GameOverState implements GameState {
         playAgain.drawImage(_graphics, 1080 / 2 - playAgain.getImage().getWidth() / 2, 1396,
                 playAgain.getImage().getWidth(), playAgain.getImage().getHeight(), alpha);
 
-        ayuda.render();
-        sonido.render();
+//        ayuda.render();
+//        sonido.render();
         //Puntos
         for (int i = 0; i < puntuacionSprite.length; i++) {
             puntuacionSprite[i].drawImage(_graphics, (1080 / 2 - gameOver.getImage().getWidth() / 2 - 200) + ( i *200), 700,
