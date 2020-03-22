@@ -1,12 +1,9 @@
 package es.ucm.gdv.motorpc; //Igual debería ser es.ucm.gdv.interfaces.motorpc
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
-
 import javax.swing.JFrame;
-
-import  es.ucm.gdv.interfaces.Game;
+import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Input;
 import es.ucm.gdv.logica.Logica;
@@ -18,29 +15,20 @@ public class GamePC implements Game, Runnable {
     private InputPC _inputPC;
 
     //Atributos para los gráficos
-    BufferStrategy _bs;
+    private BufferStrategy _bs;
     private JFrame _frame;
-
-    //Atributos de pantalla
-    private final int _anchoPantalla = (int)(1080 * 0.5625f);
-    private final int _altoPantalla = 1080;
 
     private Logica _currentGameState;
 
     //Para el hilo
     private volatile boolean _running; //Volatile hace que no revise en memoria
-    private Thread _runningThread;     //Hilo de juego
-
-
 
     public GamePC(String windowTitle) {
-
         _frame = new JFrame(windowTitle);
 
         // Vamos a usar renderizado activo. No queremos que Swing llame al
         // método repaint() porque el repintado es continuo en cualquier caso.
         _frame.setIgnoreRepaint(true);
-
     }
 
     /*
@@ -48,7 +36,7 @@ public class GamePC implements Game, Runnable {
     Además, la inicia.
     */
     public void init(Logica logica) {
-        _frame.setSize(_anchoPantalla, _altoPantalla);
+        _frame.setSize((int)(1080 * 0.5625f), 1080);
         _frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         _frame.setVisible(true);
 
@@ -64,10 +52,8 @@ public class GamePC implements Game, Runnable {
         if (intentos == 0) {
             System.err.println("No pude crear la BufferStrategy");
             return;
-
         }
         _bs = _frame.getBufferStrategy();
-
 
         //Inicializa los motores
         _graphicsPC = new GraphicsPC(_frame);
@@ -75,7 +61,6 @@ public class GamePC implements Game, Runnable {
         _currentGameState = logica;
         _currentGameState.init(this);
     }
-
 
     //-----------------------------------------------
     //                  Ciclo de juego

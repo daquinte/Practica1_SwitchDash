@@ -14,15 +14,14 @@ import es.ucm.gdv.interfaces.Rect;
 public class GraphicsPC extends AbstractGraphics implements Graphics {
 
     //Atributos privados
-    java.awt.Graphics2D _graphics;   //Graphics de java
-    JFrame _frame;                 //Ventana donde pintamos
+    private java.awt.Graphics2D _graphics;   //Graphics de java
+    private JFrame _frame;                 //Ventana donde pintamos
 
-    public void setGraphics(java.awt.Graphics2D g) {
+    void setGraphics(java.awt.Graphics2D g) {
         _graphics = g;
     }
 
-    public GraphicsPC(JFrame jf) {
-
+    GraphicsPC(JFrame jf) {
         _frame = jf;
         updateCanvasSize();
     }
@@ -35,13 +34,10 @@ public class GraphicsPC extends AbstractGraphics implements Graphics {
 
         try {
             _img = javax.imageio.ImageIO.read(new java.io.File("images/" + name));
-
             ret = new ImagePC(_img);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return ret;
     }
 
@@ -51,8 +47,6 @@ public class GraphicsPC extends AbstractGraphics implements Graphics {
         _graphics.setColor(rgb);
         _graphics.fillRect(0, 0, getWidth(), getHeight());
     }
-
-
 
     public void DrawRect(int color, Rect rectangulo) {
         Color rgb = new Color(color);

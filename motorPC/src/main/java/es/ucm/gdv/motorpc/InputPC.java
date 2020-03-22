@@ -16,7 +16,7 @@ public class InputPC implements Input, MouseListener {
     //Lista de TouchEvents
     LinkedList<TouchEvent> inputList;
 
-    public InputPC(JFrame jFrame){
+    InputPC(JFrame jFrame){
         inputList = new LinkedList<>();      //Linked list porque es más rapido añadir/borrar
         jFrame.addMouseListener(this);
     }
@@ -29,7 +29,7 @@ public class InputPC implements Input, MouseListener {
     public synchronized List<TouchEvent> getTouchEvents() {
         List<TouchEvent> aux;
         synchronized (this) {
-            aux = new ArrayList<TouchEvent>(inputList);
+            aux = new ArrayList<>(inputList);
             Clear();
         }
         return aux;

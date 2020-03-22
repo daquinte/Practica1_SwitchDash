@@ -4,11 +4,11 @@ import es.ucm.gdv.interfaces.Image;
 
 public class ImagePC implements Image{
 
-    public ImagePC(java.awt.Image img){
+    ImagePC(java.awt.Image img){
         _image = img;
     }
 
-    public java.awt.Image getImage(){return _image;}
+    java.awt.Image getImage(){return _image;}
 
     @Override
     public int getWidth() {
