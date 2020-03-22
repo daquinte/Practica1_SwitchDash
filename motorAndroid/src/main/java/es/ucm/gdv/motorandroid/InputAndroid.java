@@ -12,10 +12,10 @@ import es.ucm.gdv.interfaces.TouchEvent;
 public class InputAndroid implements Input, View.OnTouchListener{
 
     //Atributos
-    LinkedList<TouchEvent> inputList;       //Linked list porque es más rapido añadir/borrar
+    private LinkedList<TouchEvent> inputList;       //Linked list porque es más rapido añadir/borrar
 
 
-    public InputAndroid(){
+    InputAndroid(){
         inputList = new LinkedList<>();
     }
 

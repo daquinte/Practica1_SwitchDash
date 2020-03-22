@@ -32,11 +32,10 @@ public class GraphicsAndroid extends AbstractGraphics implements Graphics {
         _surfaceView = surfaceView;
         _assetManager = assetManager;
         _paint = new Paint();
-        //updateCanvasSize();
     }
 
     //Canvas = Objeto usado para enviar los comandos de dibujado
-    public void startFrame(Canvas c) {
+    void startFrame(Canvas c) {
         _androidCanvas = c;
     }
 
@@ -46,8 +45,7 @@ public class GraphicsAndroid extends AbstractGraphics implements Graphics {
         InputStream rutaImage = null;
         try {
             rutaImage = _assetManager.open("images/" + name);
-            Bitmap sprite = BitmapFactory.decodeStream(rutaImage); //Decode el asset manager
-            imageAndroid = new ImageAndroid(sprite);
+            imageAndroid = new ImageAndroid(BitmapFactory.decodeStream(rutaImage)); //Decode el asset manager
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -69,9 +67,9 @@ public class GraphicsAndroid extends AbstractGraphics implements Graphics {
         _androidCanvas.drawColor(color);
     }
 
+    // Metodo para debug
     public void DrawRect(Rect rectangulo) {
         _paint.setColor(Color.BLUE);
-
         _androidCanvas.drawRect(_canvas.x, _canvas.y,
                 _canvas.x + _canvas.width, _canvas.y + _canvas.height, _paint);
 
@@ -80,23 +78,18 @@ public class GraphicsAndroid extends AbstractGraphics implements Graphics {
     @Override
     public void drawImage(Image image, Rect destino, Rect source) {
         if (image != null) {
-            ImageAndroid androidImg = (ImageAndroid) image;
-            Bitmap bm = androidImg.getBitmap();
-
             Rect physicsCoords = coordenadasACanvas(destino);
             android.graphics.Rect dest = new android.graphics.Rect(physicsCoords.x, physicsCoords.y,
                     physicsCoords.x + physicsCoords.width, physicsCoords.y + physicsCoords.height);
 
             android.graphics.Rect src = new android.graphics.Rect(source.x, source.y,
                     source.x + source.width, source.y + source.height);
-            _androidCanvas.drawBitmap(bm, src, dest, _paint);
-
+            _androidCanvas.drawBitmap(((ImageAndroid) image).getBitmap(), src, dest, _paint);
         }
     }
 
     @Override
     public void drawImage(Image image, Rect destino, Rect source, float alpha) {
-
         _paint.setAlpha((int) alpha);
         drawImage(image, destino, source);
         _paint.reset();

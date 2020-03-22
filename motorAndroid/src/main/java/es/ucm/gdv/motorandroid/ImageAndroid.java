@@ -5,6 +5,8 @@ import es.ucm.gdv.interfaces.Image;
 
 public class ImageAndroid implements Image {
 
+    private Bitmap _imageBitmap;
+
     ImageAndroid(Bitmap img){
         _imageBitmap = img;
     }
@@ -14,7 +16,7 @@ public class ImageAndroid implements Image {
      *
      * @return Bitmap del image
      * */
-    public Bitmap getBitmap() {
+    Bitmap getBitmap() {
         return _imageBitmap;
     }
 
@@ -27,6 +29,4 @@ public class ImageAndroid implements Image {
     public int getHeight() {
         return _imageBitmap.getHeight();
     }
-
-    Bitmap _imageBitmap;
 }

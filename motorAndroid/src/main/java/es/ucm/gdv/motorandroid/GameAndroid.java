@@ -18,11 +18,10 @@ public class GameAndroid implements Game, Runnable {
     private InputAndroid _inputAndroid;
     private Logica _currentGameState;
 
-    SurfaceView _surfaceView;
+    private SurfaceView _surfaceView;
 
     //Para el update
-    long lastFrameTime = System.nanoTime();
-    long currentTime, nanoElapsedTime;
+    private long lastFrameTime = System.nanoTime();
 
     //Para el hilo
     private volatile boolean _running; //Volatile hace que no revise en memoria
@@ -31,11 +30,9 @@ public class GameAndroid implements Game, Runnable {
     public GameAndroid(Activity activity, Context context){
 
         _surfaceView = new SurfaceView(activity);
-
         activity.setContentView(_surfaceView);
         _graphicsAndroid = new GraphicsAndroid(_surfaceView, context.getAssets());
         _inputAndroid = new InputAndroid();
-
         _surfaceView.setOnTouchListener(_inputAndroid);
     }
 
@@ -100,8 +97,8 @@ public class GameAndroid implements Game, Runnable {
 
     //Calcula el deltatime que va a usar el estado actual.
     private double CalculaDeltaTime(){
-        currentTime = System.nanoTime();
-        nanoElapsedTime = currentTime - lastFrameTime;
+        long currentTime = System.nanoTime();
+        long nanoElapsedTime = currentTime - lastFrameTime;
         lastFrameTime = currentTime;
         return (double) nanoElapsedTime / 1.0e9;
     }
