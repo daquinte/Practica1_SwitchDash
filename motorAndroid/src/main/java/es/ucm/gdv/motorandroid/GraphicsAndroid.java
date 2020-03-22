@@ -97,7 +97,7 @@ public class GraphicsAndroid extends AbstractGraphics implements Graphics {
 
     @Override
     public void updateCanvasSize() {
-        setCanvasSize(new Rect(0, 0, _androidCanvas.getWidth(), _androidCanvas.getHeight()));
+        setCanvasSize(new Rect(0, 0, _surfaceView.getWidth(), _surfaceView.getHeight()));
     }
 
     @Override
