@@ -35,9 +35,13 @@ public class Flechas {
 
 
     public void render() {
-        flechas.drawImage(_game.getGraphics(), _game.getGraphics().getRectCanvas().x,
+        /*flechas.drawImage(_game.getGraphics(), _game.getGraphics().getRectCanvas().x,
                 (int)posY, _game.getGraphics().getRectCanvas().width,
-                _game.getGraphics().getRectCanvas().height, 50);
+                _game.getGraphics().getRectCanvas().height, 50);*/
+
+        flechas.drawImage(_game.getGraphics(), 1080/2 - flechas.getImage().getWidth() / 2,
+                (int)posY, flechas.getSpriteWidth(), flechas.getSpriteHeight(), 10);
+
     }
 
 

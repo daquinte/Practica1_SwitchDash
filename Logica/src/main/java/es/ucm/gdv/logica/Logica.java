@@ -131,12 +131,15 @@ public class Logica implements GameState {
         }
 
         //Pintamos el background
-        bgSprite.drawImage(_game.getGraphics(), _game.getGraphics().getRectCanvas().x, _game.getGraphics().getRectCanvas().y
-                , _game.getGraphics().getRectCanvas().width, _game.getGraphics().getRectCanvas().height);
+        /*bgSprite.drawImage(_game.getGraphics(), _game.getGraphics().getRectCanvas().x, _game.getGraphics().getRectCanvas().y
+                , _game.getGraphics().getRectCanvas().width, _game.getGraphics().getRectCanvas().height);*/
+        bgSprite.drawImage(_game.getGraphics(), 0, 0,
+                _game.getGraphics().getWidth(), _game.getGraphics().getHeight());
+
 
         if (activateFlash) {
             flash.drawImage(_game.getGraphics(), 0, 0
-                    , _game.getGraphics().getWidth(), _game.getGraphics().getHeight(), alpha);
+                    , flash.getSpriteWidth(), flash.getSpriteHeight(), alpha);
         }
     }
 }
