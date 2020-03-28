@@ -14,25 +14,22 @@ import es.ucm.gdv.interfaces.TouchEvent;
 public class TituloState implements GameState {
 
     //Atributos del motor
-
-    Game _game;
-    Logica _logica;
-    ResourceManager _resourceManager;
-    Graphics graphics;
+    private Game _game;
+    private Logica _logica;
+    private ResourceManager _resourceManager;
+    private Graphics graphics;
 
     //Atributos del estado
-    public Boton sonido;
-    public Boton ayuda;
+    private Boton sonido;
+    private Boton ayuda;
 
-    public Sprite logo;
-    public Sprite tapToPlay;
+    private Sprite logo;
+    private Sprite tapToPlay;
 
     private float alpha;
     private float factor;
 
-    private Boolean mute = false;
-
-    public TituloState(Logica l) {
+    TituloState(Logica l) {
         _logica = l;
         _resourceManager = l.getResourceManager();
     }
@@ -49,8 +46,13 @@ public class TituloState implements GameState {
 
     private void resourcesInit() {
         Image imageBotones = _resourceManager.getImage(ResourceManager.GameSprites.BUTTONS);
-//        sonido = new Boton(_game, imageBotones, Boton.Buttons.SONIDO, Boton.Direcciones.IZQUIERDA, 30);
-//        ayuda = new Boton(_game, imageBotones, Boton.Buttons.AYUDA, Boton.Direcciones.DERECHA, 30);
+
+        Sprite soundSprite = new Sprite(imageBotones, Boton.Buttons.SONIDO.ordinal() * 140, 0, 140, 140);
+        Sprite muteSprite = new Sprite(imageBotones, Boton.Buttons.MUTE.ordinal() * 140, 0, 140, 140);
+        sonido = new Boton(new Sprite[]{soundSprite, muteSprite}, Boton.Direcciones.IZQUIERDA, 30);
+
+        Sprite ayudaSprite = new Sprite(imageBotones, Boton.Buttons.AYUDA.ordinal() * 140, 0, 140, 140);
+        ayuda = new Boton(ayudaSprite, Boton.Direcciones.DERECHA, 30);
 
         Image logoI = _resourceManager.getImage(ResourceManager.GameSprites.SWITCHDASHLOGO);
         logo = new Sprite(logoI, 0, 0, logoI.getWidth(), logoI.getHeight());
@@ -79,27 +81,20 @@ public class TituloState implements GameState {
             if (touchEvent.get_touchEvent() == TouchEvent.TouchType.click) {
                 int pulsacionX = touchEvent.get_x();
                 int pulsacionY = touchEvent.get_y();
-                /*if (sonido.isPressed(pulsacionX, pulsacionY)) {
-                    if (!mute) {
-                        mute = true;
-                        sonido.toggleSprite(_resourceManager.getImage(ResourceManager.GameSprites.BUTTONS), Boton.Buttons.MUTE);
-                    }
-                    else {
-                        mute = false;
-                        sonido.toggleSprite(_resourceManager.getImage(ResourceManager.GameSprites.BUTTONS), Boton.Buttons.SONIDO);
-                    }
+                if (sonido.isPressed(pulsacionX, pulsacionY)) {
+                    sonido.toggleSprite();
                 }
                 else {
                     _logica.setCurrentGameState(new HowToPlayState(_logica));
-                }*/
+                }
             }
         }
     }
 
     @Override
     public void render() {
-        //sonido.render();
-        //ayuda.render();
+        sonido.render(graphics);
+        ayuda.render(graphics);
         logo.drawImage(graphics, 1080 / 2 - logo.getImage().getWidth() / 2, 356, logo.getImage().getWidth(), logo.getImage().getHeight());
         tapToPlay.drawImage(graphics, 1080 / 2 - tapToPlay.getImage().getWidth() / 2, 950, tapToPlay.getImage().getWidth(), tapToPlay.getImage().getHeight(), alpha);
     }

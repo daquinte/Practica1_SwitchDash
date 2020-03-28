@@ -1,7 +1,5 @@
 package es.ucm.gdv.interfaces;
 
-import java.awt.event.MouseEvent;
-
 public class TouchEvent {
     public enum TouchType {
         click, release, drag
@@ -12,15 +10,6 @@ public class TouchEvent {
     private int _inputID;
     private TouchType _touchEvent;
 
-    //Constructora de TouchEvent para PC
-    public TouchEvent(MouseEvent mouseEvent, TouchType touchType) {
-        _x = mouseEvent.getX();
-        _y = mouseEvent.getY();
-        _touchEvent = touchType;
-        _inputID = mouseEvent.getID(); //mouseEvent.getButton()-1?
-    }
-
-    //Constructora de TouchEvent para Android
     public TouchEvent(int x, int y, TouchType touchEvent, int inputID) {
         _x = x;
         _y = y;
@@ -35,7 +24,7 @@ public class TouchEvent {
         return _y;
     }
 
-    public int get_inputID() {
+    public int getInputID() {
         return _inputID;
     }
 

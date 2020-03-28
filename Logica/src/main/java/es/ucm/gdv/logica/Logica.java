@@ -33,7 +33,7 @@ public class Logica implements GameState {
         currentColor = ResourceManager.GameColor.GREEN;
         setCurrentGameState(new ResourceManager(this));
         _resourceManager = (ResourceManager) _currentGameState;
-        flechas = new Flechas(_game, _resourceManager);
+        flechas = new Flechas(_resourceManager);
 
         Image flashI = _resourceManager.getImage(ResourceManager.GameSprites.WHITE);
         flash = new Sprite(flashI, 0, 0, flashI.getWidth(), flashI.getHeight());
@@ -59,7 +59,7 @@ public class Logica implements GameState {
 
     @Override
     public void render() {
-        flechas.render();
+        flechas.render(_graphics);
         _currentGameState.render();
     }
 

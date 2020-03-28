@@ -9,11 +9,6 @@ import es.ucm.gdv.interfaces.Sprite;
 public class Jugador {
     public enum colorJugador {BLANCO, NEGRO}
 
-    ;
-
-    private ResourceManager _resourceManager;
-
-    private Image imagenJugador;
     private colorJugador _colorJugador = colorJugador.NEGRO;
 
     private Sprite jugadorNegro;
@@ -22,12 +17,11 @@ public class Jugador {
 
     private Random rnd;
 
-    int x;
-    int y;
+    private int x;
+    private int y;
 
-    public Jugador(ResourceManager res) {
-        _resourceManager = res;
-        imagenJugador = _resourceManager.getImage(ResourceManager.GameSprites.PLAYERS);
+    Jugador(ResourceManager res) {
+        Image imagenJugador = res.getImage(ResourceManager.GameSprites.PLAYERS);
         jugadorBlanco = new Sprite(imagenJugador, 0, 0, imagenJugador.getWidth(), imagenJugador.getHeight() / 2);
         jugadorNegro = new Sprite(imagenJugador, 0, imagenJugador.getHeight() / 2, imagenJugador.getWidth(), imagenJugador.getHeight() / 2);
         rnd = new Random();
@@ -44,7 +38,7 @@ public class Jugador {
             SetColorJugador(colorJugador.NEGRO);
     }
 
-    public void SetColorJugador(colorJugador colorJugador) {
+    private void SetColorJugador(colorJugador colorJugador) {
         _colorJugador = colorJugador;
         if (_colorJugador == Jugador.colorJugador.BLANCO) {
             spriteJugador = jugadorBlanco;
@@ -54,7 +48,7 @@ public class Jugador {
     }
     //Cambia el color al color opuesto
 
-    public void ToggleColorJugador() {
+    void ToggleColorJugador() {
         if (_colorJugador == Jugador.colorJugador.BLANCO) {
             spriteJugador = jugadorNegro;
             _colorJugador = colorJugador.NEGRO;
@@ -64,11 +58,11 @@ public class Jugador {
         }
     }
 
-    public Sprite GetSpriteJugador() {
+    Sprite GetSpriteJugador() {
         return spriteJugador;
     }
 
-    public colorJugador GetColorJugador() {
+    colorJugador GetColorJugador() {
         return _colorJugador;
     }
 
@@ -76,7 +70,7 @@ public class Jugador {
         return y;
     }
 
-    public int getX() {
+    int getX() {
         return x;
     }
 }

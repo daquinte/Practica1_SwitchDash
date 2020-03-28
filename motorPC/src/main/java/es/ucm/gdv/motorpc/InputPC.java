@@ -14,7 +14,7 @@ import  es.ucm.gdv.interfaces.TouchEvent;
 public class InputPC implements Input, MouseListener {
 
     //Lista de TouchEvents
-    LinkedList<TouchEvent> inputList;
+    private LinkedList<TouchEvent> inputList;
 
     InputPC(JFrame jFrame){
         inputList = new LinkedList<>();      //Linked list porque es más rapido añadir/borrar
@@ -57,7 +57,7 @@ public class InputPC implements Input, MouseListener {
      * * */
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
-        TouchEvent touchEvent = new TouchEvent(mouseEvent, TouchEvent.TouchType.click);
+        TouchEvent touchEvent = new TouchEvent(mouseEvent.getX(), mouseEvent.getY(), TouchEvent.TouchType.click, mouseEvent.getID());
         synchronized (this){
             inputList.add((touchEvent));
         }
@@ -68,7 +68,7 @@ public class InputPC implements Input, MouseListener {
      * */
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
-        TouchEvent touchEvent = new TouchEvent(mouseEvent, TouchEvent.TouchType.release);
+        TouchEvent touchEvent = new TouchEvent(mouseEvent.getX(), mouseEvent.getY(), TouchEvent.TouchType.release, mouseEvent.getID());
         synchronized (this){
             inputList.add((touchEvent));
         }
