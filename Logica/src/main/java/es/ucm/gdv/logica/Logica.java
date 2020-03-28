@@ -55,12 +55,10 @@ public class Logica implements GameState {
                 alpha = 200;
             }
         }
-
     }
 
     @Override
     public void render() {
-
         flechas.render();
         _currentGameState.render();
     }
@@ -70,28 +68,28 @@ public class Logica implements GameState {
         //Logica no hace handle input, sólo sus estados.
     }
 
-    public ResourceManager getResourceManager() {
+    ResourceManager getResourceManager() {
         return _resourceManager;
     }
 
 
-    public void aumentaVelocidadFlechas() {
+    void aumentaVelocidadFlechas() {
         flechas.aumentaVelocidad();
     }
 
-    public void resetVelocidadFlechas() {
+    void resetVelocidadFlechas() {
         flechas.resetVelocidad();
     }
 
 
-    public void setCurrentGameState(GameState gameState) {
+    void setCurrentGameState(GameState gameState) {
         activateFlash = true;
         alpha = 100;
         _currentGameState = gameState;
         _currentGameState.init(_game);
     }
 
-    public void SetClearColor(ResourceManager.GameColor newColor) {
+    void SetClearColor(ResourceManager.GameColor newColor) {
         currentColor = newColor;
         bgSprite = _resourceManager.bgColours[newColor.ordinal()];
     }
@@ -130,11 +128,11 @@ public class Logica implements GameState {
                 break;
         }
 
-        //Pintamos el background
+        //TODO: Pintamos el background
         /*bgSprite.drawImage(_game.getGraphics(), _game.getGraphics().getRectCanvas().x, _game.getGraphics().getRectCanvas().y
                 , _game.getGraphics().getRectCanvas().width, _game.getGraphics().getRectCanvas().height);*/
-        bgSprite.drawImage(_game.getGraphics(), 0, 0,
-                _game.getGraphics().getWidth(), _game.getGraphics().getHeight());
+        bgSprite.drawImage(_game.getGraphics(), 1080 / 2 - flechas.getSprite().getSpriteWidth() / 2, 0,
+                flechas.getSprite().getSpriteWidth(), flechas.getSprite().getSpriteHeight());
 
 
         if (activateFlash) {

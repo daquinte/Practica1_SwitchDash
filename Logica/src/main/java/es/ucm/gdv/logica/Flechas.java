@@ -5,15 +5,15 @@ import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.Sprite;
 
 public class Flechas {
-    Sprite flechas;
-    Game _game;
-    ResourceManager _resourceManager;
+    private Sprite sprite;
+    private Game _game;
+    private ResourceManager _resourceManager;
 
     private double posY;
     private int startPosition;
     private int velFlechas;
 
-    public Flechas(Game game, ResourceManager res) {
+    Flechas(Game game, ResourceManager res) {
         _game = game;
         _resourceManager = res;
         initFlechas();
@@ -23,7 +23,7 @@ public class Flechas {
         Image flechasimg = _resourceManager.getImage(ResourceManager.GameSprites.ARROWS);
         posY = startPosition = - flechasimg.getHeight() / 5;
         velFlechas = 0;
-        flechas = new Sprite(flechasimg, 0, 0, flechasimg.getWidth(), flechasimg.getHeight());
+        sprite = new Sprite(flechasimg, 0, 0, flechasimg.getWidth(), flechasimg.getHeight());
     }
 
     public void tick(double elapsedTime) {
@@ -39,17 +39,21 @@ public class Flechas {
                 (int)posY, _game.getGraphics().getRectCanvas().width,
                 _game.getGraphics().getRectCanvas().height, 50);*/
 
-        flechas.drawImage(_game.getGraphics(), 1080/2 - flechas.getImage().getWidth() / 2,
-                (int)posY, flechas.getSpriteWidth(), flechas.getSpriteHeight(), 10);
+        sprite.drawImage(_game.getGraphics(), 1080/2 - sprite.getImage().getWidth() / 2,
+                (int)posY, sprite.getSpriteWidth(), sprite.getSpriteHeight(), 10);
 
     }
 
 
-    public void aumentaVelocidad() {
+    void aumentaVelocidad() {
         velFlechas += 90;
     }
 
-    public void resetVelocidad() {
+    void resetVelocidad() {
         velFlechas = 0;
+    }
+
+    Sprite getSprite() {
+        return sprite;
     }
 }
