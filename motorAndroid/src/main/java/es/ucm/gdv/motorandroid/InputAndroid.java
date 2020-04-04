@@ -6,6 +6,7 @@ import android.view.View;
 import java.util.LinkedList;
 import java.util.List;
 
+import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Input;
 import es.ucm.gdv.interfaces.TouchEvent;
 
@@ -13,9 +14,10 @@ public class InputAndroid implements Input, View.OnTouchListener{
 
     //Atributos
     private LinkedList<TouchEvent> inputList;       //Linked list porque es más rapido añadir/borrar
+    private Graphics _graphics;
 
-
-    InputAndroid(){
+    InputAndroid(Graphics graphics){
+        _graphics = graphics;
         inputList = new LinkedList<>();
     }
 
@@ -42,25 +44,30 @@ public class InputAndroid implements Input, View.OnTouchListener{
     public boolean onTouch(View v, MotionEvent event) {
         TouchEvent touchEvent;
         boolean tocado = false;
+        TouchEvent.TouchType touchType = null;
         switch (event.getAction()){
             //CLICK
             case MotionEvent.ACTION_DOWN:
-                touchEvent = new TouchEvent((int)event.getX(), (int)event.getY(),
-                        TouchEvent.TouchType.click, event.getActionIndex());
-                synchronized (this){
-                    inputList.add((touchEvent));
-                }
-                tocado = true;
+                touchType = TouchEvent.TouchType.click;
                 break;
             //RELEASE
             case MotionEvent.ACTION_UP:
-                touchEvent = new TouchEvent((int)event.getX(), (int)event.getY(),
-                        TouchEvent.TouchType.release, event.getActionIndex());
-                synchronized (this){
-                    inputList.add((touchEvent));
-                }
-                tocado = true;
+                touchType = TouchEvent.TouchType.release;
                 break;
+        }
+        if (touchType != null) {
+            int x = (int) event.getX();
+            int y = (int) event.getY();
+            if (_graphics.isInCanvas(x, y)) {
+                x = _graphics.revertCoordinateX(x);
+                y = _graphics.revertCoordinateY(y);
+            }
+            touchEvent = new TouchEvent(x, y, touchType,
+                    event.getActionIndex());
+            synchronized (this) {
+                inputList.add((touchEvent));
+            }
+            tocado = true;
         }
         return tocado;
     }

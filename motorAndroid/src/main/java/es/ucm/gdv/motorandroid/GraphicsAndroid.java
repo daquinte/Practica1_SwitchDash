@@ -7,7 +7,6 @@ import es.ucm.gdv.interfaces.Rect;
 
 //Imports de android
 import android.content.res.AssetManager;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -68,17 +67,18 @@ public class GraphicsAndroid extends AbstractGraphics implements Graphics {
     }
 
     // Metodo para debug
+    @Override
     public void DrawRect(Rect rectangulo) {
         _paint.setColor(Color.BLUE);
-        _androidCanvas.drawRect(_canvas.x, _canvas.y,
-                _canvas.x + _canvas.width, _canvas.y + _canvas.height, _paint);
+        _androidCanvas.drawRect(rectangulo.x, rectangulo.y,
+                rectangulo.x + rectangulo.width, rectangulo.y + rectangulo.height, _paint);
 
     }
 
     @Override
     public void drawImage(Image image, Rect destino, Rect source) {
         if (image != null) {
-            Rect physicsCoords = coordenadasACanvas(destino);
+            Rect physicsCoords = coordinatesToCanvas(destino);
             android.graphics.Rect dest = new android.graphics.Rect(physicsCoords.x, physicsCoords.y,
                     physicsCoords.x + physicsCoords.width, physicsCoords.y + physicsCoords.height);
 

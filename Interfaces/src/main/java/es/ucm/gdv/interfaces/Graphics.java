@@ -22,6 +22,10 @@ public interface Graphics {
 
     void updateCanvasSize();
     Rect getRectCanvas();
+    void DrawRect(Rect rectangulo);
+    boolean isInCanvas(int x, int y);
+    int revertCoordinateX(int x);
+    int revertCoordinateY(int y);
 
     //Getters de la ventana
     int getWidth();                             //Ancho

@@ -48,8 +48,9 @@ public class GraphicsPC extends AbstractGraphics implements Graphics {
         _graphics.fillRect(0, 0, getWidth(), getHeight());
     }
 
-    public void DrawRect(int color, Rect rectangulo) {
-        Color rgb = new Color(color);
+    @Override
+    public void DrawRect(Rect rectangulo) {
+        Color rgb = new Color(0x484CFF);
         _graphics.setColor(rgb);
         _graphics.fillRect(rectangulo.x, rectangulo.y, rectangulo.width, rectangulo.height);
     }
@@ -58,7 +59,7 @@ public class GraphicsPC extends AbstractGraphics implements Graphics {
     public void drawImage(Image image, Rect destino, Rect source) {
         ImagePC img = (ImagePC) image;
         java.awt.Image awtImage = img.getImage();
-        Rect physicsCoordinates = coordenadasACanvas(destino);
+        Rect physicsCoordinates = coordinatesToCanvas(destino);
 
         _graphics.drawImage(awtImage, physicsCoordinates.x, physicsCoordinates.y,
                 physicsCoordinates.x + physicsCoordinates.width, physicsCoordinates.y + physicsCoordinates.height,
@@ -70,7 +71,7 @@ public class GraphicsPC extends AbstractGraphics implements Graphics {
     public void drawImage(Image image, Rect destino, Rect source, float alpha) {
         ImagePC img = (ImagePC) image;
         java.awt.Image awtImage = img.getImage();
-        Rect physicsCoordinates = coordenadasACanvas(destino);
+        Rect physicsCoordinates = coordinatesToCanvas(destino);
 
         //Vamos a regular el alpha, porque en PC está en escala 0-1
          alpha /= 100f;

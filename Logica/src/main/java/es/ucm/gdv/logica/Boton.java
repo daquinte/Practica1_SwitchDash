@@ -1,10 +1,6 @@
 package es.ucm.gdv.logica;
 
-import java.util.Random;
-
-import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.Graphics;
-import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.Rect;
 import es.ucm.gdv.interfaces.Sprite;
 
@@ -30,21 +26,14 @@ public class Boton {
 
     private void init(Direcciones x, int y) {
         index = 0;
-
-        //new Sprite(imagebotones, spriteIndex.ordinal() * 140, 0, 140, 140);
         int _x;
-        switch (x) {
-            case IZQUIERDA:
-                _x = -170;
-                break;
-            case DERECHA:
-                _x = 1130;
-                break;
-            default:
-                _x = -170;
-                break;
+        if (x == Direcciones.DERECHA) {
+            _x = -170;// 1080 - (30 + spriteBotons[0].getSpriteWidth());
         }
-        logicRect = new Rect(_x, y + 60, 140, 140);
+        else {
+            _x = -30;
+        }
+        logicRect = new Rect(_x, y + 60, 140, 140);//, spriteBotons[0].getSpriteWidth(), spriteBotons[0].getSpriteHeight());
     }
 
     void toggleSprite() {
@@ -52,11 +41,12 @@ public class Boton {
     }
 
     Boolean isPressed(int pressX, int pressY) {
-        return (pressX > logicRect.x && pressX < logicRect.x + logicRect.width
-                && pressY > logicRect.y && pressY < logicRect.y + logicRect.height);
+        return (pressX >= logicRect.x && pressX <= logicRect.x + logicRect.width
+                && pressY >= logicRect.y && pressY <= logicRect.y + logicRect.height);
     }
 
     public void render(Graphics graphics) {
+        graphics.DrawRect(logicRect);
         spriteBotons[index].drawImage(graphics, logicRect.x, logicRect.y, logicRect.width, logicRect.height);
     }
 }
