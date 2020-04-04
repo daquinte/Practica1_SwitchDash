@@ -30,6 +30,8 @@ public class SwitchDashState implements GameState {
     int pelotasRecogidas;                       //Contador de pelotas. Cada 10, sube la velocidad.
     int velocidadActual;                        //Velocidad actual de las pelotas
 
+    boolean isGameOver;                         //Bool que determina si ha perdido o no
+    double gameOverTimeTrack;                      //Contador del tiempo hasta que termine
     SistemaParticulas sistemaParticulas;        //Sistema de particulas para cuando se destruye una pelota
 
     int puntosTotales;                          //Contador de puntos
@@ -37,6 +39,7 @@ public class SwitchDashState implements GameState {
 
     //CONST
     private final int SeparacionPelotas = 395;
+    private  final double TimeUntilSceneChange = 0.8;
 
 
     public SwitchDashState(Logica l) {
@@ -57,6 +60,8 @@ public class SwitchDashState implements GameState {
 
         jugador = new Jugador(_resourceManager);
         sistemaParticulas = new SistemaParticulas(_game);
+        isGameOver = false;
+        gameOverTimeTrack = 0;
 
         pelotas = new LinkedList<>();
         initPelotas();
@@ -94,29 +99,35 @@ public class SwitchDashState implements GameState {
     @Override
     public void tick(double elapsedTime) {
 
-        List<TouchEvent> touchEvents = _game.getInput().getTouchEvents();
-        for (TouchEvent touchEvent : touchEvents) {
-            if (touchEvent.get_touchEvent() == TouchEvent.TouchType.click) {
-                jugador.ToggleColorJugador();
+
+
+            handleInput();
+
+            for (Pelota p : pelotas) {
+                p.tick(elapsedTime, velocidadActual);
+            }
+            CompruebaColision(pelotas.peek());
+
+            //Particulas
+            sistemaParticulas.tick(elapsedTime);
+
+        if(isGameOver) {
+            gameOverTimeTrack += elapsedTime;
+            if(gameOverTimeTrack >= TimeUntilSceneChange){
+                _logica.setCurrentGameState(new GameOverState(_logica, puntosTotales));
             }
         }
 
-        for (Pelota p : pelotas) {
-            p.tick(elapsedTime, velocidadActual);
-        }
-        CompruebaColision(pelotas.peek());
-
-        //Particulas
-        sistemaParticulas.tick(elapsedTime);
     }
 
     @Override
     public void render() {
 
         //JUGADOR
-        Sprite auxJugador = jugador.GetSpriteJugador();
-        auxJugador.drawImage(graphics, jugador.getX(), jugador.getY(), auxJugador.getSpriteWidth(), auxJugador.getSpriteHeight());
-
+        if(!isGameOver) {
+            Sprite auxJugador = jugador.GetSpriteJugador();
+            auxJugador.drawImage(graphics, jugador.getX(), jugador.getY(), auxJugador.getSpriteWidth(), auxJugador.getSpriteHeight());
+        }
         //PELOTAS
         for (Pelota p : pelotas) {
             Sprite spriteP = p.GetSpritePelota();
@@ -134,7 +145,12 @@ public class SwitchDashState implements GameState {
 
     @Override
     public void handleInput() {
-
+        List<TouchEvent> touchEvents = _game.getInput().getTouchEvents();
+        for (TouchEvent touchEvent : touchEvents) {
+            if (touchEvent.get_touchEvent() == TouchEvent.TouchType.click) {
+                jugador.ToggleColorJugador();
+            }
+        }
     }
 
     /**Comprueba si el color de la pelota coincide con el del jugador
@@ -151,7 +167,7 @@ public class SwitchDashState implements GameState {
             int colorJugador = jugador.GetColorJugador().ordinal();
             int colorPelota = p.GetColorPelota().ordinal();
             if (colorJugador != colorPelota) {
-                _logica.setCurrentGameState(new GameOverState(_logica, puntosTotales));
+               isGameOver = true;
             } else {
                 sistemaParticulas.addParticles(p.GetSpritePelota(), 15, new Pair(1080 / 2 - p.GetSpritePelota().getSpriteWidth() / 2, (int)p.getPosY()));
                 ResetPelota(p);

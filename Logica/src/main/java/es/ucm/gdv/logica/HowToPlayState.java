@@ -42,7 +42,8 @@ public class HowToPlayState implements GameState {
 
     private void resourcesInit () {
         Image imageBotones = _resourceManager.getImage(ResourceManager.GameSprites.BUTTONS);
-//        close = new Boton(_game, imageBotones, Boton.Buttons.SALIR, Boton.Direcciones.DERECHA, 30);
+        Sprite closeSprite = new Sprite(imageBotones, Boton.Buttons.SALIR.ordinal() * 140, 0, 140, 140);
+        close = new Boton(closeSprite, Boton.Direcciones.DERECHA, 30);
 
         Image howToPlayI = _resourceManager.getImage(ResourceManager.GameSprites.HOWTOPLAY);
         howToPlay = new Sprite(howToPlayI, 0, 0, howToPlayI.getWidth(), howToPlayI.getHeight());
@@ -83,12 +84,12 @@ public class HowToPlayState implements GameState {
             if (touchEvent.get_touchEvent() == TouchEvent.TouchType.click) {
                 int pulsacionX = touchEvent.get_x();
                 int pulsacionY = touchEvent.get_y();
-                /*if (close.isPressed(pulsacionX, pulsacionY)) {
+                if (close.isPressed(pulsacionX, pulsacionY)) {
                     _logica.setCurrentGameState(new SwitchDashState(_logica));
                 }
                 else {
                     _logica.setCurrentGameState(new SwitchDashState(_logica));
-                }*/
+                }
             }
         }
     }

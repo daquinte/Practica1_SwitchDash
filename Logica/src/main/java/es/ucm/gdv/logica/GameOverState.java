@@ -65,8 +65,12 @@ public class GameOverState implements GameState {
 
         // Botones //
         Image imageBotones = _resourceManager.getImage(ResourceManager.GameSprites.BUTTONS);
-//        sonido = new Boton(_game, imageBotones, Boton.Buttons.SONIDO, Boton.Direcciones.IZQUIERDA, 30);
-//        ayuda = new Boton(_game, imageBotones, Boton.Buttons.AYUDA, Boton.Direcciones.DERECHA, 30);
+        Sprite soundSprite = new Sprite(imageBotones, Boton.Buttons.SONIDO.ordinal() * 140, 0, 140, 140);
+        Sprite muteSprite = new Sprite(imageBotones, Boton.Buttons.MUTE.ordinal() * 140, 0, 140, 140);
+        sonido = new Boton(new Sprite[]{soundSprite, muteSprite}, Boton.Direcciones.IZQUIERDA, 30);
+
+        Sprite ayudaSprite = new Sprite(imageBotones, Boton.Buttons.AYUDA.ordinal() * 140, 0, 140, 140);
+        ayuda = new Boton(ayudaSprite, Boton.Direcciones.DERECHA, 30);
     }
 
     private void initSpritePuntos() {

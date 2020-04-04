@@ -20,6 +20,7 @@ public class Jugador {
     private int x;
     private int y;
 
+
     Jugador(ResourceManager res) {
         Image imagenJugador = res.getImage(ResourceManager.GameSprites.PLAYERS);
         jugadorBlanco = new Sprite(imagenJugador, 0, 0, imagenJugador.getWidth(), imagenJugador.getHeight() / 2);

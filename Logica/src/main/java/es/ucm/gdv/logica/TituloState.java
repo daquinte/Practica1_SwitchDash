@@ -45,6 +45,7 @@ public class TituloState implements GameState {
     }
 
     private void resourcesInit() {
+
         Image imageBotones = _resourceManager.getImage(ResourceManager.GameSprites.BUTTONS);
 
         Sprite soundSprite = new Sprite(imageBotones, Boton.Buttons.SONIDO.ordinal() * 140, 0, 140, 140);
@@ -85,7 +86,7 @@ public class TituloState implements GameState {
                     sonido.toggleSprite();
                 }
                 else {
-                    //_logica.setCurrentGameState(new HowToPlayState(_logica));
+                    _logica.setCurrentGameState(new HowToPlayState(_logica));
                 }
             }
         }
