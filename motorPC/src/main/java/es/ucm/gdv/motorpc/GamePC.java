@@ -57,7 +57,7 @@ public class GamePC implements Game, Runnable {
 
         //Inicializa los motores
         _graphicsPC = new GraphicsPC(_frame);
-        _inputPC = new InputPC(_frame);
+        _inputPC = new InputPC(_frame, _graphicsPC);
         _currentGameState = logica;
         _currentGameState.init(this);
     }

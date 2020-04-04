@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
+import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Input;
 import  es.ucm.gdv.interfaces.TouchEvent;
 
@@ -15,8 +16,10 @@ public class InputPC implements Input, MouseListener {
 
     //Lista de TouchEvents
     private LinkedList<TouchEvent> inputList;
+    private Graphics _graphics;
 
-    InputPC(JFrame jFrame){
+    InputPC(JFrame jFrame, Graphics graphics){
+        _graphics = graphics;
         inputList = new LinkedList<>();      //Linked list porque es más rapido añadir/borrar
         jFrame.addMouseListener(this);
     }
@@ -57,8 +60,15 @@ public class InputPC implements Input, MouseListener {
      * * */
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
-        TouchEvent touchEvent = new TouchEvent(mouseEvent.getX(), mouseEvent.getY(), TouchEvent.TouchType.click, mouseEvent.getID());
-        synchronized (this){
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+        if (_graphics.isInCanvas(x, y)) {
+            x = _graphics.revertCoordinateX(x - _graphics.getRectCanvas().x);
+            y = _graphics.revertCoordinateY(y - _graphics.getRectCanvas().y);
+        }
+        TouchEvent touchEvent = new TouchEvent(x, y, TouchEvent.TouchType.click,
+                mouseEvent.getID());
+        synchronized (this) {
             inputList.add((touchEvent));
         }
     }

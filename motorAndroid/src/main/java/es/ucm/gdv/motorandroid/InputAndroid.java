@@ -59,8 +59,8 @@ public class InputAndroid implements Input, View.OnTouchListener{
             int x = (int) event.getX();
             int y = (int) event.getY();
             if (_graphics.isInCanvas(x, y)) {
-                x = _graphics.revertCoordinateX(x);
-                y = _graphics.revertCoordinateY(y);
+                x = _graphics.revertCoordinateX(x - _graphics.getRectCanvas().x);
+                y = _graphics.revertCoordinateY(y -  _graphics.getRectCanvas().y);
             }
             touchEvent = new TouchEvent(x, y, touchType,
                     event.getActionIndex());

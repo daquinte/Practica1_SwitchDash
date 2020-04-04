@@ -85,7 +85,7 @@ public class TituloState implements GameState {
                     sonido.toggleSprite();
                 }
                 else {
-                    _logica.setCurrentGameState(new HowToPlayState(_logica));
+                    //_logica.setCurrentGameState(new HowToPlayState(_logica));
                 }
             }
         }

@@ -28,16 +28,16 @@ public class Boton {
         index = 0;
         int _x;
         if (x == Direcciones.DERECHA) {
-            _x = -170;// 1080 - (30 + spriteBotons[0].getSpriteWidth());
+            _x =  1080 - (30 + spriteBotons[0].getSpriteWidth());
         }
         else {
             _x = -30;
         }
-        logicRect = new Rect(_x, y + 60, 140, 140);//, spriteBotons[0].getSpriteWidth(), spriteBotons[0].getSpriteHeight());
+        logicRect = new Rect(_x, y + 60,  spriteBotons[0].getSpriteWidth(), spriteBotons[0].getSpriteHeight());
     }
 
     void toggleSprite() {
-        index = (spriteBotons.length == index - 1)? 0 : index + 1;
+        index = (spriteBotons.length-1 == index )? 0 : index + 1;
     }
 
     Boolean isPressed(int pressX, int pressY) {
