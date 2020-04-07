@@ -1,5 +1,9 @@
-package es.ucm.gdv.interfaces;
+package es.ucm.gdv.logica;
 
+
+import es.ucm.gdv.interfaces.Graphics;
+import es.ucm.gdv.interfaces.Image;
+import es.ucm.gdv.interfaces.Rect;
 
 /**
  * Clase que representa el fragmento autónomo de un image,

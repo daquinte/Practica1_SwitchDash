@@ -3,7 +3,6 @@ package es.ucm.gdv.logica;
 import java.util.Random;
 
 import es.ucm.gdv.interfaces.Image;
-import es.ucm.gdv.interfaces.Sprite;
 
 public class Pelota {
     public enum colorPelota {BLANCO, NEGRO}

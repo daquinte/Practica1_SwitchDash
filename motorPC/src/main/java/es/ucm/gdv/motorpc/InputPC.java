@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Input;
-import  es.ucm.gdv.interfaces.TouchEvent;
+import es.ucm.gdv.interfaces.TouchEvent;
 
 public class InputPC implements Input, MouseListener {
 

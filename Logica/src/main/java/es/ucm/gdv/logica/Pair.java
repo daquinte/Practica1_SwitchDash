@@ -1,4 +1,4 @@
-package es.ucm.gdv.interfaces;
+package es.ucm.gdv.logica;
 
 /*Clase de para usar pares de valores.*/
 public class Pair {

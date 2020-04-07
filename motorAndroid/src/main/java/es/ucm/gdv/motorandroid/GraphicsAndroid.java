@@ -1,6 +1,6 @@
 package es.ucm.gdv.motorandroid;
 
-import es.ucm.gdv.interfaces.AbstractGraphics;
+import es.ucm.gdv.logica.AbstractGraphics;
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.Rect;

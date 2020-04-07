@@ -2,7 +2,6 @@ package es.ucm.gdv.logica;
 
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Rect;
-import es.ucm.gdv.interfaces.Sprite;
 
 public class Boton {
 

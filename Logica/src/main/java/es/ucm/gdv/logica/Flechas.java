@@ -1,9 +1,7 @@
 package es.ucm.gdv.logica;
 
-import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
-import es.ucm.gdv.interfaces.Sprite;
 
 public class Flechas {
     private Sprite sprite;

@@ -1,4 +1,6 @@
-package es.ucm.gdv.interfaces;
+package es.ucm.gdv.logica;
+
+import es.ucm.gdv.interfaces.Rect;
 
 /*
 * Clase abstracta que implementa graphics y contiene

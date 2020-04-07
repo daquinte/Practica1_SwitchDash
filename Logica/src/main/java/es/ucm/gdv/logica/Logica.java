@@ -4,7 +4,6 @@ import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
-import es.ucm.gdv.interfaces.Sprite;
 
 
 public class Logica implements GameState {

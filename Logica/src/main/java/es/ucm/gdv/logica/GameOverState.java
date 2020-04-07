@@ -6,8 +6,8 @@ import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
-import es.ucm.gdv.interfaces.Sprite;
 import es.ucm.gdv.interfaces.TouchEvent;
+
 // TODO: Cuando arreglemos boton volver a activarlos
 public class GameOverState implements GameState {
 

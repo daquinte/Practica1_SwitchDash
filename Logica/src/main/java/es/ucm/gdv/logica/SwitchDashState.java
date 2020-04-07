@@ -3,8 +3,6 @@ package es.ucm.gdv.logica;
 import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;
-import es.ucm.gdv.interfaces.Pair;
-import es.ucm.gdv.interfaces.Sprite;
 import es.ucm.gdv.interfaces.TouchEvent;
 
 import java.util.LinkedList;

@@ -1,6 +1,5 @@
 package es.ucm.gdv.logica;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -8,7 +7,6 @@ import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
-import es.ucm.gdv.interfaces.Sprite;
 
 /*"ESTADO DE JUEGO" EN EL QUE CARGAMOS LOS RECURSOS, para tenerlos disponibles*/
 public class ResourceManager implements GameState {

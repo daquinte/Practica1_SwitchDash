@@ -4,8 +4,6 @@ import java.util.LinkedList;
 import java.util.Random;
 
 import es.ucm.gdv.interfaces.Game;
-import es.ucm.gdv.interfaces.Pair;
-import es.ucm.gdv.interfaces.Sprite;
 
 /**
  * Clase que representa el sistema de particulas.
