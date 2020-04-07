@@ -31,7 +31,7 @@ public class Boton {
             _x =  1080 - (30 + spriteBotons[0].getSpriteWidth());
         }
         else {
-            _x = -30;
+            _x = 30;
         }
         logicRect = new Rect(_x, y + 60,  spriteBotons[0].getSpriteWidth(), spriteBotons[0].getSpriteHeight());
     }
