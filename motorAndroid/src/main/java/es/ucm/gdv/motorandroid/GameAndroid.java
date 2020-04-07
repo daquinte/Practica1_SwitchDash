@@ -32,7 +32,7 @@ public class GameAndroid implements Game, Runnable {
         _surfaceView = new SurfaceView(activity);
         activity.setContentView(_surfaceView);
         _graphicsAndroid = new GraphicsAndroid(_surfaceView, context.getAssets());
-        _inputAndroid = new InputAndroid();
+        _inputAndroid = new InputAndroid(_graphicsAndroid);
         _surfaceView.setOnTouchListener(_inputAndroid);
     }
 
