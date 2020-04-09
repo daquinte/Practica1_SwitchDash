@@ -29,7 +29,7 @@ public class SwitchDashState implements GameState {
     int velocidadActual;                        //Velocidad actual de las pelotas
 
     boolean isGameOver;                         //Bool que determina si ha perdido o no
-    double gameOverTimeTrack;                      //Contador del tiempo hasta que termine
+    double gameOverTimeTrack;                   //Contador del tiempo hasta que termine
     SistemaParticulas sistemaParticulas;        //Sistema de particulas para cuando se destruye una pelota
 
     int puntosTotales;                          //Contador de puntos
@@ -37,7 +37,7 @@ public class SwitchDashState implements GameState {
 
     //CONST
     private final int SeparacionPelotas = 395;
-    private  final double TimeUntilSceneChange = 0.8;
+    private  final double TimeUntilSceneChange = 1.2;
 
 
     public SwitchDashState(Logica l) {
@@ -96,15 +96,15 @@ public class SwitchDashState implements GameState {
 
     @Override
     public void tick(double elapsedTime) {
-
-
-
             handleInput();
+
+            _logica.commonTick(elapsedTime);
 
             for (Pelota p : pelotas) {
                 p.tick(elapsedTime, velocidadActual);
             }
-            CompruebaColision(pelotas.peek());
+            if(!isGameOver)
+                CompruebaColision(pelotas.peek());
 
             //Particulas
             sistemaParticulas.tick(elapsedTime);
@@ -120,6 +120,8 @@ public class SwitchDashState implements GameState {
 
     @Override
     public void render() {
+
+        _logica.commonRender();
 
         //JUGADOR
         if(!isGameOver) {

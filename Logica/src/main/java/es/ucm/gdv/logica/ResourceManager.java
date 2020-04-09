@@ -70,7 +70,7 @@ public class ResourceManager implements GameState {
 
     @Override
     public void clear() {
-        _logica.clear();
+        //_logica.clear();
     }
 
     @Override

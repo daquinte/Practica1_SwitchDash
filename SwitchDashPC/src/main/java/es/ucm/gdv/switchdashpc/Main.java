@@ -6,9 +6,11 @@ import es.ucm.gdv.motorpc.GamePC;
 public class Main {
     public static void main(String[] args) {
         GamePC game = new GamePC("Switch Dash - Practica de Moviles edition");
+        game.init();
+
         Logica logica = new Logica(game);
         logica.init();
-        game.init();
+
         game.run();
     }
 

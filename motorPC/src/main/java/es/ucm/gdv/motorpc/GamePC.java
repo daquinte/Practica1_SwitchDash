@@ -19,6 +19,7 @@ public class GamePC implements Game, Runnable {
     private JFrame _frame;
 
     private GameState _currentGameState;
+    private GameState _nextGameState;
 
     //Para el hilo
     private volatile boolean _running; //Volatile hace que no revise en memoria
@@ -74,6 +75,11 @@ public class GamePC implements Game, Runnable {
             lastFrameTime = currentTime;
             double elapsedTime = (double) nanoElapsedTime / 1.0E9;
 
+            if (_nextGameState != null) {
+                _currentGameState = _nextGameState;
+                _nextGameState = null;
+                _currentGameState.init(this);
+            }
             //Tick de la lógica
             _currentGameState.tick(elapsedTime);
 
@@ -129,6 +135,6 @@ public class GamePC implements Game, Runnable {
 
     @Override
     public void setGameState(GameState gameState) {
-        _currentGameState = gameState;
+        _nextGameState = gameState;
     }
 }

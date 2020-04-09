@@ -59,6 +59,8 @@ public class TituloState implements GameState {
 
         Image tapToPlayI = _resourceManager.getImage(ResourceManager.GameSprites.TAPTOPLAY);
         tapToPlay = new Sprite(tapToPlayI, 0, 0, tapToPlayI.getWidth(), tapToPlayI.getHeight());
+
+        _logica.initFlechas();
     }
 
     @Override
@@ -68,6 +70,7 @@ public class TituloState implements GameState {
 
     @Override
     public void tick(double elapsedTime) {
+        _logica.commonTick(elapsedTime);
         alpha += (factor * elapsedTime);
         if (alpha >= 100 || alpha <= 0) {
             factor = -factor;
@@ -93,6 +96,7 @@ public class TituloState implements GameState {
 
     @Override
     public void render() {
+        _logica.commonRender();
         sonido.render(graphics);
         ayuda.render(graphics);
         logo.drawImage(graphics, 1080 / 2 - logo.getImage().getWidth() / 2, 356, logo.getImage().getWidth(), logo.getImage().getHeight());

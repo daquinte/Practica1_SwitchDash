@@ -9,8 +9,6 @@ import es.ucm.gdv.interfaces.Image;
 public class Logica {
     private Game _game;
     private Graphics _graphics;
-    private GameState _currentGameState;
-    private GameState _nextGameState;
     private ResourceManager _resourceManager;
 
     private ResourceManager.GameColor currentColor;
@@ -29,9 +27,12 @@ public class Logica {
 
         //INICIA RESOURCE MANAGER
         currentColor = ResourceManager.GameColor.GREEN;
-        setCurrentGameState(new ResourceManager(this));
-        _resourceManager = (ResourceManager) _currentGameState;
+        _resourceManager = new ResourceManager(this);
         _game.setGameState(_resourceManager);
+    }
+
+    public void initFlechas(){
+        //init del resource
         flechas = new Flechas(_resourceManager);
 
         Image flashI = _resourceManager.getImage(ResourceManager.GameSprites.WHITE);
@@ -42,16 +43,16 @@ public class Logica {
         ClearScreen(currentColor);
     }
 
-    public void tick(double elapsedTime) {
-        if (_nextGameState != null) _currentGameState = _nextGameState;
+    //La parte común del tick
+    public void commonTick(double elapsedTime) {
+
         flechas.tick(elapsedTime);
-        _currentGameState.tick(elapsedTime);
         flashStuff(elapsedTime);
     }
 
-    public void render() {
+    //La parte común del render
+    public void commonRender() {
         flechas.render(_graphics);
-        _currentGameState.render();
     }
 
     ResourceManager getResourceManager() {
@@ -79,8 +80,6 @@ public class Logica {
     void setCurrentGameState(GameState gameState) {
         activateFlash = true;
         alpha = 100;
-        _nextGameState = gameState;
-        _nextGameState.init(_game);
         _game.setGameState(gameState);
     }
 

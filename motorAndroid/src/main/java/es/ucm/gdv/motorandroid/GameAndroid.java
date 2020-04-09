@@ -17,7 +17,9 @@ public class GameAndroid implements Game, Runnable {
     //Referencias para el patrón Singleton
     private GraphicsAndroid _graphicsAndroid;
     private InputAndroid _inputAndroid;
-    private Logica _currentGameState;
+
+    private GameState _currentGameState;
+    private GameState _nextGameState;
 
     private SurfaceView _surfaceView;
 
@@ -74,10 +76,19 @@ public class GameAndroid implements Game, Runnable {
 
         //Espera a que se inicialice el surfaceView
         while (_graphicsAndroid.getWidth()<=0);
-        _currentGameState = new Logica();
-        _currentGameState.init(this);
+
+
+
         while (_running){
             SurfaceHolder sh = _surfaceView.getHolder();
+
+            //TODO: Comprobar que funciona, y si no funciona hacerlo como en PC
+            if (_nextGameState != null) {
+                _currentGameState = _nextGameState;
+                _nextGameState = null;
+                _currentGameState.init(this);
+            }
+
             _currentGameState.tick(CalculaDeltaTime());
             while (!sh.getSurface().isValid());
             CanvasManagePaint(sh);

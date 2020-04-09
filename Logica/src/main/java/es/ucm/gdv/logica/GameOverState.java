@@ -93,6 +93,8 @@ public class GameOverState implements GameState {
 
     @Override
     public void tick(double elapsedTime) {
+        _logica.commonTick(elapsedTime);
+
         alpha += (factor * elapsedTime);
         if (alpha >= 100 || alpha <= 0) {
             factor = -factor;
@@ -136,6 +138,8 @@ public class GameOverState implements GameState {
 
     @Override
     public void render() {
+        _logica.commonRender();
+
         gameOver.drawImage(_graphics, 1080 / 2 - gameOver.getImage().getWidth() / 2,
                 364, gameOver.getImage().getWidth(), gameOver.getImage().getHeight());
 
