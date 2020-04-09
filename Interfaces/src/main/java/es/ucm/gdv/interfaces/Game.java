@@ -11,4 +11,5 @@ public interface Game {
     //Contiene la instancia de Input
     Input getInput();
 
+    void setGameState(GameState gameState);
 }

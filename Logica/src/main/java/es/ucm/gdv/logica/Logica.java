@@ -6,10 +6,11 @@ import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
 
 
-public class Logica implements GameState {
+public class Logica {
     private Game _game;
     private Graphics _graphics;
     private GameState _currentGameState;
+    private GameState _nextGameState;
     private ResourceManager _resourceManager;
 
     private ResourceManager.GameColor currentColor;
@@ -19,34 +20,45 @@ public class Logica implements GameState {
     private Boolean activateFlash = false;
     private int alpha = 200;
 
-    public Logica() {
-        _currentGameState = this;
+    public Logica(Game game) {
+        _game = game;
     }
 
-    @Override
-    public void init(Game game) {
-        _game = game;
+    public void init() {
         _graphics = _game.getGraphics();
 
         //INICIA RESOURCE MANAGER
         currentColor = ResourceManager.GameColor.GREEN;
         setCurrentGameState(new ResourceManager(this));
         _resourceManager = (ResourceManager) _currentGameState;
+        _game.setGameState(_resourceManager);
         flechas = new Flechas(_resourceManager);
 
         Image flashI = _resourceManager.getImage(ResourceManager.GameSprites.WHITE);
         flash = new Sprite(flashI, 0, 0, flashI.getWidth(), flashI.getHeight());
     }
 
-    @Override
     public void clear() {
         ClearScreen(currentColor);
     }
 
-    @Override
     public void tick(double elapsedTime) {
+        if (_nextGameState != null) _currentGameState = _nextGameState;
         flechas.tick(elapsedTime);
         _currentGameState.tick(elapsedTime);
+        flashStuff(elapsedTime);
+    }
+
+    public void render() {
+        flechas.render(_graphics);
+        _currentGameState.render();
+    }
+
+    ResourceManager getResourceManager() {
+        return _resourceManager;
+    }
+
+    private void flashStuff(double elapsedTime) {
         if (activateFlash) {
             alpha -= (60 * elapsedTime);
             if (alpha <= 0) {
@@ -56,22 +68,6 @@ public class Logica implements GameState {
         }
     }
 
-    @Override
-    public void render() {
-        flechas.render(_graphics);
-        _currentGameState.render();
-    }
-
-    @Override
-    public void handleInput() {
-        //Logica no hace handle input, sólo sus estados.
-    }
-
-    ResourceManager getResourceManager() {
-        return _resourceManager;
-    }
-
-
     void aumentaVelocidadFlechas() {
         flechas.aumentaVelocidad();
     }
@@ -80,12 +76,12 @@ public class Logica implements GameState {
         flechas.resetVelocidad();
     }
 
-
     void setCurrentGameState(GameState gameState) {
         activateFlash = true;
         alpha = 100;
-        _currentGameState = gameState;
-        _currentGameState.init(_game);
+        _nextGameState = gameState;
+        _nextGameState.init(_game);
+        _game.setGameState(gameState);
     }
 
     void SetClearColor(ResourceManager.GameColor newColor) {

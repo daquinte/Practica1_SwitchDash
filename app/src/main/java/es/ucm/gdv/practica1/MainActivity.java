@@ -26,9 +26,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         _gameAndroid = new GameAndroid(this, this);
-
-
-
     }
 
     //Cuando la APP pasa a primer plano.

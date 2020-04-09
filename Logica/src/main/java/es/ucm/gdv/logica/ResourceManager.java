@@ -20,11 +20,10 @@ public class ResourceManager implements GameState {
     //Enumerado de colores para el fondo
     public enum GameColor {GREEN, GREEN_BLUE, CYAN, LIGHT_BLUE, PURPLE, DARK_BLUE, ORANGE, RED, BEIGE}
 
-    //
-    public Sprite [] numbers;
-    public Sprite [] alphabet;
-    public Sprite [] bgColours;
-    public boolean allLoaded = false;
+    Sprite [] numbers;
+    Sprite [] alphabet;
+    Sprite [] bgColours;
+    private boolean allLoaded = false;
 
     //Private
     private Game _game;
@@ -43,7 +42,7 @@ public class ResourceManager implements GameState {
     private String[] gameImagesRoute;
 
 
-    public ResourceManager(Logica l) {
+    ResourceManager(Logica l) {
         _logica = l;
         gameImages = new ArrayList<>();
     }
@@ -77,9 +76,9 @@ public class ResourceManager implements GameState {
     @Override
     public void tick(double elapsedTime) {
         //Comprueba si se ha cargado to.do los elementos
-        if (!allLoaded) {
+        if (allLoaded) {
+            _logica.setCurrentGameState(new TituloState(_logica));
         }
-        else _logica.setCurrentGameState(new TituloState(_logica));
     }
 
     @Override
@@ -102,7 +101,7 @@ public class ResourceManager implements GameState {
         return gameImages.get(imgNum.ordinal());
     }
 
-    public GameColor getRandomGamecolor() {
+    GameColor getRandomGamecolor() {
         return gameColors[(rnd.nextInt(gameColorSize)+1)-1];
     }
 

@@ -4,9 +4,9 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 import es.ucm.gdv.interfaces.Game;
+import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Input;
-import es.ucm.gdv.logica.Logica;
 
 public class GamePC implements Game, Runnable {
 
@@ -18,7 +18,7 @@ public class GamePC implements Game, Runnable {
     private BufferStrategy _bs;
     private JFrame _frame;
 
-    private Logica _currentGameState;
+    private GameState _currentGameState;
 
     //Para el hilo
     private volatile boolean _running; //Volatile hace que no revise en memoria
@@ -35,7 +35,7 @@ public class GamePC implements Game, Runnable {
     Inicia la ventana, y adquiere la lógica que se va a utilizar.
     Además, la inicia.
     */
-    public void init(Logica logica) {
+    public void init() {
         _frame.setSize((int)(1080 * 0.5625f), 1080);
         _frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         _frame.setVisible(true);
@@ -58,8 +58,6 @@ public class GamePC implements Game, Runnable {
         //Inicializa los motores
         _graphicsPC = new GraphicsPC(_frame);
         _inputPC = new InputPC(_frame, _graphicsPC);
-        _currentGameState = logica;
-        _currentGameState.init(this);
     }
 
     //-----------------------------------------------
@@ -129,6 +127,8 @@ public class GamePC implements Game, Runnable {
         return _inputPC;
     }
 
-
-
+    @Override
+    public void setGameState(GameState gameState) {
+        _currentGameState = gameState;
+    }
 }

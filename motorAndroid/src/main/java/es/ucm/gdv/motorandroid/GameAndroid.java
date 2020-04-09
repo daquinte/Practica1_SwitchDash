@@ -7,6 +7,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import es.ucm.gdv.interfaces.Game;
+import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Input;
 import es.ucm.gdv.logica.Logica;
@@ -28,7 +29,6 @@ public class GameAndroid implements Game, Runnable {
     private Thread _runningThread;     //Hilo de juego
 
     public GameAndroid(Activity activity, Context context){
-
         _surfaceView = new SurfaceView(activity);
         activity.setContentView(_surfaceView);
         _graphicsAndroid = new GraphicsAndroid(_surfaceView, context.getAssets());
@@ -123,6 +123,10 @@ public class GameAndroid implements Game, Runnable {
         return _inputAndroid;
     }
 
+    @Override
+    public void setGameState(GameState gameState) {
+        _currentGameState = gameState;
+    }
 
 
 }
