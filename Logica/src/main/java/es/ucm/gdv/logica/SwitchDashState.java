@@ -15,9 +15,9 @@ public class SwitchDashState implements GameState {
 
     //Atributos del motor de juego
     Game _game;
-    Logica _logica;
     ResourceManager _resourceManager;
-    Graphics graphics;
+    Logica _logica;
+    Graphics _graphics;
     private Random rnd;
 
     //Atributos del juego
@@ -40,15 +40,15 @@ public class SwitchDashState implements GameState {
     private  final double TimeUntilSceneChange = 1.2;
 
 
-    public SwitchDashState(Logica l) {
-        _logica = l;
-        _resourceManager = l.getResourceManager();
+    public SwitchDashState() {
+        _resourceManager = ResourceManager.GetResourceManager();
+        _logica = Logica.GetLogica();
     }
 
     @Override
     public void init(Game game) {
         _game = game;
-        graphics = _game.getGraphics();
+        _graphics = _game.getGraphics();
         rnd = new Random();
 
         //Init
@@ -91,7 +91,7 @@ public class SwitchDashState implements GameState {
 
     @Override
     public void clear() {
-        _logica.clear();
+        _logica.clear(_graphics);
     }
 
     @Override
@@ -112,7 +112,7 @@ public class SwitchDashState implements GameState {
         if(isGameOver) {
             gameOverTimeTrack += elapsedTime;
             if(gameOverTimeTrack >= TimeUntilSceneChange){
-                _logica.setCurrentGameState(new GameOverState(_logica, puntosTotales));
+                _logica.setCurrentGameState(_game,new GameOverState(puntosTotales));
             }
         }
 
@@ -121,22 +121,22 @@ public class SwitchDashState implements GameState {
     @Override
     public void render() {
 
-        _logica.commonRender();
+        _logica.commonRender(_graphics);
 
         //JUGADOR
         if(!isGameOver) {
             Sprite auxJugador = jugador.GetSpriteJugador();
-            auxJugador.drawImage(graphics, jugador.getX(), jugador.getY(), auxJugador.getSpriteWidth(), auxJugador.getSpriteHeight());
+            auxJugador.drawImage(_graphics, jugador.getX(), jugador.getY(), auxJugador.getSpriteWidth(), auxJugador.getSpriteHeight());
         }
         //PELOTAS
         for (Pelota p : pelotas) {
             Sprite spriteP = p.GetSpritePelota();
-            spriteP.drawImage(graphics, 1080 / 2 - spriteP.getSpriteWidth() / 2, (int)p.getPosY(), p.getWidth(), p.getWidth());
+            spriteP.drawImage(_graphics, 1080 / 2 - spriteP.getSpriteWidth() / 2, (int)p.getPosY(), p.getWidth(), p.getWidth());
         }
 
         //Puntos
         for (int i = 0; i < 3; i++) {
-            puntuacionSprite[i].drawImage(graphics, 1100 + (i * 100), 200, puntuacionSprite[2].getSpriteWidth(), puntuacionSprite[2].getSpriteHeight());
+            puntuacionSprite[i].drawImage(_graphics, 1100 + (i * 100), 200, puntuacionSprite[2].getSpriteWidth(), puntuacionSprite[2].getSpriteHeight());
         }
 
         //Particulas

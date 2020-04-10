@@ -7,9 +7,10 @@ import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
+import sun.rmi.runtime.Log;
 
 /*"ESTADO DE JUEGO" EN EL QUE CARGAMOS LOS RECURSOS, para tenerlos disponibles*/
-public class ResourceManager implements GameState {
+public class ResourceManager {
 
     //UTILS
     public enum GameSprites {
@@ -20,14 +21,15 @@ public class ResourceManager implements GameState {
     //Enumerado de colores para el fondo
     public enum GameColor {GREEN, GREEN_BLUE, CYAN, LIGHT_BLUE, PURPLE, DARK_BLUE, ORANGE, RED, BEIGE}
 
+
+    private static ResourceManager instance = null;
+
     Sprite [] numbers;
     Sprite [] alphabet;
     Sprite [] bgColours;
     private boolean allLoaded = false;
 
     //Private
-    private Game _game;
-    private Logica _logica;
     private Graphics _graphics;
     private ArrayList<Image> gameImages;
 
@@ -42,15 +44,13 @@ public class ResourceManager implements GameState {
     private String[] gameImagesRoute;
 
 
-    ResourceManager(Logica l) {
-        _logica = l;
+    private ResourceManager() {
         gameImages = new ArrayList<>();
     }
 
-    @Override
-    public void init(Game game) {
-        _game = game;
-        _graphics = _game.getGraphics();
+
+    public void init(Graphics graphics) {
+        _graphics = graphics;
 
         CargaRutasDeImagenes();
         CargaImagenes();
@@ -68,35 +68,19 @@ public class ResourceManager implements GameState {
 
 
 
-    @Override
-    public void clear() {
-        //_logica.clear();
-    }
-
-    @Override
-    public void tick(double elapsedTime) {
-        //Comprueba si se ha cargado to.do los elementos
-        if (allLoaded) {
-            _logica.setCurrentGameState(new TituloState(_logica));
-        }
-    }
-
-    @Override
-    public void render() {
-        //No hay render en este estado
-    }
-
-    @Override
-    public void handleInput() {
-        //No hay input en este estado
-    }
-
-
     ///----------------
     /// Métodos propios
     ///----------------
 
     //Public
+
+    public static ResourceManager GetResourceManager(){
+        if(instance == null) {
+            instance = new ResourceManager();
+        }
+        return  instance;
+    }
+
     public Image getImage(GameSprites imgNum) {
         return gameImages.get(imgNum.ordinal());
     }

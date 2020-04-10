@@ -2,18 +2,19 @@ package es.ucm.gdv.logica;
 
 import java.util.List;
 
+import javax.security.auth.login.LoginContext;
+
 import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.TouchEvent;
 
-// TODO: Cuando arreglemos boton volver a activarlos
-public class GameOverState implements GameState {
+public class GameOverState  implements GameState {
 
     Game _game;
-    Logica _logica;
     ResourceManager _resourceManager;
+    Logica _logica;
     Graphics _graphics;
 
 
@@ -33,9 +34,9 @@ public class GameOverState implements GameState {
     private float alpha;
     private float factor;
 
-    public GameOverState(Logica l, int puntosConseguidos){
-        _logica = l;
-        _resourceManager = l.getResourceManager();
+    public GameOverState(int puntosConseguidos){
+        _resourceManager = ResourceManager.GetResourceManager();
+        _logica = Logica.GetLogica();
         puntuacionConseguida = puntosConseguidos;
     }
 
@@ -88,7 +89,7 @@ public class GameOverState implements GameState {
 
     @Override
     public void clear() {
-        _logica.clear();
+        _logica.clear(_graphics);
     }
 
     @Override
@@ -114,10 +115,10 @@ public class GameOverState implements GameState {
                     sonido.toggleSprite();
                 }
                 else if(ayuda.isPressed(pulsacionX,pulsacionY)){
-                    _logica.setCurrentGameState(new HowToPlayState(_logica));
+                    _logica.setCurrentGameState(_game,new HowToPlayState());
                 }
                 else {
-                    _logica.setCurrentGameState(new SwitchDashState(_logica));
+                    _logica.setCurrentGameState(_game,new SwitchDashState());
                 }
             }
         }
@@ -138,7 +139,7 @@ public class GameOverState implements GameState {
 
     @Override
     public void render() {
-        _logica.commonRender();
+        _logica.commonRender(_graphics);
 
         gameOver.drawImage(_graphics, 1080 / 2 - gameOver.getImage().getWidth() / 2,
                 364, gameOver.getImage().getWidth(), gameOver.getImage().getHeight());

@@ -3,7 +3,7 @@ package es.ucm.gdv.logica;
 import es.ucm.gdv.interfaces.Rect;
 
 /*
-* Clase abstracta que implementa graphics y contiene
+* Clase abstracta que contiene
 * los métodos que son comunes a la implementacion de android y de pc.
 * Concetramente, define el escalado del canvas físico donde se va a jugar
 * y tiene funcionalidades para pasar de coordenadas logicas a fisicas.

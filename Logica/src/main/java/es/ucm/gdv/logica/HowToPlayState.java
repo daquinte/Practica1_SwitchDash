@@ -17,23 +17,24 @@ public class HowToPlayState implements GameState {
     public Sprite tapToPlay;
 
     Game _game;
-    Logica _logica;
     ResourceManager _resourceManager;
-    Graphics graphics;
+    Logica _logica;
+    Graphics _graphics;
 
     private float alpha;
     private float factor;
 
 
-    public HowToPlayState(Logica l) {
-        _logica = l;
-        _resourceManager = l.getResourceManager();
+    public HowToPlayState() {
+
+        _resourceManager = ResourceManager.GetResourceManager();
+        _logica = Logica.GetLogica();
     }
 
     @Override
     public void init(Game game) {
         _game = game;
-        graphics = _game.getGraphics();
+        _graphics = _game.getGraphics();
         resourcesInit();
         factor = 60;
         _logica.resetVelocidadFlechas();
@@ -56,7 +57,7 @@ public class HowToPlayState implements GameState {
 
     @Override
     public void clear() {
-        _logica.clear();
+        _logica.clear(_graphics);
     }
 
     @Override
@@ -72,10 +73,10 @@ public class HowToPlayState implements GameState {
 
     @Override
     public void render() {
-        _logica.commonRender();
-        howToPlay.drawImage(graphics, 1080 / 2 - howToPlay.getImage().getWidth() / 2, 290, howToPlay.getImage().getWidth(), howToPlay.getImage().getHeight());
-        instructions.drawImage(graphics, 1080 / 2 - instructions.getImage().getWidth() / 2, 768, instructions.getImage().getWidth(), instructions.getImage().getHeight());
-        tapToPlay.drawImage(graphics, 1080 / 2 - tapToPlay.getImage().getWidth() / 2, 1464, tapToPlay.getImage().getWidth(), tapToPlay.getImage().getHeight(), alpha);
+        _logica.commonRender(_graphics);
+        howToPlay.drawImage(_graphics, 1080 / 2 - howToPlay.getImage().getWidth() / 2, 290, howToPlay.getImage().getWidth(), howToPlay.getImage().getHeight());
+        instructions.drawImage(_graphics, 1080 / 2 - instructions.getImage().getWidth() / 2, 768, instructions.getImage().getWidth(), instructions.getImage().getHeight());
+        tapToPlay.drawImage(_graphics, 1080 / 2 - tapToPlay.getImage().getWidth() / 2, 1464, tapToPlay.getImage().getWidth(), tapToPlay.getImage().getHeight(), alpha);
     }
 
     @Override
@@ -86,10 +87,10 @@ public class HowToPlayState implements GameState {
                 int pulsacionX = touchEvent.get_x();
                 int pulsacionY = touchEvent.get_y();
                 if (close.isPressed(pulsacionX, pulsacionY)) {
-                    _logica.setCurrentGameState(new SwitchDashState(_logica));
+                    _logica.setCurrentGameState(_game,new SwitchDashState());
                 }
                 else {
-                    _logica.setCurrentGameState(new SwitchDashState(_logica));
+                    _logica.setCurrentGameState(_game,new SwitchDashState());
                 }
             }
         }

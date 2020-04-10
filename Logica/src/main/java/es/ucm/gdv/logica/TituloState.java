@@ -7,6 +7,7 @@ import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.TouchEvent;
+import sun.rmi.runtime.Log;
 
 
 // TODO: Cuando arreglemos boton volver a activarlos
@@ -14,9 +15,9 @@ public class TituloState implements GameState {
 
     //Atributos del motor
     private Game _game;
-    private Logica _logica;
     private ResourceManager _resourceManager;
-    private Graphics graphics;
+    private Logica _logica;
+    private Graphics _graphics;
 
     //Atributos del estado
     private Boton sonido;
@@ -28,19 +29,22 @@ public class TituloState implements GameState {
     private float alpha;
     private float factor;
 
-    TituloState(Logica l) {
-        _logica = l;
-        _resourceManager = l.getResourceManager();
+    public TituloState() {
+        factor = 60;
+        alpha = 0;
     }
 
     @Override
     public void init(Game game) {
         _game = game;
-        graphics = _game.getGraphics();
+        _graphics = _game.getGraphics();
+        _resourceManager = ResourceManager.GetResourceManager();
+        _logica = Logica.GetLogica();
+
+        _resourceManager.init(_game.getGraphics());
         _logica.SetClearColor(_resourceManager.getRandomGamecolor());
         resourcesInit();
-        factor = 60;
-        alpha = 0;
+
     }
 
     private void resourcesInit() {
@@ -65,7 +69,7 @@ public class TituloState implements GameState {
 
     @Override
     public void clear() {
-        _logica.clear();
+        _logica.clear(_graphics);
     }
 
     @Override
@@ -77,6 +81,7 @@ public class TituloState implements GameState {
         }
         handleInput();
     }
+
     @Override
     public void handleInput() {
         List<TouchEvent> touchEvents = _game.getInput().getTouchEvents();
@@ -88,7 +93,7 @@ public class TituloState implements GameState {
                     sonido.toggleSprite();
                 }
                 else {
-                    _logica.setCurrentGameState(new HowToPlayState(_logica));
+                    _logica.setCurrentGameState(_game, new HowToPlayState());
                 }
             }
         }
@@ -96,10 +101,10 @@ public class TituloState implements GameState {
 
     @Override
     public void render() {
-        _logica.commonRender();
-        sonido.render(graphics);
-        ayuda.render(graphics);
-        logo.drawImage(graphics, 1080 / 2 - logo.getImage().getWidth() / 2, 356, logo.getImage().getWidth(), logo.getImage().getHeight());
-        tapToPlay.drawImage(graphics, 1080 / 2 - tapToPlay.getImage().getWidth() / 2, 950, tapToPlay.getImage().getWidth(), tapToPlay.getImage().getHeight(), alpha);
+        _logica.commonRender(_graphics);
+        sonido.render(_graphics);
+        ayuda.render(_graphics);
+        logo.drawImage(_graphics, 1080 / 2 - logo.getImage().getWidth() / 2, 356, logo.getImage().getWidth(), logo.getImage().getHeight());
+        tapToPlay.drawImage(_graphics, 1080 / 2 - tapToPlay.getImage().getWidth() / 2, 950, tapToPlay.getImage().getWidth(), tapToPlay.getImage().getHeight(), alpha);
     }
 }
