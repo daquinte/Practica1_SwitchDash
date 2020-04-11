@@ -3,11 +3,8 @@ package es.ucm.gdv.logica;
 import java.util.ArrayList;
 import java.util.Random;
 
-import es.ucm.gdv.interfaces.Game;
-import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
-import sun.rmi.runtime.Log;
 
 /*"ESTADO DE JUEGO" EN EL QUE CARGAMOS LOS RECURSOS, para tenerlos disponibles*/
 public class ResourceManager {

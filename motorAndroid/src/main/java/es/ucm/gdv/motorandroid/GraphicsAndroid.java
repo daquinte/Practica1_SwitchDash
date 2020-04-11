@@ -1,11 +1,5 @@
 package es.ucm.gdv.motorandroid;
 
-import es.ucm.gdv.logica.AbstractGraphics;
-import es.ucm.gdv.interfaces.Graphics;
-import es.ucm.gdv.interfaces.Image;
-import es.ucm.gdv.interfaces.Rect;
-
-//Imports de android
 import android.content.res.AssetManager;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -13,9 +7,15 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.SurfaceView;
 
-
 import java.io.IOException;
 import java.io.InputStream;
+
+import es.ucm.gdv.interfaces.Graphics;
+import es.ucm.gdv.interfaces.Image;
+import es.ucm.gdv.interfaces.Rect;
+import es.ucm.gdv.logica.AbstractGraphics;
+
+//Imports de android
 
 
 public class GraphicsAndroid extends AbstractGraphics implements Graphics {

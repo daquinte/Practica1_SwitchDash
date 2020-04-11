@@ -2,8 +2,6 @@ package es.ucm.gdv.logica;
 
 import java.util.List;
 
-import javax.security.auth.login.LoginContext;
-
 import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;

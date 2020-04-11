@@ -1,10 +1,9 @@
 package es.ucm.gdv.practica1;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import es.ucm.gdv.interfaces.GameState;
-import es.ucm.gdv.logica.Logica;
 import es.ucm.gdv.logica.TituloState;
 import es.ucm.gdv.motorandroid.GameAndroid;
 

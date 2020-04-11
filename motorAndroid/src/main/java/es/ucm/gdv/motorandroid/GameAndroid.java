@@ -10,7 +10,6 @@ import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Input;
-import es.ucm.gdv.logica.Logica;
 
 public class GameAndroid implements Game, Runnable {
 

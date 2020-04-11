@@ -7,7 +7,6 @@ import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.TouchEvent;
-import sun.rmi.runtime.Log;
 
 
 // TODO: Cuando arreglemos boton volver a activarlos

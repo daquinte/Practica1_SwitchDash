@@ -2,7 +2,9 @@ package es.ucm.gdv.motorpc; //Igual debería ser es.ucm.gdv.interfaces.motorpc
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
+
 import javax.swing.JFrame;
+
 import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;

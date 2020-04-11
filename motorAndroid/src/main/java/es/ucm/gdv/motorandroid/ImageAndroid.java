@@ -1,6 +1,7 @@
 package es.ucm.gdv.motorandroid;
 
 import android.graphics.Bitmap;
+
 import es.ucm.gdv.interfaces.Image;
 
 public class ImageAndroid implements Image {
