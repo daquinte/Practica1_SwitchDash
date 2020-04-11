@@ -10,6 +10,7 @@ import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Input;
+import es.ucm.gdv.logica.Logica;
 
 public class GameAndroid implements Game, Runnable {
 
@@ -77,18 +78,21 @@ public class GameAndroid implements Game, Runnable {
         while (_graphicsAndroid.getWidth()<=0);
 
 
-
+        long lastFrameTime = System.nanoTime();
         while (_running){
             SurfaceHolder sh = _surfaceView.getHolder();
 
-            //TODO: Comprobar que funciona, y si no funciona hacerlo como en PC
+            long currentTime = System.nanoTime();
+            long nanoElapsedTime = currentTime - lastFrameTime;
+            lastFrameTime = currentTime;
+            double elapsedTime = (double) nanoElapsedTime / 1.0E9;
+
             if (_nextGameState != null) {
                 _currentGameState = _nextGameState;
                 _nextGameState = null;
                 _currentGameState.init(this);
             }
-
-            _currentGameState.tick(CalculaDeltaTime());
+            _currentGameState.tick(elapsedTime);
             while (!sh.getSurface().isValid());
             CanvasManagePaint(sh);
         }
@@ -104,15 +108,6 @@ public class GameAndroid implements Game, Runnable {
         _currentGameState.render();
         sh.unlockCanvasAndPost(c);
     }
-
-    //Calcula el deltatime que va a usar el estado actual.
-    private double CalculaDeltaTime(){
-        long currentTime = System.nanoTime();
-        long nanoElapsedTime = currentTime - lastFrameTime;
-        lastFrameTime = currentTime;
-        return (double) nanoElapsedTime / 1.0e9;
-    }
-
 
     @Override
     public Game getGame() {
