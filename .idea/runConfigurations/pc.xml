@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="pc" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="es.ucm.gdv.switchdashpc.Main" />
+    <module name="SwitchDashPC" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
