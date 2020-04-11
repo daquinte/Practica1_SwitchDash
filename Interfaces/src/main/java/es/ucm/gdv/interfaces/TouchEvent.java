@@ -8,12 +8,12 @@ public class TouchEvent {
     private int _x;
     private int _y;
     private int _inputID;
-    private TouchType _touchEvent;
+    private TouchType _touchType;
 
-    public TouchEvent(int x, int y, TouchType touchEvent, int inputID) {
+    public TouchEvent(int x, int y, TouchType touchType, int inputID) {
         _x = x;
         _y = y;
-        _touchEvent = touchEvent;
+        _touchType = touchType;
         _inputID = inputID;
     }
 
@@ -28,8 +28,8 @@ public class TouchEvent {
         return _inputID;
     }
 
-    public TouchType get_touchEvent() {
-        return _touchEvent;
+    public TouchType getTouchType() {
+        return _touchType;
     }
 }
 

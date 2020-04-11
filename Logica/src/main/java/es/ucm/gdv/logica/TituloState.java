@@ -85,7 +85,7 @@ public class TituloState implements GameState {
     public void handleInput() {
         List<TouchEvent> touchEvents = _game.getInput().getTouchEvents();
         for (TouchEvent touchEvent : touchEvents) {
-            if (touchEvent.get_touchEvent() == TouchEvent.TouchType.click) {
+            if (touchEvent.getTouchType() == TouchEvent.TouchType.click) {
                 int pulsacionX = touchEvent.get_x();
                 int pulsacionY = touchEvent.get_y();
                 if (sonido.isPressed(pulsacionX, pulsacionY)) {

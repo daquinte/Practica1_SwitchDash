@@ -147,7 +147,7 @@ public class SwitchDashState implements GameState {
     public void handleInput() {
         List<TouchEvent> touchEvents = _game.getInput().getTouchEvents();
         for (TouchEvent touchEvent : touchEvents) {
-            if (touchEvent.get_touchEvent() == TouchEvent.TouchType.click) {
+            if (touchEvent.getTouchType() == TouchEvent.TouchType.click) {
                 jugador.ToggleColorJugador();
             }
         }
