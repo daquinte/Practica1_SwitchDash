@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 
 import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
@@ -35,6 +36,11 @@ public class GameAndroid implements Game, Runnable {
         activity.setContentView(_surfaceView);
         _graphicsAndroid = new GraphicsAndroid(_surfaceView, context.getAssets());
         _inputAndroid = new InputAndroid(_graphicsAndroid);
+        _surfaceView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         _surfaceView.setOnTouchListener(_inputAndroid);
     }
 
