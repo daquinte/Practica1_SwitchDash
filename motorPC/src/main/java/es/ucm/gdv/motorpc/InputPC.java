@@ -33,18 +33,11 @@ public class InputPC implements Input, MouseListener {
         List<TouchEvent> aux;
         synchronized (this) {
             aux = new ArrayList<>(inputList);
-            Clear();
+            synchronized (this) {
+                inputList.clear();
+            }
         }
         return aux;
-    }
-
-    /**
-     * Limpia la cola de comandos.
-     * Sincronized porque se tiene que limpiar la cola cuando la hebra no lo use.
-     * */
-    @Override
-    public synchronized void Clear() {
-            inputList.clear();
     }
 
     //-----------------

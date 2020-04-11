@@ -136,7 +136,7 @@ public class GameAndroid implements Game, Runnable {
 
     @Override
     public void setGameState(GameState gameState) {
-        _currentGameState = gameState;
+        _nextGameState = gameState;
     }
 
 

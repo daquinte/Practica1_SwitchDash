@@ -26,15 +26,12 @@ public class InputAndroid implements Input, View.OnTouchListener{
         LinkedList<TouchEvent> auxIL;
         synchronized (this) {
             auxIL = new LinkedList<>(inputList);
-            Clear();
+            synchronized (this) {
+                inputList.clear();
+            }
 
         }
         return auxIL;
-    }
-
-    @Override
-    public synchronized void Clear() {
-        inputList.clear();
     }
 
     /*

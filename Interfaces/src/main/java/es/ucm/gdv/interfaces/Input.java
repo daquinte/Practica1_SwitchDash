@@ -8,5 +8,4 @@ public interface Input {
      * la última invocación al método.
      * */
     List<TouchEvent> getTouchEvents();
-    void Clear();
 }

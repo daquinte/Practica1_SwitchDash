@@ -11,8 +11,8 @@ public class Main {
         GamePC game = new GamePC("Switch Dash - Practica de Moviles edition");
         game.init();
 
-        GameState test = new TituloState();
-        game.setGameState(test);
+        GameState tituloState = new TituloState();
+        game.setGameState(tituloState);
         game.run();
     }
 
