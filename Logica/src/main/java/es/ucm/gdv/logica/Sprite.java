@@ -42,10 +42,6 @@ public class Sprite {
     }
 
     public Image getImage(){ return _spriteImage; }
-    public int getSpriteWidth(){ return _source.width; }
-    public int getSpriteHeight(){ return _source.height; }
-
-    public Rect getRectDestiny(){
-        return _rectDestiny;
-    }
+    int getSpriteWidth(){ return _source.width; }
+    int getSpriteHeight(){ return _source.height; }
 }

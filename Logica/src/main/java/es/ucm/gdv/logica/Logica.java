@@ -22,14 +22,14 @@ public class Logica {
 
     private static Logica instance = null;
 
-    public static Logica GetLogica(){
+    static Logica GetLogica(){
         if(instance == null) {
             instance = new Logica();
         }
         return  instance;
     }
 
-    public void initFlechas(){
+    void initFlechas(){
         //init del resource
         ResourceManager rm = ResourceManager.GetResourceManager();
         flechas = new Flechas(rm);
@@ -40,14 +40,14 @@ public class Logica {
 
 
     //La parte común del tick
-    public void commonTick(double elapsedTime) {
+    void commonTick(double elapsedTime) {
 
         flechas.tick(elapsedTime);
         flashStuff(elapsedTime);
     }
 
     //La parte común del render
-    public void commonRender(Graphics g) {
+    void commonRender(Graphics g) {
         flechas.render(g);
     }
 
@@ -126,10 +126,9 @@ public class Logica {
         bgSprite.drawImage(_graphics, 1080 / 2 - flechas.getSprite().getSpriteWidth() / 2, 0,
                 flechas.getSprite().getSpriteWidth(), flechas.getSprite().getSpriteHeight());
 
-
+        activateFlash = true;
         if (activateFlash) {
-            flash.drawImage(_graphics, 0, 0
-                    , flash.getSpriteWidth(), flash.getSpriteHeight(), alpha);
+            flash.drawImage(_graphics, 0, 0, 1080, 1920, alpha);
         }
     }
 }

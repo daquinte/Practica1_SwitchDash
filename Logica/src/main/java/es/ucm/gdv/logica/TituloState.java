@@ -9,7 +9,6 @@ import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.TouchEvent;
 
 
-// TODO: Cuando arreglemos boton volver a activarlos
 public class TituloState implements GameState {
 
     //Atributos del motor

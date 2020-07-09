@@ -15,30 +15,14 @@ public abstract class AbstractGraphics {
     private int _referenceCanvasWidth = 1080;
     private int _referenceCanvasHeight = 1920;
 
-    private Rect scale(Rect oldRect) {
-        int x = 0;
-        int new_width = (oldRect.width > oldRect.height)? calculateNewAspectRatio(oldRect.height)
-                    : calculateNewAspectRatio(oldRect.width);
-        x += (oldRect.width / 2) - (new_width / 2);
-        return new Rect(x, 0, new_width, oldRect.height);
-    }
-
     /*Pasa coordenadas lógicas en la resolucion base a coordenadas físicas con nuestra resolución.*/
     protected Rect coordinatesToCanvas(Rect destino) {
         int _width = (destino.width * _canvas.width / _referenceCanvasWidth);
         int _height = destino.height * _width / destino.width;
 
-        int _y = translateCoordinate(_canvas.height, destino.y, _canvas.y);
+        int _y = (_canvas.height * destino.y / _referenceCanvasHeight)+ _canvas.y;
         int _x = (_canvas.width * destino.x / _referenceCanvasWidth) + _canvas.x;
         return new Rect(_x, _y, _width, _height);
-    }
-
-    private int translateCoordinate(int canvasSize, int coord, int canvasCoord) {
-        return (canvasSize * coord / _referenceCanvasHeight) + canvasCoord;
-    }
-
-    private int calculateNewAspectRatio(int param) {
-        return 9 * param / 16;
     }
 
     public boolean isInCanvas(int x, int y) {
@@ -54,8 +38,27 @@ public abstract class AbstractGraphics {
         return (y * _referenceCanvasHeight) / _canvas.height;
     }
 
+    private Rect scaleCanvas(Rect actualCanvas) {
+        int new_width = actualCanvas.width, new_height = actualCanvas.height;
+        if (actualCanvas.width > actualCanvas.height) {
+            if (actualCanvas.width > _referenceCanvasWidth) {
+                new_width = _referenceCanvasWidth;
+                new_height = (new_width * actualCanvas.height) / actualCanvas.width;
+            }
+        }
+        else {
+            if (actualCanvas.height > _referenceCanvasHeight) {
+                new_height = _referenceCanvasHeight;
+                new_width = (new_height * actualCanvas.width) / actualCanvas.height;
+            }
+        }
+        int x = 0;
+        x += (actualCanvas.width / 2) - (new_width / 2);
+        return new Rect(x, 0, new_width, new_height);
+    }
+
     protected void setCanvasSize(Rect actualCanvas) {
-        _canvas = scale(actualCanvas);
+        _canvas = scaleCanvas(actualCanvas);
     }
 
     public Rect getRectCanvas() {
