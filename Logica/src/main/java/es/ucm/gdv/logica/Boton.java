@@ -46,6 +46,6 @@ public class Boton {
 
     public void render(Graphics graphics) {
         //graphics.DrawRect(logicRect);
-        spriteBotons[index].drawImage(graphics, logicRect.x, logicRect.y, logicRect.width, logicRect.height);
+        spriteBotons[index].drawImage(graphics, logicRect.x, logicRect.y, logicRect.width, logicRect.height, true);
     }
 }

@@ -140,10 +140,10 @@ public class GameOverState  implements GameState {
         _logica.commonRender(_graphics);
 
         gameOver.drawImage(_graphics, 1080 / 2 - gameOver.getImage().getWidth() / 2,
-                364, gameOver.getImage().getWidth(), gameOver.getImage().getHeight());
+                364, gameOver.getImage().getWidth(), gameOver.getImage().getHeight(), true);
 
         playAgain.drawImage(_graphics, 1080 / 2 - playAgain.getImage().getWidth() / 2, 1396,
-                playAgain.getImage().getWidth(), playAgain.getImage().getHeight(), alpha);
+                playAgain.getImage().getWidth(), playAgain.getImage().getHeight(), alpha, true);
 
         sonido.render(_graphics);
         ayuda.render(_graphics);
@@ -151,13 +151,13 @@ public class GameOverState  implements GameState {
         //Puntos
         for (int i = 0; i < puntuacionSprite.length; i++) {
             puntuacionSprite[i].drawImage(_graphics, (1080 / 2 - gameOver.getImage().getWidth() / 2 - 200) + ( i *200), 700,
-                    puntuacionSprite[2].getSpriteWidth() * 2, puntuacionSprite[2].getSpriteHeight() *2);
+                    puntuacionSprite[2].getSpriteWidth() * 2, puntuacionSprite[2].getSpriteHeight() *2, true);
 
         }
 
         for (int i = 0; i < points.length; i++) {
             points[i].drawImage(_graphics, (1080 / 2 - gameOver.getImage().getWidth() / 2 - 190) + ( i *100), 1000,
-                    puntuacionSprite[2].getSpriteWidth(), puntuacionSprite[2].getSpriteHeight());
+                    puntuacionSprite[2].getSpriteWidth(), puntuacionSprite[2].getSpriteHeight(), true);
 
         }
     }

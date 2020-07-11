@@ -56,10 +56,10 @@ public class GraphicsPC extends AbstractGraphics implements Graphics {
     }
 
     @Override
-    public void drawImage(Image image, Rect destino, Rect source) {
+    public void drawImage(Image image, Rect destino, Rect source, Boolean scale) {
         ImagePC img = (ImagePC) image;
         java.awt.Image awtImage = img.getImage();
-        Rect physicsCoordinates = coordinatesToCanvas(destino);
+        Rect physicsCoordinates = (scale)? coordinatesToCanvas(destino) : destino;
 
         _graphics.drawImage(awtImage, physicsCoordinates.x, physicsCoordinates.y,
                 physicsCoordinates.x + physicsCoordinates.width, physicsCoordinates.y + physicsCoordinates.height,
@@ -68,10 +68,10 @@ public class GraphicsPC extends AbstractGraphics implements Graphics {
     }
 
     @Override
-    public void drawImage(Image image, Rect destino, Rect source, float alpha) {
+    public void drawImage(Image image, Rect destino, Rect source, float alpha, Boolean scale) {
         ImagePC img = (ImagePC) image;
         java.awt.Image awtImage = img.getImage();
-        Rect physicsCoordinates = coordinatesToCanvas(destino);
+        Rect physicsCoordinates = (scale)? coordinatesToCanvas(destino) : destino;
 
         //Vamos a regular el alpha, porque en PC está en escala 0-1
          alpha /= 100f;

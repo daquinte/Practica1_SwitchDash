@@ -27,7 +27,7 @@ public class Flechas {
 
     public void render(Graphics graphics) {
         sprite.drawImage(graphics, 1080/2 - sprite.getImage().getWidth() / 2,
-                (int)posY, sprite.getSpriteWidth(), sprite.getSpriteHeight(), 50);
+                (int)posY, sprite.getSpriteWidth(), sprite.getSpriteHeight(), 50, true);
 
     }
 

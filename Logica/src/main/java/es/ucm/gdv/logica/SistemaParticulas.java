@@ -117,6 +117,6 @@ class Particula{
     }
 
     public void render(){
-        particleSprite.drawImage(_game.getGraphics(), posX, 1150 + posY, particleSprite.getSpriteWidth()/randomScaleFactor, particleSprite.getSpriteHeight()/randomScaleFactor, alpha);
+        particleSprite.drawImage(_game.getGraphics(), posX, 1150 + posY, particleSprite.getSpriteWidth()/randomScaleFactor, particleSprite.getSpriteHeight()/randomScaleFactor, alpha, true);
     }
 }

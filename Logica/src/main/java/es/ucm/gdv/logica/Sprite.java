@@ -31,14 +31,14 @@ public class Sprite {
      * @param x Posicion x destino en coodenadas de pantalla (0 - getWidth()-1 <- Escalado y reposicionamiento FUERA, es llamada desde el escalado.
      *
      * */
-    public void drawImage(Graphics graphics, int x, int y, int ancho, int alto) {
+    public void drawImage(Graphics graphics, int x, int y, int ancho, int alto, Boolean scale) {
         _rectDestiny = new Rect(x, y, ancho, alto);
-        graphics.drawImage(_spriteImage, _rectDestiny, _source);
+        graphics.drawImage(_spriteImage, _rectDestiny, _source, scale);
     }
 
-    public void drawImage(Graphics graphics, int x, int y, int ancho, int alto, float alpha){
+    public void drawImage(Graphics graphics, int x, int y, int ancho, int alto, float alpha, Boolean scale){
         _rectDestiny =  new Rect(x, y, ancho, alto);
-        graphics.drawImage(_spriteImage, _rectDestiny, _source, alpha);
+        graphics.drawImage(_spriteImage, _rectDestiny, _source, alpha, scale);
     }
 
     public Image getImage(){ return _spriteImage; }

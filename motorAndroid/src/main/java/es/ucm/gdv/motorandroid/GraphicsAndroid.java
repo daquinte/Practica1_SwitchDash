@@ -76,9 +76,9 @@ public class GraphicsAndroid extends AbstractGraphics implements Graphics {
     }
 
     @Override
-    public void drawImage(Image image, Rect destino, Rect source) {
+    public void drawImage(Image image, Rect destino, Rect source, Boolean scale) {
         if (image != null) {
-            Rect physicsCoords = coordinatesToCanvas(destino);
+            Rect physicsCoords = (scale)? coordinatesToCanvas(destino) : destino;
             android.graphics.Rect dest = new android.graphics.Rect(physicsCoords.x, physicsCoords.y,
                     physicsCoords.x + physicsCoords.width, physicsCoords.y + physicsCoords.height);
 
@@ -89,9 +89,9 @@ public class GraphicsAndroid extends AbstractGraphics implements Graphics {
     }
 
     @Override
-    public void drawImage(Image image, Rect destino, Rect source, float alpha) {
+    public void drawImage(Image image, Rect destino, Rect source, float alpha, Boolean scale) {
         _paint.setAlpha((int) alpha);
-        drawImage(image, destino, source);
+        drawImage(image, destino, source, scale);
         _paint.reset();
     }
 

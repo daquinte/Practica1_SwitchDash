@@ -124,11 +124,10 @@ public class Logica {
         /*bgSprite.drawImage(_game.getGraphics(), _game.getGraphics().getRectCanvas().x, _game.getGraphics().getRectCanvas().y
                 , _game.getGraphics().getRectCanvas().width, _game.getGraphics().getRectCanvas().height);*/
         bgSprite.drawImage(_graphics, 1080 / 2 - flechas.getSprite().getSpriteWidth() / 2, 0,
-                flechas.getSprite().getSpriteWidth(), flechas.getSprite().getSpriteHeight());
+                flechas.getSprite().getSpriteWidth(), flechas.getSprite().getSpriteHeight(), true);
 
-        activateFlash = true;
         if (activateFlash) {
-            flash.drawImage(_graphics, 0, 0, 1080, 1920, alpha);
+            flash.drawImage(_graphics, 0, 0, _graphics.getWidth(), _graphics.getHeight(), alpha, false);
         }
     }
 }

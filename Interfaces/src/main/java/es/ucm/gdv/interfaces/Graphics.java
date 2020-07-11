@@ -12,13 +12,13 @@ public interface Graphics {
      *  @param destino       rectangulo destino
      *  @param source        rectangulo fuente, extraido de la imagen
      */
-    void drawImage(Image image, Rect destino, Rect source);
+    void drawImage(Image image, Rect destino, Rect source, Boolean scale);
 
     /**
      * Pinta la imagen, escalada en coordenadas de canvas, aplicandole la componente alpha
      * Pintar con alfa es más caro, por eso vamos a tener un método aparte
      */
-    void drawImage(Image image, Rect destino, Rect source, float alpha);
+    void drawImage(Image image, Rect destino, Rect source, float alpha, Boolean scale);
 
     void updateCanvasSize();
     Rect getRectCanvas();
