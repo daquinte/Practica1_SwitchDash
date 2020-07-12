@@ -84,9 +84,8 @@ public class SwitchDashState implements GameState {
     }
 
     private void initSpritePuntos() {
-        for (int i = 0; i < 3; i++) {
-            puntuacionSprite[i] = _resourceManager.numbers[0];
-        }
+        puntosTotales--;
+        CalculaPuntuacion();
     }
 
     @Override
@@ -135,8 +134,11 @@ public class SwitchDashState implements GameState {
         }
 
         //Puntos
-        for (int i = 0; i < 3; i++) {
-            puntuacionSprite[i].drawImage(_graphics, 1100 + (i * 100), 200, puntuacionSprite[2].getSpriteWidth(), puntuacionSprite[2].getSpriteHeight(), true);
+        int numuerosApintar = (puntosTotales >= 100) ? 2 : (puntosTotales > 10) ? 1 : 0;
+        int xOffset = numuerosApintar;
+        for (int i = 2; i >= 2 - numuerosApintar; i--) {
+            puntuacionSprite[i].drawImage(_graphics, (1080 * 2 / 3 + 145) + 95 * xOffset, 115, puntuacionSprite[2].getSpriteWidth(), puntuacionSprite[2].getSpriteHeight(), true);
+            xOffset--;
         }
 
         //Particulas
@@ -185,7 +187,7 @@ public class SwitchDashState implements GameState {
 
     private void CalculaPuntuacion() {
         //No creo que nadie llegue, pero nunca sabes
-        if (puntosTotales <= 999) {
+        if (puntosTotales <= 998) {
             puntosTotales++;
             int resultadoDivision = puntosTotales;
             int indexSprite = 2;
@@ -194,6 +196,14 @@ public class SwitchDashState implements GameState {
                 resultadoDivision /= 10;
                 indexSprite--;
             }
+            while (indexSprite > 0) {
+                puntuacionSprite[indexSprite] = _resourceManager.numbers[0];
+                indexSprite--;
+            }
+        }
+        else {
+            puntosTotales = 0;
+            initSpritePuntos();
         }
     }
 
