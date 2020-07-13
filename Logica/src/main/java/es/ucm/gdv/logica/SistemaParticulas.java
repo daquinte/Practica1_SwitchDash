@@ -16,22 +16,20 @@ public class SistemaParticulas {
     private LinkedList<Particula> eliminadas;
 
     private Game _game;
-    public SistemaParticulas(Game g){
-
+    SistemaParticulas(Game g){
         particulas = new LinkedList<>();
         eliminadas = new LinkedList<>();
         _game = g;
-
     }
 
-    public void addParticles(Sprite baseSprite, int numParticles, Pair originalPos){
+    void addParticles(Sprite baseSprite, int numParticles, int x){
         for(int i = 0; i < numParticles;i++){
-            Particula p = new Particula(this, _game,  baseSprite, originalPos);
+            Particula p = new Particula(this, _game,  baseSprite, x);
             particulas.add(p);
         }
     }
 
-    public void eraseParticle(Particula p){
+    void eraseParticle(Particula p){
         eliminadas.add(p);
     }
 
@@ -39,12 +37,10 @@ public class SistemaParticulas {
         for (Particula p : particulas) {
             p.tick(elapsedTime);
         }
-
         for(Particula p : eliminadas){
            particulas.remove(p);
         }
         eliminadas.clear();
-
     }
 
     public void  render(){
@@ -54,41 +50,38 @@ public class SistemaParticulas {
     }
 }
 
-/*Particula del efecto de muerte de la pelota. El efecto se compone por varias particulas.
-* Cada particula tiene sus propios valores de escala, posicion y "fuerza"
-* -Evidentemente no hay fuerzas físicas, sólo desplazamientos-
-* */
+/* Particula del efecto de muerte de la pelota. El efecto se compone por varias particulas.
+ * Cada particula tiene sus propios valores de escala, posicion y "fuerza"
+ * -Evidentemente no hay fuerzas físicas, sólo desplazamientos-
+ * */
 class Particula{
-    Game _game;                             //Referencia al juego
-    SistemaParticulas sistemaP;             //Referencia al sistema de particulas
+    private Game _game;                             //Referencia al juego
+    private SistemaParticulas sistemaP;             //Referencia al sistema de particulas
 
-    Sprite particleSprite;                  //Sprite base, obtenido de la pelota destruida
-    Random rnd;                             //Random de la particula.
-
-
-    int alpha;                              //Componente alpha. Cuando llegue a cero, se destruye.
-    int randomXFactor;                      //Factor de "velocidad" en X
-    int randomYFactor;                      //Factor de "velocidad" en Y
-    int randomScaleFactor;                  //Escala de la particula
-    int factor = 70;                        //Factor por el cual decrece el valor de "alpha"
-
-    final int MAXSPEED = 200;
-    final int MAXSCALE = 3;
+    private Sprite particleSprite;                  //Sprite base, obtenido de la pelota destruida
 
 
+    private int alpha;                              //Componente alpha. Cuando llegue a cero, se destruye.
+    private int randomXFactor;                      //Factor de "velocidad" en X
+    private int randomYFactor;                      //Factor de "velocidad" en Y
+    private int randomScaleFactor;                  //Escala de la particula
 
-    int posX, posY;
-    public Particula(SistemaParticulas sp, Game g, Sprite s, Pair originalPos){
+    private int posX, posY;
+
+    Particula(SistemaParticulas sp, Game g, Sprite s, int x){
         _game = g;
         sistemaP = sp;
         particleSprite = s;
-        rnd = new Random();
+        //Random de la particula.
+        Random rnd = new Random();
 
-        posX = originalPos._first;
+        posX = x;
         posY = 0;
+        int MAXSCALE = 3;
         randomScaleFactor = rnd.nextInt(MAXSCALE) +1;
-        randomXFactor = rnd.nextInt(MAXSPEED*2)-MAXSPEED;
-        randomYFactor = rnd.nextInt(MAXSPEED*2)-MAXSPEED;
+        int MAXSPEED = 200;
+        randomXFactor = rnd.nextInt(MAXSPEED *2)- MAXSPEED;
+        randomYFactor = rnd.nextInt(MAXSPEED *2)- MAXSPEED;
 
 
         // Ajustamos la velocidad diagonal
@@ -104,6 +97,8 @@ class Particula{
     }
 
     public void tick(double elapsedTime){
+        //Factor por el cual decrece el valor de "alpha"
+        int factor = 70;
         alpha -= (factor * elapsedTime);
         if (alpha <= 0) {
             sistemaP.eraseParticle(this);
@@ -111,8 +106,6 @@ class Particula{
         else {
             posY += randomYFactor * elapsedTime;
             posX += randomXFactor * elapsedTime;
-
-
         }
     }
 

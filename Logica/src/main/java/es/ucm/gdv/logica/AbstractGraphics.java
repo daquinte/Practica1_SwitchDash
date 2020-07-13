@@ -4,8 +4,8 @@ import es.ucm.gdv.interfaces.Rect;
 
 /*
 * Clase abstracta que contiene
-* los métodos que son comunes a la implementacion de android y de pc.
-* Concetramente, define el escalado del canvas físico donde se va a jugar
+* los metodos que son comunes a la implementacion de android y de pc.
+* Concretamente, define el escalado del canvas fisico donde se va a jugar
 * y tiene funcionalidades para pasar de coordenadas logicas a fisicas.
 * */
 public abstract class AbstractGraphics {
@@ -15,7 +15,7 @@ public abstract class AbstractGraphics {
     private final int _referenceCanvasWidth = 1080;
     private final int _referenceCanvasHeight = 1920;
 
-    /*Pasa coordenadas lógicas en la resolucion base a coordenadas físicas con nuestra resolución.*/
+    /*Pasa coordenadas logicas en la resolucion base a coordenadas físicas con nuestra resolución.*/
     protected Rect coordinatesToCanvas(Rect destino) {
         int _width = (destino.width * _canvas.width / _referenceCanvasWidth);
         int _height = destino.height * _width / destino.width;
@@ -42,8 +42,7 @@ public abstract class AbstractGraphics {
         int new_height = frameCanvas.height;
         int new_width = (new_height * _referenceCanvasWidth) / _referenceCanvasHeight;
 
-        int x = 0;
-        x += (frameCanvas.width / 2) - (new_width / 2);
+        int x = (frameCanvas.width / 2) - (new_width / 2);
         _canvas = new Rect(x, 0, new_width, new_height);
     }
 

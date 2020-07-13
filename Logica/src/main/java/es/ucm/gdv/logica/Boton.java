@@ -7,10 +7,10 @@ public class Boton {
 
     private Sprite[] spriteBotons;
     private int index;
-    private Rect logicRect;                                 //Rectangulo logico para la resolucion base de la lógica.
+    private Rect logicRect;                                 //Rectangulo logico para la resolucion base de la logica.
 
-    public enum Direcciones {IZQUIERDA, DERECHA}             //Orientacion de los botones
-    public enum Buttons {AYUDA, SALIR, SONIDO, MUTE, HOME}   //Tipos de botones
+    public enum Direcciones {IZQUIERDA, DERECHA}            //Orientacion de los botones
+    public enum Buttons {AYUDA, SALIR, SONIDO, MUTE}        //Tipos de botones
 
     Boton(Sprite sprite, Direcciones x, int y) {
         spriteBotons = new Sprite[1];
@@ -25,18 +25,12 @@ public class Boton {
 
     private void init(Direcciones x, int y) {
         index = 0;
-        int _x;
-        if (x == Direcciones.DERECHA) {
-            _x =  1080 - (30 + spriteBotons[0].getSpriteWidth());
-        }
-        else {
-            _x = 30;
-        }
+        int _x = (x == Direcciones.DERECHA)? 1080 - (30 + spriteBotons[0].getSpriteWidth()) : 30;
         logicRect = new Rect(_x, y + 60,  spriteBotons[0].getSpriteWidth(), spriteBotons[0].getSpriteHeight());
     }
 
     void toggleSprite() {
-        index = (spriteBotons.length-1 == index )? 0 : index + 1;
+        index = (spriteBotons.length - 1 == index) ? 0 : index + 1;
     }
 
     Boolean isPressed(int pressX, int pressY) {
@@ -45,7 +39,6 @@ public class Boton {
     }
 
     public void render(Graphics graphics) {
-        //graphics.DrawRect(logicRect);
         spriteBotons[index].drawImage(graphics, logicRect.x, logicRect.y, logicRect.width, logicRect.height, true);
     }
 }

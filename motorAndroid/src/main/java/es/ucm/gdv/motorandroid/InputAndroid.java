@@ -29,7 +29,6 @@ public class InputAndroid implements Input, View.OnTouchListener{
             synchronized (this) {
                 inputList.clear();
             }
-
         }
         return auxIL;
     }

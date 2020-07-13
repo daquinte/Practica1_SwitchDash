@@ -7,9 +7,9 @@ import es.ucm.gdv.interfaces.Image;
 
 //TODO: Cambiamos el nombre de Lógica?
 /*
- * Clase que contiene todos los métodos
+ * Clase que contiene todos los metodos
  * que son comunes entre las implementaciones de los estados de juego
- * Para que la instancia sea común, esta clase cumple con el patrón singleton
+ * Para que la instancia sea comun, esta clase cumple con el patron singleton
  * */
 public class Logica {
 
@@ -39,18 +39,16 @@ public class Logica {
     }
 
 
-    //La parte común del tick
+    //La parte comun del tick
     void commonTick(double elapsedTime) {
-
         flechas.tick(elapsedTime);
         flashStuff(elapsedTime);
     }
 
-    //La parte común del render
+    //La parte comun del render
     void commonRender(Graphics g) {
         flechas.render(g);
     }
-
 
     private void flashStuff(double elapsedTime) {
         if (activateFlash) {
@@ -86,7 +84,6 @@ public class Logica {
         bgSprite = ResourceManager.GetResourceManager().bgColours[newColor.ordinal()];
     }
 
-    //Métodos privados de la lógica
     private void ClearScreen(Graphics _graphics, ResourceManager.GameColor gameColor) {
         switch (gameColor) {
             case GREEN:
@@ -121,8 +118,6 @@ public class Logica {
         }
 
         //TODO: Pintamos el background
-        /*bgSprite.drawImage(_game.getGraphics(), _game.getGraphics().getRectCanvas().x, _game.getGraphics().getRectCanvas().y
-                , _game.getGraphics().getRectCanvas().width, _game.getGraphics().getRectCanvas().height);*/
         bgSprite.drawImage(_graphics, 1080 / 2 - flechas.getSprite().getSpriteWidth() / 2, 0,
                 flechas.getSprite().getSpriteWidth(), flechas.getSprite().getSpriteHeight(), true);
 

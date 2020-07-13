@@ -8,31 +8,29 @@ import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.TouchEvent;
 
-public class GameOverState  implements GameState {
+public class GameOverState implements GameState {
 
-    Game _game;
-    ResourceManager _resourceManager;
-    Logica _logica;
-    Graphics _graphics;
+    private Game _game;
+    private ResourceManager _resourceManager;
+    private Logica _logica;
+    private Graphics _graphics;
 
 
     //Atributos del estado
-    public Boton sonido;
-    public Boton ayuda;
+    private Boton sonido;
+    private Boton ayuda;
 
-    public Sprite gameOver;
-    public Sprite playAgain;
+    private Sprite gameOver;
+    private Sprite playAgain;
 
-    private Sprite [] puntuacionSprite;
-    private Sprite [] points;
+    private Sprite[] puntuacionSprite;
+    private Sprite[] points;
     private int puntuacionConseguida;           //Puntos obtenidos en el estado de juego.
-
-    private Boolean mute = false;
 
     private float alpha;
     private float factor;
 
-    public GameOverState(int puntosConseguidos){
+    GameOverState(int puntosConseguidos) {
         _resourceManager = ResourceManager.GetResourceManager();
         _logica = Logica.GetLogica();
         puntuacionConseguida = puntosConseguidos;
@@ -46,15 +44,14 @@ public class GameOverState  implements GameState {
         factor = 60;
         alpha = 0;
 
-
         initResources();
         initSpritePuntos();
-        char [] puntos = {'P','O', 'I', 'N', 'T', 'S'};
+        char[] puntos = {'P', 'O', 'I', 'N', 'T', 'S'};
         initSpritePoints(puntos);
         SeparaPuntuacion();
     }
 
-    private void initResources(){
+    private void initResources() {
         // Sprites //
         Image imgGO = _resourceManager.getImage(ResourceManager.GameSprites.GAMEOVER);
         gameOver = new Sprite(imgGO, 0, 0, imgGO.getWidth(), imgGO.getHeight());
@@ -78,11 +75,12 @@ public class GameOverState  implements GameState {
             puntuacionSprite[i] = _resourceManager.numbers[0];
         }
     }
-    private void initSpritePoints(char [] p) {
+
+    private void initSpritePoints(char[] p) {
         points = new Sprite[6];
-       for(int i = 0; i < points.length; i++){
-           points[i] = _resourceManager.alphabet[p[i]%65];
-       }
+        for (int i = 0; i < points.length; i++) {
+            points[i] = _resourceManager.alphabet[p[i] % 65];
+        }
     }
 
     @Override
@@ -111,20 +109,17 @@ public class GameOverState  implements GameState {
                 int pulsacionY = touchEvent.get_y();
                 if (sonido.isPressed(pulsacionX, pulsacionY)) {
                     sonido.toggleSprite();
-                }
-                else if(ayuda.isPressed(pulsacionX,pulsacionY)){
-                    _logica.setCurrentGameState(_game,new HowToPlayState());
-                }
-                else {
-                    _logica.setCurrentGameState(_game,new SwitchDashState());
+                } else if (ayuda.isPressed(pulsacionX, pulsacionY)) {
+                    _logica.setCurrentGameState(_game, new HowToPlayState());
+                } else {
+                    _logica.setCurrentGameState(_game, new SwitchDashState());
                 }
             }
         }
     }
 
     private void SeparaPuntuacion() {
-
-        if(puntuacionConseguida <= 999) {
+        if (puntuacionConseguida <= 999) {
             int resultadoDivision = puntuacionConseguida;
             int indexSprite = 2;
             while (resultadoDivision > 0) {
@@ -150,15 +145,13 @@ public class GameOverState  implements GameState {
 
         //Puntos
         for (int i = 0; i < puntuacionSprite.length; i++) {
-            puntuacionSprite[i].drawImage(_graphics, (1080 / 2 - gameOver.getImage().getWidth() / 2 - 200) + ( i *200), 700,
-                    puntuacionSprite[2].getSpriteWidth() * 2, puntuacionSprite[2].getSpriteHeight() *2, true);
-
+            puntuacionSprite[i].drawImage(_graphics, (1080 / 2 - gameOver.getImage().getWidth() / 2 - 200) + (i * 200), 700,
+                    puntuacionSprite[2].getSpriteWidth() * 2, puntuacionSprite[2].getSpriteHeight() * 2, true);
         }
 
         for (int i = 0; i < points.length; i++) {
-            points[i].drawImage(_graphics, (1080 / 2 - gameOver.getImage().getWidth() / 2 - 190) + ( i *100), 1000,
+            points[i].drawImage(_graphics, (1080 / 2 - gameOver.getImage().getWidth() / 2 - 190) + (i * 100), 1000,
                     puntuacionSprite[2].getSpriteWidth(), puntuacionSprite[2].getSpriteHeight(), true);
-
         }
     }
 

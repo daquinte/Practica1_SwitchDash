@@ -3,7 +3,6 @@ package es.ucm.gdv.motorandroid;
 import android.content.res.AssetManager;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.SurfaceView;
 
@@ -23,7 +22,7 @@ public class GraphicsAndroid extends AbstractGraphics implements Graphics {
     //Atributos
     private SurfaceView _surfaceView;       //Ventana para android. Se usa para los guetters
     private AssetManager _assetManager;     //Carga de imagenes
-    private Canvas _androidCanvas;                 //Viewport. Aquí se pinta.
+    private Canvas _androidCanvas;          //Viewport. Aquí se pinta.
 
     private Paint _paint;
 
@@ -64,15 +63,6 @@ public class GraphicsAndroid extends AbstractGraphics implements Graphics {
     @Override
     public void clear(int color) {
         _androidCanvas.drawColor(color);
-    }
-
-    // Metodo para debug
-    @Override
-    public void DrawRect(Rect rectangulo) {
-        _paint.setColor(Color.BLUE);
-        _androidCanvas.drawRect(rectangulo.x, rectangulo.y,
-                rectangulo.x + rectangulo.width, rectangulo.y + rectangulo.height, _paint);
-
     }
 
     @Override

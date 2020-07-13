@@ -46,8 +46,8 @@ public class Jugador {
             spriteJugador = jugadorNegro;
         }
     }
-    //Cambia el color al color opuesto
 
+    //Cambia el color al color opuesto
     void ToggleColorJugador() {
         if (_colorJugador == Jugador.colorJugador.BLANCO) {
             spriteJugador = jugadorNegro;

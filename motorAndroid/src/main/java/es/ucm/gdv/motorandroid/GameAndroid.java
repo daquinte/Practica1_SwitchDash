@@ -11,7 +11,6 @@ import es.ucm.gdv.interfaces.Game;
 import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Input;
-import es.ucm.gdv.logica.Logica;
 
 public class GameAndroid implements Game, Runnable {
 
@@ -23,9 +22,6 @@ public class GameAndroid implements Game, Runnable {
     private GameState _nextGameState;
 
     private SurfaceView _surfaceView;
-
-    //Para el update
-    private long lastFrameTime = System.nanoTime();
 
     //Para el hilo
     private volatile boolean _running; //Volatile hace que no revise en memoria
@@ -55,7 +51,7 @@ public class GameAndroid implements Game, Runnable {
                 _runningThread.join();
                 break;
             } catch (InterruptedException ie) {
-
+                System.err.println("interrupcion por excepcion");
             }
         }
     }
@@ -81,7 +77,7 @@ public class GameAndroid implements Game, Runnable {
         }
 
         //Espera a que se inicialice el surfaceView
-        while (_graphicsAndroid.getWidth()<=0);
+        while(_graphicsAndroid.getWidth() <= 0);
 
 
         long lastFrameTime = System.nanoTime();
@@ -99,7 +95,7 @@ public class GameAndroid implements Game, Runnable {
                 _currentGameState.init(this);
             }
             _currentGameState.tick(elapsedTime);
-            while (!sh.getSurface().isValid());
+            while(!sh.getSurface().isValid());
             CanvasManagePaint(sh);
         }
     }
@@ -138,6 +134,4 @@ public class GameAndroid implements Game, Runnable {
     public void setGameState(GameState gameState) {
         _nextGameState = gameState;
     }
-
-
 }

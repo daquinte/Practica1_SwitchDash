@@ -6,7 +6,7 @@ import java.util.Random;
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
 
-/*"ESTADO DE JUEGO" EN EL QUE CARGAMOS LOS RECURSOS, para tenerlos disponibles*/
+/*"ESTADO DE JUEGO" EN EL QUE CARGAMOS LOS RECURSOS, para tenerlos disponibles --- SINGLETON ---*/
 public class ResourceManager {
 
     //UTILS
@@ -24,7 +24,6 @@ public class ResourceManager {
     Sprite [] numbers;
     Sprite [] alphabet;
     Sprite [] bgColours;
-    private boolean allLoaded = false;
 
     //Private
     private Graphics _graphics;
@@ -34,7 +33,7 @@ public class ResourceManager {
     private GameColor[] gameColors;
 
     //Random para devolver colores aleatorios
-    Random rnd;
+    private Random rnd;
 
     //Para las imagenes del juego
     //En pc, se encuentran en la carpeta images
@@ -63,15 +62,7 @@ public class ResourceManager {
         initAlphabet();
     }
 
-
-
-    ///----------------
-    /// Métodos propios
-    ///----------------
-
-    //Public
-
-    public static ResourceManager GetResourceManager(){
+    static ResourceManager GetResourceManager(){
         if(instance == null) {
             instance = new ResourceManager();
         }
@@ -111,12 +102,10 @@ public class ResourceManager {
 
     //Carga imagenes de las rutas obtenidas en Resource Manager
     private void CargaImagenes() {
-        for (int i = 0; i < gameImagesRoute.length; i++) {
-            Image aux = _graphics.newImage(gameImagesRoute[i]);
+        for (String s : gameImagesRoute) {
+            Image aux = _graphics.newImage(s);
             gameImages.add(aux);
         }
-
-        allLoaded = true;
     }
 
     private void initPoints() {
@@ -126,7 +115,7 @@ public class ResourceManager {
         int itY = 3;
         for (int j = 0; j < numbers.length; j++) {
             numbers[j] = new Sprite(pointsI, itX * 125, itY *160, 125, 160);
-            itX ++;
+            itX++;
             if(j == 7){
                 itX = 0;
                 itY++;

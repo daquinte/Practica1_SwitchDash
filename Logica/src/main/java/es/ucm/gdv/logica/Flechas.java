@@ -18,10 +18,7 @@ public class Flechas {
     }
 
     public void tick(double elapsedTime) {
-        posY += ((384 + velFlechas) * elapsedTime);
-        if (posY >= 0) {
-            posY = startPosition;
-        }
+        posY = posY >= 0? startPosition : posY + ((384 + velFlechas) * elapsedTime);
     }
 
 

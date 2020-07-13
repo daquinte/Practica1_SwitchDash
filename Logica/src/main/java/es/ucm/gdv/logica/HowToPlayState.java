@@ -10,23 +10,22 @@ import es.ucm.gdv.interfaces.TouchEvent;
 
 // TODO: Cuando arreglemos boton volver a activarlos
 public class HowToPlayState implements GameState {
-    public Boton close;
+    private Boton close;
 
-    public Sprite howToPlay;
-    public Sprite instructions;
-    public Sprite tapToPlay;
+    private Sprite howToPlay;
+    private Sprite instructions;
+    private Sprite tapToPlay;
 
-    Game _game;
-    ResourceManager _resourceManager;
-    Logica _logica;
-    Graphics _graphics;
+    private Game _game;
+    private ResourceManager _resourceManager;
+    private Logica _logica;
+    private Graphics _graphics;
 
     private float alpha;
     private float factor;
 
 
-    public HowToPlayState() {
-
+    HowToPlayState() {
         _resourceManager = ResourceManager.GetResourceManager();
         _logica = Logica.GetLogica();
     }
@@ -86,6 +85,7 @@ public class HowToPlayState implements GameState {
             if (touchEvent.getTouchType() == TouchEvent.TouchType.click) {
                 int pulsacionX = touchEvent.get_x();
                 int pulsacionY = touchEvent.get_y();
+                // Este codigo esta repetido para un posible cambio de estado futuro
                 if (close.isPressed(pulsacionX, pulsacionY)) {
                     _logica.setCurrentGameState(_game,new SwitchDashState());
                 }

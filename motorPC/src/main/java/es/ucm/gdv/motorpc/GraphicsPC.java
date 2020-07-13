@@ -49,13 +49,6 @@ public class GraphicsPC extends AbstractGraphics implements Graphics {
     }
 
     @Override
-    public void DrawRect(Rect rectangulo) {
-        Color rgb = new Color(0x484CFF);
-        _graphics.setColor(rgb);
-        _graphics.fillRect(rectangulo.x, rectangulo.y, rectangulo.width, rectangulo.height);
-    }
-
-    @Override
     public void drawImage(Image image, Rect destino, Rect source, Boolean scale) {
         ImagePC img = (ImagePC) image;
         java.awt.Image awtImage = img.getImage();

@@ -23,9 +23,6 @@ public class GamePC implements Game, Runnable {
     private GameState _currentGameState;
     private GameState _nextGameState;
 
-    //Para el hilo
-    private volatile boolean _running; //Volatile hace que no revise en memoria
-
     public GamePC(String windowTitle) {
         _frame = new JFrame(windowTitle);
 
@@ -50,6 +47,7 @@ public class GamePC implements Game, Runnable {
                 _frame.createBufferStrategy(2);
                 break;
             } catch (Exception e) {
+                System.err.println("interrupcion por excepcion");
             }
         } // while pidiendo la creación de la buffeStrategy
         if (intentos == 0) {

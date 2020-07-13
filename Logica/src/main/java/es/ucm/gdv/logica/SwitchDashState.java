@@ -14,33 +14,32 @@ import es.ucm.gdv.interfaces.TouchEvent;
 public class SwitchDashState implements GameState {
 
     //Atributos del motor de juego
-    Game _game;
-    ResourceManager _resourceManager;
-    Logica _logica;
-    Graphics _graphics;
+    private Game _game;
+    private ResourceManager _resourceManager;
+    private Logica _logica;
+    private Graphics _graphics;
     private Random rnd;
 
     //Atributos del juego
-    Jugador jugador;                            //Referencia a la clase jugador.
+    private Jugador jugador;                            //Referencia a la clase jugador.
 
-    Queue<Pelota> pelotas;                      //Cola con las pelotas que se reciclan a lo largo del juego.
-    Pelota ultimaPelota;                        //Referencia a la última pelota, la superior, para recolocar las pelotas destruidas.
-    int pelotasRecogidas;                       //Contador de pelotas. Cada 10, sube la velocidad.
-    int velocidadActual;                        //Velocidad actual de las pelotas
+    private Queue<Pelota> pelotas;                      //Cola con las pelotas que se reciclan a lo largo del juego.
+    private Pelota ultimaPelota;                        //Referencia a la última pelota, la superior, para recolocar las pelotas destruidas.
+    private int pelotasRecogidas;                       //Contador de pelotas. Cada 10, sube la velocidad.
+    private int velocidadActual;                        //Velocidad actual de las pelotas
 
-    boolean isGameOver;                         //Bool que determina si ha perdido o no
-    double gameOverTimeTrack;                   //Contador del tiempo hasta que termine
-    SistemaParticulas sistemaParticulas;        //Sistema de particulas para cuando se destruye una pelota
+    private boolean isGameOver;                         //Bool que determina si ha perdido o no
+    private double gameOverTimeTrack;                   //Contador del tiempo hasta que termine
+    private SistemaParticulas sistemaParticulas;        //Sistema de particulas para cuando se destruye una pelota
 
-    int puntosTotales;                          //Contador de puntos
-    Sprite[] puntuacionSprite;                  //Sprites con los números de los puntos.
+    private int puntosTotales;                          //Contador de puntos
+    private Sprite[] puntuacionSprite;                  //Sprites con los números de los puntos.
 
     //CONST
     private final int SeparacionPelotas = 395;
-    private  final double TimeUntilSceneChange = 1.2;
 
 
-    public SwitchDashState() {
+    SwitchDashState() {
         _resourceManager = ResourceManager.GetResourceManager();
         _logica = Logica.GetLogica();
     }
@@ -110,7 +109,7 @@ public class SwitchDashState implements GameState {
 
         if(isGameOver) {
             gameOverTimeTrack += elapsedTime;
-            if(gameOverTimeTrack >= TimeUntilSceneChange){
+            if(gameOverTimeTrack >= 1.2){
                 _logica.setCurrentGameState(_game,new GameOverState(puntosTotales));
             }
         }
@@ -134,7 +133,7 @@ public class SwitchDashState implements GameState {
         }
 
         //Puntos
-        int numuerosApintar = (puntosTotales >= 100) ? 2 : (puntosTotales > 10) ? 1 : 0;
+        int numuerosApintar = (puntosTotales >= 100) ? 2 : (puntosTotales >= 10) ? 1 : 0;
         int xOffset = numuerosApintar;
         for (int i = 2; i >= 2 - numuerosApintar; i--) {
             puntuacionSprite[i].drawImage(_graphics, (1080 * 2 / 3 + 145) + 95 * xOffset, 115, puntuacionSprite[2].getSpriteWidth(), puntuacionSprite[2].getSpriteHeight(), true);
@@ -164,14 +163,16 @@ public class SwitchDashState implements GameState {
     private void CompruebaColision(Pelota p) {
 
         int yJugador = jugador.getY();
-        int yPelota = (int)pelotas.peek().getPosY();
-        if ((yPelota + pelotas.peek().getHeight() / 2) >= yJugador) {
+        Pelota pelota = pelotas.peek();
+        if (pelota == null) return;
+        int yPelota = (int)pelota.getPosY();
+        if ((yPelota + pelota.getHeight() / 2) >= yJugador) {
             int colorJugador = jugador.GetColorJugador().ordinal();
             int colorPelota = p.GetColorPelota().ordinal();
             if (colorJugador != colorPelota) {
                isGameOver = true;
             } else {
-                sistemaParticulas.addParticles(p.GetSpritePelota(), 15, new Pair(1080 / 2 - p.GetSpritePelota().getSpriteWidth() / 2, (int)p.getPosY()));
+                sistemaParticulas.addParticles(p.GetSpritePelota(), 15, 1080 / 2 - p.GetSpritePelota().getSpriteWidth() / 2);
                 ResetPelota(p);
                 CalculaPuntuacion();
                 pelotasRecogidas++;

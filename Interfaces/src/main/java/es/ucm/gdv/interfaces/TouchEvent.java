@@ -1,13 +1,14 @@
 package es.ucm.gdv.interfaces;
 
+// Esta clase esta en el modulo de interfaces debido a su uso en las propias interfaces
 public class TouchEvent {
     public enum TouchType {
-        click, release, drag
+        click, release
     }
 
     private int _x;
     private int _y;
-    private int _inputID;
+    private int _inputID; // identificador del dedo que se usa
     private TouchType _touchType;
 
     public TouchEvent(int x, int y, TouchType touchType, int inputID) {
