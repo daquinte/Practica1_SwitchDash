@@ -8,7 +8,6 @@ import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
 import es.ucm.gdv.interfaces.TouchEvent;
 
-// TODO: Cuando arreglemos boton volver a activarlos
 public class HowToPlayState implements GameState {
     private Boton close;
 

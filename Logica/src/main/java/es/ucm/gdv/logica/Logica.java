@@ -5,7 +5,6 @@ import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.interfaces.Graphics;
 import es.ucm.gdv.interfaces.Image;
 
-//TODO: Cambiamos el nombre de Lógica?
 /*
  * Clase que contiene todos los metodos
  * que son comunes entre las implementaciones de los estados de juego
@@ -117,7 +116,6 @@ public class Logica {
                 break;
         }
 
-        //TODO: Pintamos el background
         bgSprite.drawImage(_graphics, 1080 / 2 - flechas.getSprite().getSpriteWidth() / 2, 0,
                 flechas.getSprite().getSpriteWidth(), flechas.getSprite().getSpriteHeight(), true);
 
