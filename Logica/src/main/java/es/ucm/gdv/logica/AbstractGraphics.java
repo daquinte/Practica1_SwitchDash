@@ -1,13 +1,15 @@
 package es.ucm.gdv.logica;
 
+import org.jetbrains.annotations.NotNull;
+
 import es.ucm.gdv.interfaces.Rect;
 
 /*
-* Clase abstracta que contiene
-* los metodos que son comunes a la implementacion de android y de pc.
-* Concretamente, define el escalado del canvas fisico donde se va a jugar
-* y tiene funcionalidades para pasar de coordenadas logicas a fisicas.
-* */
+ * Clase abstracta que contiene
+ * los metodos que son comunes a la implementacion de android y de pc.
+ * Concretamente, define el escalado del canvas fisico donde se va a jugar
+ * y tiene funcionalidades para pasar de coordenadas logicas a fisicas.
+ * */
 public abstract class AbstractGraphics {
 
     private Rect _canvas;
@@ -38,9 +40,14 @@ public abstract class AbstractGraphics {
         return (y * _referenceCanvasHeight) / _canvas.height;
     }
 
+    /*Lo correcto seria utilizar un sistema parecido a Bootstrap para determinar rangos de resoluciones
+    * y no utilizar siempre la misma base. La solucion actual no es responsive*/
     protected void setCanvasSize(Rect frameCanvas) {
         int new_height = frameCanvas.height;
         int new_width = (new_height * _referenceCanvasWidth) / _referenceCanvasHeight;
+        if (new_width > _referenceCanvasWidth) {
+            new_width = frameCanvas.width;
+        }
 
         int x = (frameCanvas.width / 2) - (new_width / 2);
         _canvas = new Rect(x, 0, new_width, new_height);

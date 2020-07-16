@@ -26,7 +26,7 @@ public class Boton {
     private void init(Direcciones x, int y) {
         index = 0;
         int _x = (x == Direcciones.DERECHA)? 1080 - (30 + spriteBotons[0].getSpriteWidth()) : 30;
-        logicRect = new Rect(_x, y + 60,  spriteBotons[0].getSpriteWidth(), spriteBotons[0].getSpriteHeight());
+        logicRect = new Rect(_x, y,  spriteBotons[0].getSpriteWidth(), spriteBotons[0].getSpriteHeight());
     }
 
     void toggleSprite() {

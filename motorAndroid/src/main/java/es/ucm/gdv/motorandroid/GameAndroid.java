@@ -38,6 +38,7 @@ public class GameAndroid implements Game, Runnable {
                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         _surfaceView.setOnTouchListener(_inputAndroid);
+
     }
 
     /**

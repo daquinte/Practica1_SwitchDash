@@ -2,6 +2,7 @@ package es.ucm.gdv.practica1;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import es.ucm.gdv.interfaces.GameState;
 import es.ucm.gdv.logica.TituloState;
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Esto quita la barra de notificaciones del movil
+        this.getWindow().setFlags(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN, View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         super.onCreate(savedInstanceState);
         _gameAndroid = new GameAndroid(this, this);
         GameState tituloState = new TituloState();

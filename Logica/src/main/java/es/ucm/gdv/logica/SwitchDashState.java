@@ -136,7 +136,7 @@ public class SwitchDashState implements GameState {
         int numuerosApintar = (puntosTotales >= 100) ? 2 : (puntosTotales >= 10) ? 1 : 0;
         int xOffset = numuerosApintar;
         for (int i = 2; i >= 2 - numuerosApintar; i--) {
-            puntuacionSprite[i].drawImage(_graphics, (1080 * 2 / 3 + 145) + 95 * xOffset, 115, puntuacionSprite[2].getSpriteWidth(), puntuacionSprite[2].getSpriteHeight(), true);
+            puntuacionSprite[i].drawImage(_graphics, (1080 * 2 / 3 + 145) + 65 * xOffset, 30, puntuacionSprite[2].getSpriteWidth(), puntuacionSprite[2].getSpriteHeight(), true);
             xOffset--;
         }
 
