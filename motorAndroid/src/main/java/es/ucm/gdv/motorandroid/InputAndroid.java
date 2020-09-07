@@ -47,6 +47,10 @@ public class InputAndroid implements Input, View.OnTouchListener{
                 touchType = TouchEvent.TouchType.click;
                 break;
             //RELEASE
+            case MotionEvent.ACTION_MOVE:
+                touchType = TouchEvent.TouchType.drag;
+                break;
+            //RELEASE
             case MotionEvent.ACTION_UP:
                 touchType = TouchEvent.TouchType.release;
                 break;

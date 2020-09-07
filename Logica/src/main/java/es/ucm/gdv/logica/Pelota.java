@@ -9,13 +9,14 @@ public class Pelota {
 
     private colorPelota _colorPelota;
 
-    private Sprite pelotaNegra;
-    private Sprite pelotaBlanca;
+    private Sprite [] pelotasBlancas;
+    private Sprite [] pelotasNegras;
 
     private Sprite spritePelota;
 
 
     private Random rnd;
+    private Boolean pelotaPicuda;
     private double posY;
     private int width;
     private int height;
@@ -24,11 +25,14 @@ public class Pelota {
         width = height = 100;
         int marco = 128;
         Image imagenPelota = res.getImage(ResourceManager.GameSprites.BALLS);
-        int x = marco / 2 - width / 2;
-        int y = x * 2;
-        pelotaBlanca = new Sprite(imagenPelota, x, y, width, height);
-        pelotaNegra = new Sprite(imagenPelota, x, y + marco, width, height);
-
+        pelotasBlancas = new Sprite[10];
+        pelotasNegras = new Sprite[10];
+        int y = (marco - height);
+        for(int i = 0; i < 10; i++) {
+            int x = i * marco + (marco / 2 - width / 2);
+            pelotasBlancas[i] = new Sprite(imagenPelota, x, y, width, height);
+            pelotasNegras[i] = new Sprite(imagenPelota, x, y + marco, width, height);
+        }
         rnd = new Random();
         initPelota();
     }
@@ -48,11 +52,18 @@ public class Pelota {
 
     void setColorPelota(colorPelota colorJugador) {
         _colorPelota = colorJugador;
-        if (_colorPelota == colorPelota.BLANCO)
-            spritePelota = pelotaBlanca;
-        else if (_colorPelota == colorPelota.NEGRO) {
-            spritePelota = pelotaNegra;
+        int nuevaPelota = rnd.nextInt(10);
+        pelotaPicuda = (nuevaPelota == 2 || nuevaPelota == 3 || nuevaPelota == 4 || nuevaPelota == 6 || nuevaPelota == 8 || nuevaPelota == 9);
+        if (_colorPelota == colorPelota.BLANCO) {
+            spritePelota = pelotasBlancas[nuevaPelota];
         }
+        else if (_colorPelota == colorPelota.NEGRO) {
+            spritePelota = pelotasNegras[nuevaPelota];
+        }
+    }
+
+    Boolean checkTypeAndColor(int colorJugador) {
+        return (pelotaPicuda && colorJugador != _colorPelota.ordinal()) || (!pelotaPicuda && colorJugador == _colorPelota.ordinal());
     }
 
     void setPosY(int newPosY) {

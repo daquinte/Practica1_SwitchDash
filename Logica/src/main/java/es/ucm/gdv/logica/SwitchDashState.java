@@ -107,6 +107,8 @@ public class SwitchDashState implements GameState {
             //Particulas
             sistemaParticulas.tick(elapsedTime);
 
+            jugador.tick(elapsedTime);
+
         if(isGameOver) {
             gameOverTimeTrack += elapsedTime;
             if(gameOverTimeTrack >= 1.2){
@@ -151,6 +153,12 @@ public class SwitchDashState implements GameState {
             if (touchEvent.getTouchType() == TouchEvent.TouchType.click) {
                 jugador.ToggleColorJugador();
             }
+            else if (touchEvent.getTouchType() == TouchEvent.TouchType.drag) {
+                jugador.setGodMode(true);
+            }
+            else if (touchEvent.getTouchType() == TouchEvent.TouchType.release) {
+                jugador.setGodMode(false);
+            }
         }
     }
 
@@ -168,8 +176,7 @@ public class SwitchDashState implements GameState {
         int yPelota = (int)pelota.getPosY();
         if ((yPelota + pelota.getHeight() / 2) >= yJugador) {
             int colorJugador = jugador.GetColorJugador().ordinal();
-            int colorPelota = p.GetColorPelota().ordinal();
-            if (colorJugador != colorPelota) {
+            if (!pelota.checkTypeAndColor(colorJugador)) {
                isGameOver = true;
             } else {
                 sistemaParticulas.addParticles(p.GetSpritePelota(), 15, 1080 / 2 - p.GetSpritePelota().getSpriteWidth() / 2);

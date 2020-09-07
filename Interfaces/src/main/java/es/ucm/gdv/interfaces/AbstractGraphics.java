@@ -1,8 +1,4 @@
-package es.ucm.gdv.logica;
-
-import org.jetbrains.annotations.NotNull;
-
-import es.ucm.gdv.interfaces.Rect;
+package es.ucm.gdv.interfaces;
 
 /*
  * Clase abstracta que contiene
@@ -10,7 +6,7 @@ import es.ucm.gdv.interfaces.Rect;
  * Concretamente, define el escalado del canvas fisico donde se va a jugar
  * y tiene funcionalidades para pasar de coordenadas logicas a fisicas.
  * */
-public abstract class AbstractGraphics {
+public abstract class AbstractGraphics implements Graphics {
 
     private Rect _canvas;
 

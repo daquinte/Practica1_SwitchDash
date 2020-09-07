@@ -19,6 +19,10 @@ public class Jugador {
     private int x;
     private int y;
 
+    private Boolean godMode;
+
+    private double currentTime;
+    private double totalTime;
 
     Jugador(ResourceManager res) {
         Image imagenJugador = res.getImage(ResourceManager.GameSprites.PLAYERS);
@@ -28,6 +32,9 @@ public class Jugador {
         initJugador();
         x = 1080 / 2 - spriteJugador.getSpriteWidth() / 2;
         y = 1200;
+        godMode = false;
+        currentTime = 0;
+        totalTime = 1;
     }
 
     private void initJugador() {
@@ -56,6 +63,20 @@ public class Jugador {
             spriteJugador = jugadorBlanco;
             _colorJugador = colorJugador.BLANCO;
         }
+    }
+    public void tick(double elapsedTime) {
+        if (godMode){
+            currentTime +=  2.2D * elapsedTime;
+            System.out.println(currentTime);
+            if (currentTime >= totalTime) {
+                ToggleColorJugador();
+                currentTime = 0;
+            }
+        }
+    }
+
+    void setGodMode(Boolean godMode) {
+        this.godMode = godMode;
     }
 
     Sprite GetSpriteJugador() {
