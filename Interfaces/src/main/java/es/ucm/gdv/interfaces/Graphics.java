@@ -38,5 +38,7 @@ public interface Graphics {
     //Getters de la ventana
     int getWidth();                             //Ancho
     int getHeight();                            //Alto
+
+    void setGlobalOffset(int x, int y);
 }
 

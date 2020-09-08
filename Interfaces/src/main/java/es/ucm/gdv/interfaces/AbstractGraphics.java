@@ -12,6 +12,8 @@ public abstract class AbstractGraphics implements Graphics {
 
     private final int _referenceCanvasWidth = 1080;
     private final int _referenceCanvasHeight = 1920;
+    private int offsetX = 0;
+    private int offsetY = 0;
 
     /*Pasa coordenadas logicas en la resolucion base a coordenadas físicas con nuestra resolución.*/
     protected Rect coordinatesToCanvas(Rect destino) {
@@ -29,11 +31,11 @@ public abstract class AbstractGraphics implements Graphics {
     }
 
     public int revertCoordinateX(int x) {
-        return (x * _referenceCanvasWidth) / _canvas.width;
+        return ((x - offsetX)  * _referenceCanvasWidth) / _canvas.width;
     }
 
     public int revertCoordinateY(int y) {
-        return (y * _referenceCanvasHeight) / _canvas.height;
+        return ((y - offsetY) * _referenceCanvasHeight) / _canvas.height;
     }
 
     /*Lo correcto seria utilizar un sistema parecido a Bootstrap para determinar rangos de resoluciones
@@ -45,12 +47,18 @@ public abstract class AbstractGraphics implements Graphics {
             new_width = frameCanvas.width;
         }
 
-        int x = (frameCanvas.width / 2) - (new_width / 2);
-        _canvas = new Rect(x, 0, new_width, new_height);
+        int x = (frameCanvas.width / 2) - (new_width / 2) + offsetX;
+        _canvas = new Rect(x, offsetY, new_width, new_height);
     }
 
     public Rect getRectCanvas() {
         return _canvas;
+    }
+
+    public void setGlobalOffset(int x, int y) {
+        offsetX = _canvas.width * x / _referenceCanvasWidth;
+        offsetY = _canvas.height * y / _referenceCanvasHeight;
+        updateCanvasSize();
     }
 }
 

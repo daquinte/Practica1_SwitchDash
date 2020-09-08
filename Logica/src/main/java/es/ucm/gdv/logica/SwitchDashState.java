@@ -111,7 +111,9 @@ public class SwitchDashState implements GameState {
 
         if(isGameOver) {
             gameOverTimeTrack += elapsedTime;
+            _graphics.setGlobalOffset(rnd.nextInt(101) - 50, rnd.nextInt(101) - 50);
             if(gameOverTimeTrack >= 1.2){
+                _graphics.setGlobalOffset(0,0);
                 _logica.setCurrentGameState(_game,new GameOverState(puntosTotales));
             }
         }
